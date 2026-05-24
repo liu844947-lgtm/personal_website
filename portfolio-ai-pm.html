@@ -1,0 +1,1579 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI 产品经理个人作品集 | Agent 与用户研究</title>
+  <style>
+    :root {
+      --green: #004c2b;
+      --green-deep: #00391f;
+      --green-soft: #0d6843;
+      --pink: #eb7ba8;
+      --pink-deep: #d73582;
+      --paper: #fffefa;
+      --white: #ffffff;
+      --ink: #111714;
+      --text: #47524c;
+      --muted: #89928c;
+      --rule: #162119;
+      --soft-rule: rgba(0, 57, 31, 0.16);
+      --page-pad: clamp(24px, 4vw, 54px);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: "Noto Sans SC", "Source Han Sans SC", "Microsoft YaHei", "PingFang SC", Arial, sans-serif;
+      line-height: 1.55;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      height: 68px;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 var(--page-pad);
+      border-bottom: 1px solid var(--rule);
+      background: rgba(255, 254, 250, 0.94);
+      backdrop-filter: blur(12px);
+    }
+
+    .brand {
+      color: var(--green);
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .header-nav {
+      display: flex;
+      gap: clamp(22px, 4vw, 52px);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+
+    .header-nav a {
+      position: relative;
+      padding: 4px 0;
+      transition: color 0.18s ease;
+    }
+
+    .header-nav a::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      bottom: -8px;
+      left: 0;
+      height: 2px;
+      background: var(--pink);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.2s ease;
+    }
+
+    .header-nav a:hover,
+    .header-nav a.is-active {
+      color: var(--pink-deep);
+    }
+
+    .header-nav a.is-active::after {
+      transform: scaleX(1);
+    }
+
+    .hero {
+      display: grid;
+      min-height: calc(100vh - 68px);
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .intro {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: calc(100vh - 68px);
+      padding: clamp(52px, 8vh, 92px) var(--page-pad) 34px;
+      border-right: 1px solid var(--rule);
+    }
+
+    .kicker {
+      margin: 0 0 24px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    .intro h1 {
+      max-width: 680px;
+      margin: 0 0 26px;
+      color: var(--green-deep);
+      font-size: clamp(54px, 6vw, 94px);
+      font-weight: 900;
+      line-height: 0.98;
+      letter-spacing: 0;
+    }
+
+    .role-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 30px;
+    }
+
+    .pill {
+      display: inline-flex;
+      min-height: 44px;
+      align-items: center;
+      padding: 9px 20px;
+      border: 2px solid var(--green-deep);
+      border-radius: 999px;
+      color: var(--green-deep);
+      font-size: 15px;
+      font-weight: 750;
+    }
+
+    .pill.accent {
+      border-color: var(--pink);
+      color: var(--pink-deep);
+    }
+
+    .intro-copy {
+      max-width: 620px;
+      margin: 0;
+      color: var(--text);
+      font-size: clamp(15px, 1.2vw, 18px);
+      line-height: 1.85;
+    }
+
+    .section-links {
+      display: grid;
+      max-width: 550px;
+      gap: 4px;
+      margin: clamp(38px, 7vh, 70px) 0 0;
+    }
+
+    .section-links a {
+      display: flex;
+      gap: 22px;
+      align-items: baseline;
+      padding: 9px 0;
+      transition: color 0.16s ease, transform 0.16s ease;
+    }
+
+    .section-links a:hover {
+      color: var(--pink-deep);
+      transform: translateX(5px);
+    }
+
+    .section-links span {
+      min-width: 28px;
+      color: #a8aeaa;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .section-links strong {
+      font-size: clamp(25px, 2.4vw, 36px);
+      font-weight: 600;
+      line-height: 1.25;
+    }
+
+    .social-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 34px;
+      margin-top: 34px;
+      color: var(--text);
+      font-size: 13px;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+    }
+
+    .feature {
+      position: relative;
+      display: flex;
+      min-height: calc(100vh - 68px);
+      flex-direction: column;
+      justify-content: center;
+      overflow: hidden;
+      padding: clamp(32px, 4vw, 56px);
+      background: #fdfcf8;
+    }
+
+    .feature::after {
+      content: "";
+      position: absolute;
+      right: -110px;
+      bottom: -110px;
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      background: rgba(235, 123, 168, 0.18);
+    }
+
+    .case-mark {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 34px;
+      color: var(--pink-deep);
+    }
+
+    .plane {
+      position: relative;
+      display: block;
+      width: 52px;
+      height: 30px;
+      border-top: 3px solid var(--pink);
+      border-right: 3px solid var(--pink);
+      border-radius: 0 44px 0 0;
+      transform: skewX(-30deg) rotate(-8deg);
+    }
+
+    .plane::before {
+      content: "";
+      position: absolute;
+      left: -7px;
+      top: 22px;
+      width: 38px;
+      border-top: 3px solid var(--pink);
+      transform: rotate(-24deg);
+    }
+
+    .case-mark strong {
+      font-size: clamp(34px, 4vw, 52px);
+      font-weight: 900;
+      letter-spacing: 0.03em;
+    }
+
+    .devices {
+      position: relative;
+      width: min(100%, 660px);
+      height: clamp(360px, 47vw, 460px);
+      margin: 0 auto;
+    }
+
+    .laptop {
+      position: absolute;
+      left: 0;
+      top: 30px;
+      width: 78%;
+      padding: 11px;
+      border: 7px solid #121714;
+      border-radius: 24px;
+      background: #121714;
+      box-shadow: 0 12px 30px rgba(0, 57, 31, 0.1);
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+    }
+
+    .laptop-screen {
+      height: clamp(230px, 26vw, 295px);
+      overflow: hidden;
+      border-radius: 10px;
+      background: var(--white);
+    }
+
+    .ui-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 34px;
+      padding: 0 14px;
+      color: var(--pink-deep);
+      background: #f9dbe8;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .trip-layout {
+      display: grid;
+      height: calc(100% - 34px);
+      grid-template-columns: 1fr 0.36fr;
+    }
+
+    .trip-list {
+      display: grid;
+      gap: 8px;
+      padding: 13px;
+      background: #fff;
+    }
+
+    .trip-card {
+      display: grid;
+      grid-template-columns: 42px 1fr;
+      gap: 9px;
+      align-items: center;
+      padding: 7px;
+      border: 1px solid #f2eee7;
+      border-radius: 8px;
+    }
+
+    .trip-thumb {
+      height: 34px;
+      border-radius: 6px;
+      background: linear-gradient(135deg, #0c6a43, #eb7ba8);
+    }
+
+    .line {
+      display: block;
+      height: 5px;
+      margin: 4px 0;
+      border-radius: 4px;
+      background: #dfddd8;
+    }
+
+    .line.short {
+      width: 62%;
+      background: #f1bacf;
+    }
+
+    .side-route {
+      display: grid;
+      gap: 8px;
+      padding: 12px 10px;
+      background: #fff8fb;
+    }
+
+    .route-block {
+      border-radius: 7px;
+      background: rgba(235, 123, 168, 0.2);
+    }
+
+    .route-block:first-child {
+      height: 58px;
+    }
+
+    .route-block:nth-child(2) {
+      height: 94px;
+      background: rgba(0, 76, 43, 0.11);
+    }
+
+    .route-block:last-child {
+      height: 38px;
+      background: var(--pink);
+    }
+
+    .phone {
+      position: absolute;
+      right: 2%;
+      bottom: 36px;
+      width: 29%;
+      padding: 8px;
+      border: 6px solid #121714;
+      border-radius: 32px;
+      background: #121714;
+      box-shadow: 0 16px 32px rgba(0, 57, 31, 0.16);
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+    }
+
+    .phone-screen {
+      min-height: clamp(256px, 29vw, 315px);
+      overflow: hidden;
+      border-radius: 21px;
+      background: #fff;
+    }
+
+    .phone-head {
+      padding: 20px 11px 10px;
+      color: var(--green-deep);
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .phone-head b {
+      color: var(--pink-deep);
+    }
+
+    .phone-chip-row {
+      display: flex;
+      gap: 4px;
+      padding: 0 9px 10px;
+    }
+
+    .phone-chip {
+      flex: 1;
+      height: 22px;
+      border-radius: 7px;
+      background: #f9dbe8;
+    }
+
+    .phone-map {
+      position: relative;
+      height: 75px;
+      margin: 0 9px 10px;
+      border-radius: 9px;
+      background:
+        linear-gradient(90deg, rgba(0, 76, 43, 0.1) 1px, transparent 1px),
+        linear-gradient(rgba(0, 76, 43, 0.1) 1px, transparent 1px),
+        #f6fbf7;
+      background-size: 18px 18px;
+    }
+
+    .phone-map::before {
+      content: "";
+      position: absolute;
+      left: 17px;
+      top: 42px;
+      width: 82px;
+      height: 24px;
+      border-top: 3px solid var(--pink);
+      border-right: 3px solid var(--pink);
+      border-radius: 0 20px 0 0;
+      transform: rotate(-19deg);
+    }
+
+    .day-mini {
+      height: 37px;
+      margin: 8px 9px;
+      border-radius: 8px;
+      background: #f5f3ee;
+    }
+
+    .feature-caption {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 22px;
+      border-top: 1px solid var(--soft-rule);
+      padding-top: 20px;
+    }
+
+    .feature-caption h2 {
+      margin: 0 0 4px;
+      color: var(--green-deep);
+      font-size: clamp(20px, 2vw, 27px);
+    }
+
+    .feature-caption p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .feature:hover .laptop {
+      transform: translateY(-5px);
+      box-shadow: 0 18px 38px rgba(0, 57, 31, 0.13);
+    }
+
+    .feature:hover .phone {
+      transform: translate(-5px, -10px) rotate(-1deg);
+      box-shadow: 0 22px 40px rgba(0, 57, 31, 0.2);
+    }
+
+    .arrow {
+      display: inline-flex;
+      width: 48px;
+      height: 48px;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--pink);
+      border-radius: 50%;
+      color: var(--pink-deep);
+      font-size: 21px;
+    }
+
+    .work {
+      border-top: 1px solid var(--rule);
+    }
+
+    .work-header {
+      padding: clamp(52px, 7vw, 90px) var(--page-pad);
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .label {
+      margin: 0 0 10px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .work-header h2 {
+      margin: 0;
+      color: var(--green-deep);
+      font-family: "Noto Serif SC", "Source Han Serif SC", SimSun, Georgia, serif;
+      font-size: clamp(46px, 6vw, 74px);
+      font-weight: 600;
+      line-height: 1.1;
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .project {
+      display: flex;
+      min-height: 750px;
+      flex-direction: column;
+      padding: 30px var(--page-pad) 36px;
+      border-bottom: 1px solid var(--rule);
+      transition: background 0.22s ease;
+    }
+
+    .project:nth-child(odd) {
+      border-right: 1px solid var(--rule);
+    }
+
+    .project:hover {
+      background: #fffdf9;
+    }
+
+    .project-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .ghost {
+      display: inline-flex;
+      align-items: center;
+      min-height: 38px;
+      padding: 7px 18px;
+      border: 1px solid var(--pink);
+      border-radius: 999px;
+      color: var(--pink-deep);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .year {
+      color: var(--green-deep);
+      font-size: 19px;
+      font-weight: 800;
+    }
+
+    .project-visual {
+      display: flex;
+      min-height: 380px;
+      align-items: center;
+      justify-content: center;
+      margin: 35px 0 24px;
+      padding: 28px;
+      border-radius: 8px;
+      background: #fdfcf8;
+      transition: background 0.22s ease;
+    }
+
+    .project:hover .project-visual {
+      background: #fff8fb;
+    }
+
+    .research-board {
+      display: grid;
+      width: min(520px, 100%);
+      grid-template-columns: 0.92fr 1.35fr 0.92fr;
+      gap: 9px;
+      align-items: center;
+    }
+
+    .research-column {
+      display: grid;
+      gap: 9px;
+    }
+
+    .note,
+    .insight,
+    .dashboard {
+      border: 1px solid rgba(0, 76, 43, 0.1);
+      border-radius: 11px;
+      background: #fff;
+      box-shadow: 0 8px 16px rgba(0, 57, 31, 0.06);
+    }
+
+    .note {
+      min-height: 76px;
+      padding: 10px;
+      background: #fff5f9;
+    }
+
+    .note.green {
+      background: #f0f7f2;
+    }
+
+    .insight {
+      min-height: 248px;
+      padding: 15px;
+    }
+
+    .insight h4 {
+      margin: 0 0 14px;
+      color: var(--green-deep);
+      font-size: 15px;
+    }
+
+    .score {
+      padding: 14px;
+      border-radius: 10px;
+      color: #fff;
+      background: var(--green);
+      font-size: 25px;
+      font-weight: 800;
+    }
+
+    .score small {
+      display: block;
+      font-size: 10px;
+      font-weight: 500;
+    }
+
+    .dashboard {
+      min-height: 82px;
+      background: rgba(235, 123, 168, 0.17);
+    }
+
+    .project h3 {
+      margin: auto 0 12px;
+      color: var(--green-deep);
+      font-size: clamp(24px, 2vw, 31px);
+      line-height: 1.32;
+      text-transform: uppercase;
+    }
+
+    .project p {
+      margin: 0 0 23px;
+      color: var(--text);
+      font-size: 15px;
+      line-height: 1.75;
+    }
+
+    .project-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .keywords {
+      color: var(--muted);
+      font-size: 12px;
+      letter-spacing: 0.08em;
+    }
+
+    .view {
+      padding: 9px 23px;
+      border: 1px solid var(--green-deep);
+      border-radius: 999px;
+      color: var(--green-deep);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+    }
+
+    .view:hover {
+      border-color: var(--pink);
+      color: var(--pink-deep);
+      background: rgba(235, 123, 168, 0.08);
+    }
+
+    .travel-case {
+      padding: clamp(58px, 8vw, 100px) var(--page-pad) clamp(68px, 9vw, 110px);
+      border-bottom: 1px solid var(--rule);
+      background: #fdfcf8;
+    }
+
+    .case-intro {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: clamp(28px, 6vw, 90px);
+      margin-bottom: clamp(44px, 6vw, 76px);
+    }
+
+    .case-intro h2 {
+      max-width: 540px;
+      margin: 10px 0 0;
+      color: var(--green-deep);
+      font-size: clamp(42px, 5vw, 68px);
+      line-height: 1.12;
+    }
+
+    .case-summary {
+      padding-top: 34px;
+    }
+
+    .case-summary > p {
+      max-width: 650px;
+      margin: 0 0 28px;
+      color: var(--text);
+      font-size: 17px;
+      line-height: 1.85;
+    }
+
+    .case-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .case-stat {
+      padding: 17px 16px;
+      border: 1px solid var(--soft-rule);
+      border-radius: 10px;
+    }
+
+    .case-stat strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--green-deep);
+      font-size: 24px;
+    }
+
+    .case-stat span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .flow-heading {
+      display: flex;
+      gap: 20px;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: clamp(30px, 4vw, 46px);
+    }
+
+    .flow-heading h3 {
+      margin: 0;
+      color: var(--green-deep);
+      font-size: clamp(26px, 3vw, 38px);
+    }
+
+    .flow-heading p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .mockup-flow {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: clamp(24px, 4vw, 58px);
+      align-items: start;
+    }
+
+    .mockup-flow::before {
+      content: "";
+      position: absolute;
+      top: clamp(270px, 26vw, 380px);
+      right: 15%;
+      left: 15%;
+      border-top: 1px dashed rgba(0, 76, 43, 0.28);
+    }
+
+    .flow-step {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .flow-step:not(:last-child)::after {
+      content: "→";
+      position: absolute;
+      top: clamp(260px, 25vw, 365px);
+      right: calc(clamp(24px, 4vw, 58px) / -2 - 15px);
+      display: inline-flex;
+      width: 30px;
+      height: 30px;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--pink);
+      border-radius: 50%;
+      color: var(--pink-deep);
+      background: var(--paper);
+      font-size: 16px;
+    }
+
+    .phone-cutout {
+      display: block;
+      width: min(100%, 312px);
+      height: clamp(510px, 52vw, 690px);
+      object-fit: contain;
+      filter: drop-shadow(0 20px 24px rgba(0, 57, 31, 0.1));
+      transition: transform 0.25s ease;
+    }
+
+    .flow-step:hover .phone-cutout {
+      transform: translateY(-9px);
+    }
+
+    .flow-copy {
+      width: min(100%, 312px);
+      margin-top: 22px;
+      padding-top: 20px;
+      border-top: 1px solid var(--soft-rule);
+      text-align: left;
+    }
+
+    .flow-copy span {
+      color: var(--pink-deep);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+    }
+
+    .flow-copy h4 {
+      margin: 9px 0 8px;
+      color: var(--green-deep);
+      font-size: 20px;
+    }
+
+    .flow-copy p {
+      margin: 0;
+      color: var(--text);
+      font-size: 14px;
+      line-height: 1.65;
+    }
+
+    .case-logic {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      margin-top: clamp(52px, 7vw, 82px);
+      border: 1px solid var(--rule);
+    }
+
+    .case-logic article {
+      min-height: 168px;
+      padding: clamp(22px, 3vw, 30px);
+    }
+
+    .case-logic article:not(:last-child) {
+      border-right: 1px solid var(--rule);
+    }
+
+    .case-logic h4 {
+      margin: 0 0 12px;
+      color: var(--green-deep);
+      font-size: 18px;
+    }
+
+    .case-logic p {
+      margin: 0;
+      color: var(--text);
+      font-size: 14px;
+      line-height: 1.65;
+    }
+
+    .trip-builder {
+      margin: -4px 0 28px;
+      padding: 18px;
+      border: 1px solid var(--soft-rule);
+      border-radius: 12px;
+      background: var(--white);
+    }
+
+    .trip-builder-label {
+      margin: 0 0 12px;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .preference-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .preference {
+      padding: 7px 13px;
+      border: 1px solid rgba(0, 76, 43, 0.22);
+      border-radius: 999px;
+      color: var(--green-deep);
+      background: transparent;
+      cursor: pointer;
+      font-size: 13px;
+      transition: all 0.18s ease;
+    }
+
+    .preference:hover,
+    .preference[aria-pressed="true"] {
+      border-color: var(--pink);
+      color: var(--pink-deep);
+      background: rgba(235, 123, 168, 0.1);
+    }
+
+    .ai-result {
+      display: grid;
+      grid-template-columns: 36px 1fr;
+      gap: 10px;
+      align-items: start;
+      min-height: 62px;
+      padding: 11px 12px;
+      border-radius: 9px;
+      color: var(--green-deep);
+      background: #f4f8f5;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .ai-result::before {
+      content: "AI";
+      display: inline-flex;
+      width: 32px;
+      height: 32px;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      color: var(--white);
+      background: var(--green);
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .ai-result.is-updating span {
+      opacity: 0;
+      transform: translateY(3px);
+    }
+
+    .ai-result span {
+      transition: opacity 0.18s ease, transform 0.18s ease;
+    }
+
+    .approach {
+      display: grid;
+      grid-template-columns: 0.78fr 1.22fr;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .approach-heading {
+      padding: clamp(48px, 6vw, 78px) var(--page-pad);
+      border-right: 1px solid var(--rule);
+    }
+
+    .approach-heading h2 {
+      margin: 0 0 20px;
+      color: var(--green-deep);
+      font-size: clamp(38px, 4vw, 54px);
+      line-height: 1.14;
+    }
+
+    .approach-heading p {
+      max-width: 350px;
+      margin: 0;
+      color: var(--text);
+    }
+
+    .questions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .question {
+      min-height: 194px;
+      padding: clamp(28px, 4vw, 42px);
+      border-bottom: 1px solid var(--soft-rule);
+    }
+
+    .question:nth-child(odd) {
+      border-right: 1px solid var(--soft-rule);
+    }
+
+    .question:last-child {
+      grid-column: 1 / -1;
+      border-bottom: 0;
+    }
+
+    .question span {
+      color: var(--pink-deep);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .question h3 {
+      margin: 9px 0 10px;
+      color: var(--green-deep);
+      font-size: 19px;
+    }
+
+    .question p {
+      margin: 0;
+      color: var(--text);
+      font-size: 14px;
+    }
+
+    .about {
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: clamp(28px, 5vw, 80px);
+      padding: clamp(56px, 8vw, 96px) var(--page-pad);
+      background: var(--green-deep);
+      color: var(--paper);
+    }
+
+    .about h2 {
+      margin: 0;
+      font-size: clamp(42px, 5vw, 66px);
+      line-height: 1.1;
+    }
+
+    .about-copy p {
+      max-width: 640px;
+      margin: 0 0 32px;
+      color: rgba(255, 254, 250, 0.76);
+      font-size: 17px;
+      line-height: 1.85;
+    }
+
+    .deliverables {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .deliverables .ghost {
+      color: var(--pink);
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 26px var(--page-pad);
+      color: rgba(255, 254, 250, 0.72);
+      background: var(--green-deep);
+      border-top: 1px solid rgba(255, 254, 250, 0.16);
+      font-size: 13px;
+    }
+
+    .has-motion .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.52s ease, transform 0.52s ease;
+    }
+
+    .has-motion .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 980px) {
+      .hero,
+      .project-grid,
+      .approach,
+      .about,
+      .case-intro {
+        grid-template-columns: 1fr;
+      }
+
+      .intro {
+        min-height: auto;
+        border-right: 0;
+        border-bottom: 1px solid var(--rule);
+      }
+
+      .feature {
+        min-height: 680px;
+      }
+
+      .project:nth-child(odd),
+      .approach-heading {
+        border-right: 0;
+      }
+
+      .approach-heading {
+        border-bottom: 1px solid var(--rule);
+      }
+
+      .case-summary {
+        padding-top: 0;
+      }
+
+      .mockup-flow {
+        gap: 22px;
+      }
+
+      .phone-cutout {
+        height: clamp(380px, 53vw, 560px);
+      }
+    }
+
+    @media (max-width: 620px) {
+      .site-header {
+        height: 60px;
+      }
+
+      .header-nav {
+        gap: 18px;
+        font-size: 11px;
+      }
+
+      .intro h1 {
+        font-size: 49px;
+      }
+
+      .feature {
+        min-height: 560px;
+      }
+
+      .devices {
+        height: 315px;
+      }
+
+      .phone {
+        width: 34%;
+      }
+
+      .project {
+        min-height: auto;
+      }
+
+      .questions {
+        grid-template-columns: 1fr;
+      }
+
+      .question:nth-child(odd) {
+        border-right: 0;
+      }
+
+      .question:last-child {
+        grid-column: auto;
+      }
+
+      .case-stats,
+      .mockup-flow,
+      .case-logic {
+        grid-template-columns: 1fr;
+      }
+
+      .mockup-flow::before,
+      .flow-step::after {
+        display: none !important;
+      }
+
+      .phone-cutout {
+        height: 540px;
+      }
+
+      .case-logic article:not(:last-child) {
+        border-right: 0;
+        border-bottom: 1px solid var(--rule);
+      }
+    }
+
+    @media print {
+      .site-header {
+        position: static;
+      }
+
+      .hero {
+        min-height: auto;
+      }
+
+      .intro,
+      .feature {
+        min-height: 820px;
+      }
+
+      .reveal {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation: none !important;
+        scroll-behavior: auto !important;
+        transition: none !important;
+      }
+
+      .has-motion .reveal {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#">AI PM Portfolio</a>
+    <nav class="header-nav" aria-label="主导航">
+      <a href="#home" data-nav="home">Home</a>
+      <a href="#projects" data-nav="projects">Projects</a>
+      <a href="#about" data-nav="about">About</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home" data-section="home">
+      <div class="intro">
+        <div>
+          <p class="kicker">Portfolio 2025 - 2026</p>
+          <h1>AI 产品<br>经理</h1>
+          <div class="role-row">
+            <span class="pill">AI Agent 产品经理</span>
+            <span class="pill accent">C 端体验 / 用户研究</span>
+          </div>
+          <p class="intro-copy">我关注 AI 如何从“能回答”变成“能帮助用户完成任务”。擅长将真实用户问题拆解为 Agent 交互、产品工作流、可靠性评估与可验证交付。</p>
+          <nav class="section-links" aria-label="作品集章节">
+            <a href="#projects"><span>01</span><strong>AI Agent Projects</strong></a>
+            <a href="#workflow"><span>02</span><strong>Product Workflow</strong></a>
+            <a href="#questions"><span>03</span><strong>Five Questions</strong></a>
+            <a href="#about"><span>04</span><strong>About me</strong></a>
+          </nav>
+        </div>
+        <div class="social-links">
+          <a href="#about">Resume ↗</a>
+          <a href="#projects">Cases ↗</a>
+          <a href="#about">Contact ↗</a>
+        </div>
+      </div>
+
+      <article class="feature reveal" aria-label="主项目：旅游 Agent">
+        <div class="case-mark">
+          <span class="plane" aria-hidden="true"></span>
+          <strong>TRIPMATE</strong>
+        </div>
+        <div class="devices" aria-hidden="true">
+          <div class="laptop">
+            <div class="laptop-screen">
+              <div class="ui-bar">
+                <span>TRIPMATE · 厦门 3 日</span>
+                <span>偏好标签 / 行程路线</span>
+              </div>
+              <div class="trip-layout">
+                <div class="trip-list">
+                  <div class="trip-card"><span class="trip-thumb"></span><div><i class="line"></i><i class="line short"></i></div></div>
+                  <div class="trip-card"><span class="trip-thumb"></span><div><i class="line"></i><i class="line short"></i></div></div>
+                  <div class="trip-card"><span class="trip-thumb"></span><div><i class="line"></i><i class="line short"></i></div></div>
+                  <div class="trip-card"><span class="trip-thumb"></span><div><i class="line"></i><i class="line short"></i></div></div>
+                </div>
+                <div class="side-route">
+                  <span class="route-block"></span>
+                  <span class="route-block"></span>
+                  <span class="route-block"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="phone">
+            <div class="phone-screen">
+              <div class="phone-head"><b>Hi，旅行者</b><br>厦门三天轻预算行程</div>
+              <div class="phone-chip-row"><i class="phone-chip"></i><i class="phone-chip"></i><i class="phone-chip"></i></div>
+              <div class="phone-map"></div>
+              <div class="day-mini"></div>
+              <div class="day-mini"></div>
+              <div class="day-mini"></div>
+            </div>
+          </div>
+        </div>
+        <div class="feature-caption">
+          <div>
+            <h2>旅游 Agent</h2>
+            <p>模糊偏好理解 · 行程生成 · 地图路线</p>
+          </div>
+          <a class="arrow" href="#tripmate" aria-label="查看旅游 Agent 项目">↗</a>
+        </div>
+      </article>
+    </section>
+
+    <section class="work" id="projects" data-section="projects">
+      <header class="work-header reveal">
+        <p class="label">Selected work</p>
+        <h2>AI Agent Projects</h2>
+      </header>
+      <div class="project-grid">
+        <article class="project reveal" id="tripmate">
+          <div class="project-meta">
+            <span class="ghost">Consumer Agent</span>
+            <span class="year">2026</span>
+          </div>
+          <div class="project-visual">
+            <div class="devices" style="height: 300px; width: min(100%, 470px);">
+              <div class="laptop" style="width: 80%; top: 30px;">
+                <div class="laptop-screen" style="height: 190px;">
+                  <div class="ui-bar"><span>TRIPMATE</span><span>行程规划</span></div>
+                  <div class="trip-layout">
+                    <div class="trip-list">
+                      <div class="trip-card"><span class="trip-thumb"></span><div><i class="line"></i><i class="line short"></i></div></div>
+                      <div class="trip-card"><span class="trip-thumb"></span><div><i class="line"></i><i class="line short"></i></div></div>
+                    </div>
+                    <div class="side-route"><span class="route-block"></span><span class="route-block"></span></div>
+                  </div>
+                </div>
+              </div>
+              <div class="phone" style="width: 29%; bottom: 8px;">
+                <div class="phone-screen" style="min-height: 190px;">
+                  <div class="phone-head"><b>厦门</b><br>轻预算行程</div>
+                  <div class="phone-map" style="height: 58px;"></div>
+                  <div class="day-mini"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="trip-builder" aria-label="旅行偏好互动预览">
+            <p class="trip-builder-label">试试选择偏好 · Agent 即时调整方案</p>
+            <div class="preference-list">
+              <button class="preference" type="button" aria-pressed="true" data-trip-choice="photo">适合拍照</button>
+              <button class="preference" type="button" aria-pressed="false" data-trip-choice="coffee">小众咖啡</button>
+              <button class="preference" type="button" aria-pressed="false" data-trip-choice="budget">预算友好</button>
+            </div>
+            <div class="ai-result" aria-live="polite">
+              <span data-trip-output>Day 2 · 清晨植物园光影机位 → 沙坡尾街巷拍摄 → 环岛路日落；路线少折返。</span>
+            </div>
+          </div>
+          <h3>把模糊旅行愿望变成可执行路线</h3>
+          <p>用户输入自然语言需求，AI 低打扰追问并生成偏好标签、分日行程与地图动线；通过事实校验和可编辑方案降低规划成本。</p>
+          <div class="project-actions">
+            <span class="keywords">交互流程 / Agent / 路线验证</span>
+            <a class="view" href="#travel-case">View</a>
+          </div>
+        </article>
+
+        <article class="project reveal" id="research">
+          <div class="project-meta">
+            <span class="ghost">Research Workflow</span>
+            <span class="year">2026</span>
+          </div>
+          <div class="project-visual">
+            <div class="research-board" aria-hidden="true">
+              <div class="research-column">
+                <span class="note green"></span>
+                <span class="note"></span>
+                <span class="note green"></span>
+              </div>
+              <div class="insight">
+                <h4>用户洞察看板</h4>
+                <div class="score">12<small>本周新增高频痛点</small></div>
+                <i class="line" style="margin-top: 18px;"></i>
+                <i class="line short"></i>
+                <i class="line"></i>
+              </div>
+              <div class="research-column">
+                <span class="dashboard"></span>
+                <span class="dashboard"></span>
+                <span class="dashboard"></span>
+              </div>
+            </div>
+          </div>
+          <h3>从零散反馈到可追溯产品洞察</h3>
+          <p>统一访谈、问卷与客服反馈，AI 协助标签聚类和机会点排序，并让每条洞察回到原始证据与验证指标。</p>
+          <div class="project-actions">
+            <span class="keywords">用户研究 / AI 工作流 / 证据链</span>
+            <a class="view" href="#workflow">View</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="travel-case" id="travel-case">
+      <div class="case-intro reveal">
+        <div>
+          <p class="label">Case study 01 · Travel Agent</p>
+          <h2>从灵感探索到可编辑行程路线</h2>
+        </div>
+        <div class="case-summary">
+          <p>用户说“我和朋友去厦门三天，喜欢拍照和小众咖啡店，预算不要太高”。AI 不直接抛出攻略，而是理解兴趣、确认约束，再把推荐结果组织为能执行、能编辑、能查看路线的计划。</p>
+          <div class="case-stats">
+            <div class="case-stat"><strong>01</strong><span>自然发现</span></div>
+            <div class="case-stat"><strong>02</strong><span>AI 澄清偏好</span></div>
+            <div class="case-stat"><strong>03</strong><span>路线落地</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flow-heading reveal">
+        <h3>核心用户流程</h3>
+        <p>真实界面样机试排 · 设备背景已抠除</p>
+      </div>
+
+      <div class="mockup-flow reveal" aria-label="旅游 Agent 三步体验流程">
+        <article class="flow-step">
+          <img class="phone-cutout" src="assets/travel-flow/discover-web.png" alt="旅行发现首页手机样机">
+          <div class="flow-copy">
+            <span>STEP 01 · DISCOVER</span>
+            <h4>从旅行灵感开始</h4>
+            <p>首页呈现目的地内容和精选推荐，降低用户从零开始规划的压力。</p>
+          </div>
+        </article>
+        <article class="flow-step">
+          <img class="phone-cutout" src="assets/travel-flow/chat-web.png" alt="旅行助手对话列表手机样机">
+          <div class="flow-copy">
+            <span>STEP 02 · CONVERSE</span>
+            <h4>延续旅行对话</h4>
+            <p>AI 记住旅行动机与历史会话，为多次规划保留可继续编辑的上下文。</p>
+          </div>
+        </article>
+        <article class="flow-step">
+          <img class="phone-cutout" src="assets/travel-flow/route-web.png" alt="地图行程路线手机样机">
+          <div class="flow-copy">
+            <span>STEP 03 · PLAN</span>
+            <h4>查看并修改路线</h4>
+            <p>将地点、步行距离、日期和编辑入口落在地图上，让生成结果真正可执行。</p>
+          </div>
+        </article>
+      </div>
+
+      <div class="case-logic reveal">
+        <article>
+          <h4>真实问题</h4>
+          <p>攻略信息很多，但用户难以组合兴趣、同行需求、预算和动线。</p>
+        </article>
+        <article>
+          <h4>AI 能力设计</h4>
+          <p>用对话抽取偏好与限制，并将生成内容约束为日程和地图节点。</p>
+        </article>
+        <article>
+          <h4>验证方式</h4>
+          <p>看行程采纳率、路线查看率、编辑行为和规划完成时长。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="approach" id="workflow">
+      <div class="approach-heading reveal">
+        <p class="label">Product approach</p>
+        <h2>AI 工作流与验证闭环</h2>
+        <p>从用户表达开始，到可控输出、工具校验与行为反馈，我用结构化流程管理 AI 的价值与风险。</p>
+      </div>
+      <div class="questions" id="questions">
+        <article class="question reveal">
+          <span>01</span>
+          <h3>发现什么真实问题？</h3>
+          <p>旅行用户难以组合偏好、预算和路线；产品团队难以快速将零散反馈转成可行动洞察。</p>
+        </article>
+        <article class="question reveal">
+          <span>02</span>
+          <h3>为什么适合用 AI？</h3>
+          <p>任务涉及自然语言理解、多轮澄清、生成规划和聚类总结，AI 可明显降低信息处理成本。</p>
+        </article>
+        <article class="question reveal">
+          <span>03</span>
+          <h3>如何设计用户流程？</h3>
+          <p>自然输入 → 关键追问 → 结构化标签 → 工具调用 → 可编辑结果 → 反馈回流。</p>
+        </article>
+        <article class="question reveal">
+          <span>04</span>
+          <h3>输出不可靠时怎么优化？</h3>
+          <p>事实用工具校验，判断用抽检和规则约束，体验用采纳率、编辑率与纠错样本持续优化。</p>
+        </article>
+        <article class="question reveal">
+          <span>05</span>
+          <h3>做出了什么，如何验证？</h3>
+          <p>交付 Agent 原型与调研系统方案；以任务完成率、方案采纳率、人工编辑率和研究耗时下降验证产品价值。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="about" id="about" data-section="about">
+      <div>
+        <p class="label" style="color: var(--pink);">About me</p>
+        <h2>让 AI 真正进入用户任务。</h2>
+      </div>
+      <div class="about-copy">
+        <p>目标岗位：AI 应用产品经理 / AI Agent 产品经理 / AI 用户产品经理。作品集支持网页浏览，并可进一步整理为简历项目描述与 PDF 投递版本。</p>
+        <div class="deliverables">
+          <span class="ghost">简历内容</span>
+          <span class="ghost">网站作品集</span>
+          <span class="ghost">PDF 展示</span>
+          <span class="ghost">面试答辩</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>AI Product Manager Portfolio · 2026</span>
+    <span>Deep Green / White / Pink</span>
+  </footer>
+  <script>
+    document.documentElement.classList.add("has-motion");
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.14, rootMargin: "0px 0px -36px" });
+
+    document.querySelectorAll(".reveal").forEach((element) => {
+      revealObserver.observe(element);
+    });
+
+    const navLinks = document.querySelectorAll("[data-nav]");
+    const navigationObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) {
+          return;
+        }
+
+        navLinks.forEach((link) => {
+          link.classList.toggle("is-active", link.dataset.nav === entry.target.dataset.section);
+        });
+      });
+    }, { threshold: 0.01, rootMargin: "-68px 0px -74% 0px" });
+
+    document.querySelectorAll("[data-section]").forEach((section) => {
+      navigationObserver.observe(section);
+    });
+
+    const tripRoutes = {
+      photo: "Day 2 · 清晨植物园光影机位 → 沙坡尾街巷拍摄 → 环岛路日落；路线少折返。",
+      coffee: "Day 1 · 老城区散步 → 设计感咖啡店 A → 沙坡尾展览 → 日落咖啡店 B；预留慢逛时间。",
+      budget: "Day 3 · 公交直达鼓浪屿码头 → 免费街巷路线 → 本地小吃清单；人均预算控制在 180 元内。"
+    };
+    const tripOutput = document.querySelector("[data-trip-output]");
+    const resultPanel = document.querySelector(".ai-result");
+
+    document.querySelectorAll("[data-trip-choice]").forEach((button) => {
+      button.addEventListener("click", () => {
+        document.querySelectorAll("[data-trip-choice]").forEach((choice) => {
+          choice.setAttribute("aria-pressed", String(choice === button));
+        });
+
+        resultPanel.classList.add("is-updating");
+        window.setTimeout(() => {
+          tripOutput.textContent = tripRoutes[button.dataset.tripChoice];
+          resultPanel.classList.remove("is-updating");
+        }, 130);
+      });
+    });
+  </script>
+</body>
+</html>
