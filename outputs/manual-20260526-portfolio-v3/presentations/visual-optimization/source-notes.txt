@@ -1,0 +1,15 @@
+Visual reference interpretation
+- Cover reference: dark forest-green field, high-contrast condensed typography, oversized central pink lightning motif.
+- Directory reference: warm paper split canvas with identity/navigation at left and featured-project device proof at right.
+
+User-requested corrections
+- Green cover with a pink lightning.
+- Green horizontal bars at top and bottom of interior pages.
+- Pink footer text and progress indicator.
+- Direct page titles supplied by the user instead of conclusion-style claims.
+- Unified font sizes and stronger, legible cards.
+- Merge former pages 03 and 04 into the product overview.
+
+Available visual evidence
+- Mobile UI screenshots for home, itinerary, AI chat, editing, generation, list and persona test/result.
+- Transparent device compositions for route, discover and chat.

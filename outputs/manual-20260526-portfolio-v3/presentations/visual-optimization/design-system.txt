@@ -1,0 +1,7 @@
+Canvas: 1280 x 720, editorial landscape.
+Palette: deep green #003C24, green #005331, paper #FBF9F3, panel #F1F4EE, pink #EC78A6, ink #102119, muted #5D7066.
+Special pages: cover uses full deep green; directory uses split paper with green project panel.
+Interior chrome: 40 px top bar and 54 px bottom bar; pink progress rail in footer.
+Typography: Microsoft YaHei; detail titles 38 px bold; subheads 18 px; card headings 15-16 px bold; body 12-14 px.
+Cards: visible green outlines, paper/white fills, pink indexed accents; no low-contrast pale-only blocks.
+Images: actual product screens, fitted cleanly and used as proof rather than decoration.

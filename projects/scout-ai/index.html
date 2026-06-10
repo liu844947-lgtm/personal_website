@@ -1,0 +1,1100 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ScoutAI 用户自调研系统 | Case Study</title>
+  <style>
+    /* ===== Design Tokens ===== */
+    :root {
+      /* Original greens */
+      --green: #004c2b;
+      --green-deep: #00391f;
+      --green-soft: #eef5ef;
+      /* Pinks */
+      --pink: #eb7ba8;
+      --pink-deep: #d73582;
+      --pink-soft: #fff1f7;
+      /* New accent palette */
+      --coral: #ff6b6b;
+      --coral-soft: #fff0f0;
+      --purple: #7c5cbf;
+      --purple-soft: #f3eefe;
+      --teal: #2aa198;
+      --teal-soft: #e6f7f5;
+      --gold: #d4a056;
+      --gold-soft: #fef6e8;
+      /* Neutrals */
+      --paper: #fffefa;
+      --white: #fff;
+      --ink: #111714;
+      --text: #46514b;
+      --muted: #87918b;
+      --rule: #172019;
+      --soft-rule: rgba(0, 57, 31, 0.15);
+      --pad: clamp(22px, 4.3vw, 62px);
+      /* Shadows */
+      --shadow-sm: 0 2px 8px rgba(0, 57, 31, 0.06);
+      --shadow-md: 0 8px 30px rgba(0, 57, 31, 0.1);
+      --shadow-lg: 0 16px 48px rgba(0, 57, 31, 0.13);
+      --shadow-pink: 0 8px 30px rgba(215, 53, 130, 0.15);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: "Noto Sans SC", "Source Han Sans SC", "Microsoft YaHei", "PingFang SC", Arial, sans-serif;
+      line-height: 1.65;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* ===== Scroll Animations ===== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-20px) scale(1.05); }
+    }
+    @keyframes float-slow {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-12px) scale(1.03); }
+    }
+
+    /* ===== Global Header ===== */
+    .global-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      display: flex;
+      height: 68px;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 var(--pad);
+      border-bottom: 1px solid var(--rule);
+      background: rgba(255, 254, 250, 0.96);
+      backdrop-filter: blur(12px);
+    }
+    .brand {
+      color: var(--green);
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 0.2em;
+    }
+    .global-nav {
+      display: flex;
+      gap: clamp(20px, 4vw, 52px);
+      font-size: 13px;
+      font-weight: 750;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+    .global-nav a {
+      position: relative;
+      transition: color 0.25s;
+    }
+    .global-nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--pink-deep);
+      transition: width 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .global-nav a:hover { color: var(--pink-deep); }
+    .global-nav a:hover::after { width: 100%; }
+
+    /* ===== Hero ===== */
+    .case-hero {
+      display: grid;
+      min-height: min(840px, calc(100vh - 68px));
+      grid-template-columns: 0.95fr 1.05fr;
+      border-bottom: 1px solid var(--rule);
+    }
+    .hero-copy {
+      padding: clamp(46px, 7vw, 86px) var(--pad);
+      border-right: 1px solid var(--rule);
+    }
+    .crumb {
+      display: inline-flex;
+      margin-bottom: clamp(36px, 6vw, 64px);
+      color: var(--green);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+    .section-label {
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-bottom: 23px;
+    }
+    .chip {
+      display: inline-flex;
+      min-height: 37px;
+      align-items: center;
+      padding: 7px 16px;
+      border: 1px solid var(--pink);
+      border-radius: 999px;
+      color: var(--pink-deep);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      transition: all 0.3s;
+    }
+    .chip:hover {
+      background: var(--pink-soft);
+      border-color: var(--pink-deep);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-pink);
+    }
+    h1 {
+      margin: 0 0 13px;
+      color: var(--green-deep);
+      font-size: clamp(52px, 6vw, 78px);
+      font-weight: 900;
+      line-height: 1.06;
+    }
+    .subtitle {
+      margin: 0 0 28px;
+      color: var(--green);
+      font-size: clamp(21px, 2.3vw, 30px);
+      font-weight: 700;
+      line-height: 1.4;
+    }
+    .summary {
+      max-width: 670px;
+      margin: 0 0 clamp(30px, 4vw, 42px);
+      color: var(--text);
+      font-size: 16px;
+      line-height: 1.92;
+    }
+    .facts {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      border: 1px solid var(--soft-rule);
+    }
+    .fact {
+      min-height: 92px;
+      padding: 15px 16px;
+      border-bottom: 1px solid var(--soft-rule);
+    }
+    .fact:nth-child(odd) { border-right: 1px solid var(--soft-rule); }
+    .fact:nth-last-child(-n + 2) { border-bottom: 0; }
+    .fact strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+    }
+    .fact span {
+      color: var(--green-deep);
+      font-size: 14px;
+      font-weight: 650;
+    }
+
+    /* ===== Hero Media ===== */
+    .hero-media {
+      position: relative;
+      display: grid;
+      place-items: center;
+      padding: clamp(34px, 5vw, 62px);
+      overflow: hidden;
+    }
+    .hero-media img {
+      position: relative;
+      z-index: 2;
+      display: block;
+      width: min(100%, 820px);
+      object-fit: contain;
+      filter: drop-shadow(0 26px 26px rgba(0, 0, 0, 0.25));
+      transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .hero-media:hover img {
+      transform: scale(1.03) translateY(-4px);
+    }
+    /* Floating blur bubbles */
+    .hero-bubble {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(50px);
+      opacity: 0.5;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .hero-bubble-1 {
+      width: 320px;
+      height: 320px;
+      top: -60px;
+      right: -40px;
+      background: radial-gradient(circle, #f06292, transparent);
+      animation: float 8s ease-in-out infinite;
+    }
+    .hero-bubble-2 {
+      width: 220px;
+      height: 220px;
+      bottom: 10%;
+      left: -50px;
+      background: radial-gradient(circle, #ce93d8, transparent);
+      animation: float-slow 10s ease-in-out infinite;
+      animation-delay: -3s;
+    }
+    .hero-bubble-3 {
+      width: 180px;
+      height: 180px;
+      top: 30%;
+      right: 15%;
+      background: radial-gradient(circle, #ffab91, transparent);
+      animation: float 7s ease-in-out infinite;
+      animation-delay: -5s;
+    }
+    .hero-bubble-4 {
+      width: 260px;
+      height: 260px;
+      bottom: -40px;
+      right: -30px;
+      background: radial-gradient(circle, #f48fb1, transparent);
+      animation: float-slow 9s ease-in-out infinite;
+      animation-delay: -2s;
+    }
+
+    /* ===== Layout ===== */
+    .case-layout {
+      display: grid;
+      grid-template-columns: 252px minmax(0, 1fr);
+      align-items: start;
+    }
+    .case-index {
+      position: sticky;
+      top: 68px;
+      min-height: calc(100vh - 68px);
+      padding: 40px 25px 44px var(--pad);
+      border-right: 1px solid var(--rule);
+    }
+    .case-index nav { display: grid; gap: 5px; }
+    .case-index a {
+      display: grid;
+      grid-template-columns: 30px 1fr;
+      gap: 9px;
+      padding: 9px 0;
+      color: var(--text);
+      font-size: 13px;
+      line-height: 1.42;
+      transition: all 0.25s;
+      border-left: 2px solid transparent;
+      padding-left: 10px;
+    }
+    .case-index span { color: var(--muted); font-weight: 750; }
+    .case-index a.active,
+    .case-index a:hover {
+      color: var(--pink-deep);
+      font-weight: 700;
+      border-left-color: var(--pink-deep);
+      padding-left: 12px;
+    }
+    .case-index a.active span { color: var(--pink-deep); }
+
+    /* ===== Sections ===== */
+    .case-section {
+      padding: clamp(52px, 7vw, 86px) var(--pad);
+      border-bottom: 1px solid var(--rule);
+      break-inside: avoid-page;
+      scroll-margin-top: 68px;
+    }
+    .section-head {
+      display: grid;
+      grid-template-columns: 74px minmax(0, 1fr);
+      gap: 16px;
+      margin-bottom: clamp(30px, 4vw, 48px);
+    }
+    .number {
+      color: var(--pink-deep);
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+    }
+    h2 {
+      margin: 0;
+      max-width: 920px;
+      color: var(--green-deep);
+      font-size: clamp(31px, 3.6vw, 49px);
+      line-height: 1.2;
+    }
+    .lead {
+      max-width: 860px;
+      margin: -18px 0 34px 90px;
+      padding: 16px 20px;
+      color: var(--text);
+      font-size: 16px;
+      line-height: 1.85;
+      background: linear-gradient(135deg, var(--pink-soft) 0%, var(--purple-soft) 100%);
+      border-radius: 12px;
+      border-left: 4px solid var(--pink-deep);
+    }
+
+    /* ===== Enhanced Cards ===== */
+    .cards-4,
+    .cards-3,
+    .cards-2 {
+      display: grid;
+      gap: 14px;
+    }
+    .cards-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .cards-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .cards-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .card {
+      min-height: 168px;
+      padding: clamp(18px, 2.5vw, 25px);
+      border: 1px solid var(--soft-rule);
+      background: var(--white);
+      transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--pink), var(--purple));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+      border-color: transparent;
+    }
+    .card:hover::before { transform: scaleX(1); }
+    .card h3 {
+      margin: 0 0 11px;
+      color: var(--green-deep);
+      font-size: 18px;
+      transition: color 0.3s;
+    }
+    .card:hover h3 { color: var(--pink-deep); }
+    .card p,
+    .card li {
+      margin: 0;
+      color: var(--text);
+      font-size: 14px;
+      line-height: 1.72;
+    }
+    .card ul { margin: 0; padding-left: 18px; }
+
+    /* ===== Pain-Point Cards ===== */
+    .pain-points-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .pain-card {
+      min-height: 210px;
+      padding: clamp(20px, 2.5vw, 26px);
+      border: 1px solid var(--soft-rule);
+      border-radius: 14px;
+      background: linear-gradient(160deg, var(--pink-soft) 0%, var(--white) 50%);
+      transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    .pain-card::before {
+      content: attr(data-index);
+      position: absolute;
+      right: 0;
+      top: -10px;
+      color: var(--green-soft);
+      font-size: 82px;
+      font-weight: 900;
+      line-height: 1;
+      pointer-events: none;
+    }
+    .pain-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--green);
+    }
+    .pain-card h3 {
+      position: relative;
+      margin: 0 0 10px;
+      color: var(--green-deep);
+      font-size: 17px;
+    }
+    .pain-card p {
+      position: relative;
+      margin: 0;
+      color: var(--text);
+      font-size: 13.5px;
+      line-height: 1.75;
+    }
+
+    /* ===== Image Section ===== */
+    .image-row {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 36px;
+      align-items: center;
+    }
+    .image-row.two { grid-template-columns: 1.15fr 0.85fr; }
+    .image-panel {
+      display: grid;
+      min-height: 310px;
+      place-items: center;
+      margin: 0;
+      padding: 8px;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+    }
+    .image-panel img {
+      display: block;
+      max-width: 100%;
+      max-height: 520px;
+      object-fit: contain;
+      transition: transform 0.3s ease;
+    }
+    .image-panel:hover img {
+      transform: scale(1.05);
+    }
+
+    /* ===== Image Hover Preview ===== */
+    .img-preview {
+      position: fixed;
+      z-index: 9999;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.18s ease;
+      padding: 8px;
+      border-radius: 12px;
+      background: var(--white);
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.3);
+    }
+    .img-preview.show {
+      opacity: 1;
+    }
+    .img-preview img {
+      display: block;
+      max-width: 480px;
+      max-height: 500px;
+      border-radius: 8px;
+      object-fit: contain;
+    }
+
+    /* ===== Flow Diagram ===== */
+    .flow {
+      display: flex;
+      flex-wrap: wrap;
+      border: 1px solid var(--rule);
+      transition: box-shadow 0.3s;
+    }
+    .flow:hover {
+      box-shadow: var(--shadow-sm);
+    }
+    .flow-node {
+      position: relative;
+      flex: 1 1 150px;
+      min-height: 96px;
+      padding: 25px 24px 20px;
+      color: var(--green-deep);
+      background: var(--white);
+      font-size: 14px;
+      font-weight: 700;
+      transition: all 0.3s;
+    }
+    .flow-node:hover {
+      background: linear-gradient(135deg, var(--pink-soft), var(--purple-soft));
+      color: var(--pink-deep);
+    }
+    .flow-node:not(:last-child) {
+      border-right: 1px solid var(--soft-rule);
+    }
+    .flow-node:not(:last-child)::after {
+      content: "→";
+      position: absolute;
+      z-index: 1;
+      top: 50%;
+      right: -14px;
+      display: grid;
+      width: 28px;
+      height: 28px;
+      place-items: center;
+      border-radius: 50%;
+      color: var(--pink-deep);
+      background: var(--paper);
+      transform: translateY(-50%);
+      transition: all 0.3s;
+    }
+    .flow-node:hover:not(:last-child)::after {
+      background: var(--pink-deep);
+      color: var(--white);
+      transform: translateY(-50%) scale(1.1);
+    }
+    .flow-node small {
+      display: block;
+      margin-bottom: 7px;
+      color: var(--pink-deep);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      transition: color 0.3s;
+    }
+    .flow-node:hover small { color: var(--purple); }
+
+    /* ===== Status Note ===== */
+    .status-note {
+      margin: 0 0 31px 90px;
+      padding: 22px 25px;
+      border-left: 5px solid var(--pink);
+      color: var(--green-deep);
+      background: linear-gradient(135deg, var(--pink-soft) 0%, var(--purple-soft) 100%);
+      font-size: 16px;
+      line-height: 1.8;
+      border-radius: 0 12px 12px 0;
+      transition: box-shadow 0.3s;
+    }
+    .status-note:hover {
+      box-shadow: var(--shadow-md);
+    }
+
+    /* ===== DEMO Video Section ===== */
+    .demo-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 30px;
+    }
+    .demo-video-wrapper {
+      position: relative;
+      display: grid;
+      place-items: center;
+      min-height: 340px;
+      border: 1px solid var(--soft-rule);
+      background: linear-gradient(145deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      border-radius: 16px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .demo-video-wrapper:hover {
+      box-shadow: 0 12px 40px rgba(15, 52, 96, 0.3);
+      transform: translateY(-4px) scale(1.01);
+    }
+    .demo-video-wrapper::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 30% 40%, rgba(235, 123, 168, 0.15), transparent 60%),
+                  radial-gradient(ellipse at 70% 60%, rgba(124, 92, 191, 0.12), transparent 60%);
+      pointer-events: none;
+    }
+    .demo-play-btn {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      width: 80px;
+      height: 80px;
+      place-items: center;
+      border-radius: 50%;
+      background: rgba(235, 123, 168, 0.9);
+      color: white;
+      font-size: 32px;
+      transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+      box-shadow: 0 4px 20px rgba(235, 123, 168, 0.4);
+    }
+    .demo-video-wrapper:hover .demo-play-btn {
+      transform: scale(1.12);
+      box-shadow: 0 8px 32px rgba(235, 123, 168, 0.5);
+    }
+    .demo-play-btn::after {
+      content: '▶';
+      margin-left: 4px;
+    }
+    .demo-video-label {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      color: rgba(255,255,255,0.7);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+    /* Mock video frame decorations */
+    .demo-video-wrapper .frame-dot {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .demo-video-wrapper .frame-dot-1 {
+      width: 120px;
+      height: 120px;
+      top: -30px;
+      left: -30px;
+      background: radial-gradient(circle, rgba(235, 123, 168, 0.08), transparent);
+    }
+    .demo-video-wrapper .frame-dot-2 {
+      width: 180px;
+      height: 180px;
+      bottom: -60px;
+      right: -40px;
+      background: radial-gradient(circle, rgba(124, 92, 191, 0.08), transparent);
+    }
+    .demo-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 14px;
+      padding: 10px 0;
+    }
+    .demo-info h3 {
+      margin: 0;
+      color: var(--green-deep);
+      font-size: 20px;
+    }
+    .demo-info p {
+      margin: 0;
+      color: var(--text);
+      font-size: 14px;
+      line-height: 1.8;
+    }
+    .demo-info .demo-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+    }
+    .demo-info .demo-meta span {
+      display: inline-flex;
+      padding: 5px 13px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      background: var(--pink-soft);
+      color: var(--pink-deep);
+    }
+    .demo-info .demo-meta span:nth-child(2) {
+      background: var(--purple-soft);
+      color: var(--purple);
+    }
+    .demo-info .demo-meta span:nth-child(3) {
+      background: var(--teal-soft);
+      color: var(--teal);
+    }
+
+    /* ===== Footer ===== */
+    .page-footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 28px var(--pad);
+      border-top: 1px solid rgba(255, 254, 250, 0.17);
+      color: rgba(255, 254, 250, 0.72);
+      background: var(--green-deep);
+      font-size: 13px;
+    }
+    .page-footer a {
+      transition: color 0.25s;
+    }
+    .page-footer a:hover {
+      color: var(--pink);
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 1120px) {
+      .case-layout { display: block; }
+      .case-index {
+        position: sticky;
+        top: 68px;
+        z-index: 10;
+        min-height: 0;
+        overflow-x: auto;
+        padding: 14px var(--pad);
+        border-right: 0;
+        border-bottom: 1px solid var(--rule);
+        background: var(--paper);
+      }
+      .case-index nav { display: flex; gap: 20px; white-space: nowrap; }
+      .case-index a { display: block; border-left: none; padding-left: 0; }
+      .case-index a.active { border-left: none; padding-left: 0; }
+      .case-index a span { margin-right: 6px; }
+      .cards-4,
+      .pain-points-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 900px) {
+      .case-hero,
+      .image-row,
+      .image-row.two,
+      .cards-3 { grid-template-columns: 1fr; }
+      .hero-copy {
+        border-right: 0;
+        border-bottom: 1px solid var(--rule);
+      }
+      .cards-2,
+      .pain-points-grid { grid-template-columns: 1fr; }
+      .demo-container { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 620px) {
+      .global-header { height: 60px; }
+      .global-nav { gap: 15px; font-size: 11px; }
+      .facts,
+      .cards-4 { grid-template-columns: 1fr; }
+      .fact:nth-child(odd) { border-right: 0; }
+      .section-head { display: block; }
+      .number { display: block; margin-bottom: 9px; }
+      .lead,
+      .status-note { margin-left: 0; }
+      .flow-node:not(:last-child) {
+        border-right: 0;
+        border-bottom: 1px solid var(--soft-rule);
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="global-header">
+    <a class="brand" href="../../portfolio-ai-pm.html#home">AI PM PORTFOLIO</a>
+    <nav class="global-nav" aria-label="全局导航">
+      <a href="../../portfolio-ai-pm.html#home">Home</a>
+      <a href="../../portfolio-ai-pm.html#projects">Projects</a>
+      <a href="../../portfolio-ai-pm.html#about">About</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ===== HERO ===== -->
+    <section class="case-hero" id="overview">
+      <div class="hero-copy">
+        <a class="crumb" href="../../portfolio-ai-pm.html#projects">← Back to Projects</a>
+        <p class="section-label">01 · 产品概况</p>
+        <div class="chips">
+          <span class="chip">跨平台调研</span>
+          <span class="chip">用户反馈分析</span>
+          <span class="chip">潜在机会发现</span>
+        </div>
+        <h1>ScoutAI</h1>
+        <p class="subtitle">用户自调研系统</p>
+        <p class="summary">输入一个研究问题，系统自动生成关键词、抓取跨平台用户反馈、清洗数据，并输出带原话证据的结构化用户研究报告。</p>
+        <div class="facts" aria-label="项目信息">
+          <div class="fact"><strong>项目类型</strong><span>AI Agent</span></div>
+          <div class="fact"><strong>目标用户</strong><span>产品经理：竞品分析、用户需求挖掘</span></div>
+          <div class="fact"><strong>我的角色</strong><span>产品定义 / AI 交互 / 界面设计 / Demo 落地</span></div>
+          <div class="fact"><strong>当前成果</strong><span>网页端 Demo / 跨平台抓取 / 数据清洗与报告输出</span></div>
+          <div class="fact"><strong>核心能力</strong><span>可追溯原话引用 / AI 追问 / 结构化报告导出</span></div>
+        </div>
+      </div>
+      <div class="hero-media">
+        <img src="../../demo_pic/ScoutAI%E9%BB%91%E8%89%B2Mac%E5%A3%B3_%E5%B8%A6%E5%BA%95%E5%BA%A7.png" alt="ScoutAI 黑色 MacBook 样机">
+      </div>
+    </section>
+
+    <!-- ===== BODY ===== -->
+    <div class="case-layout">
+      <aside class="case-index" aria-label="案例章节导航">
+        <nav>
+          <a href="#overview" data-anchor="overview"><span>01</span>产品概况</a>
+          <a href="#problem" data-anchor="problem"><span>02</span>用户痛点</a>
+          <a href="#solution" data-anchor="solution"><span>03</span>产品方案</a>
+          <a href="#demo" data-anchor="demo"><span>04</span>DEMO 展示</a>
+          <a href="#design" data-anchor="design"><span>05</span>关键设计</a>
+          <a href="#report" data-anchor="report"><span>06</span>报告结构</a>
+          <a href="#testing" data-anchor="testing"><span>07</span>测试与迭代</a>
+        </nav>
+      </aside>
+
+      <div class="case-body">
+
+        <!-- ===== 02 用户痛点 ===== -->
+        <section class="case-section" id="problem">
+          <header class="section-head">
+            <span class="number">02</span>
+            <h2>用户痛点</h2>
+          </header>
+          <p class="lead">设计机会：把"散落的声音"转化为"带证据链的判断"，让研究结论经得起追问。</p>
+          <div class="pain-points-grid">
+            <article class="pain-card reveal" data-index="01">
+              <h3>调研碎片化</h3>
+              <p>用户反馈分散在不同平台、不同语言、不同语境里，产品判断很难从单一平台得出。Twitter、Reddit、B 站、YouTube 各自形成信息孤岛。</p>
+            </article>
+            <article class="pain-card reveal reveal-delay-1" data-index="02">
+              <h3>手工整理成本高</h3>
+              <p>抓取、筛选、清洗、归类都需要大量人工时间，一个课题往往耗时 3-5 天，调研周期被严重拉长，难以快速验证假设。</p>
+            </article>
+            <article class="pain-card reveal reveal-delay-2" data-index="03">
+              <h3>结论不可追溯</h3>
+              <p>很多调研报告只剩一句总结，缺少原始用户数据支撑。向团队汇报时难以回答"证据在哪""谁说的""在哪个平台"，缺乏说服力。</p>
+            </article>
+            <article class="pain-card reveal reveal-delay-3" data-index="04">
+              <h3>先验偏见干扰</h3>
+              <p>手工总结时容易注入主观判断，选择性关注符合预期的反馈，忽略真实用户表达中的反常识信号，导致错过关键洞察。</p>
+            </article>
+          </div>
+        </section>
+
+        <!-- ===== 03 产品方案 ===== -->
+        <section class="case-section" id="solution">
+          <header class="section-head">
+            <span class="number">03</span>
+            <h2>产品方案</h2>
+          </header>
+          <div class="cards-3">
+            <article class="card reveal">
+              <h3>关键词生成</h3>
+              <p>用于抓 B 站中文关键词和国外网站英文关键词。AI 提取 2-4 个短词，补充人群，并扩展同义词 / 近义词。</p>
+            </article>
+            <article class="card reveal reveal-delay-1">
+              <h3>多平台抓取</h3>
+              <p>Twitter 和 YouTube 利用 API 抓取，Reddit / Bilibili 利用爬虫抓取，以获得上千条真实用户数据。</p>
+            </article>
+            <article class="card reveal reveal-delay-2">
+              <h3>清洗与报告</h3>
+              <p>去掉表情、短句、垃圾内容，统计词频 Top 10，并为核心观点附上用户原话。</p>
+            </article>
+          </div>
+          <div class="image-row">
+            <figure class="image-panel reveal">
+              <img src="../../demo_pic/ScoutAI-%E6%96%B0%E5%BB%BA%E8%B0%83%E7%A0%94%E9%A1%B5.png" alt="ScoutAI 新建调研页">
+            </figure>
+            <figure class="image-panel reveal reveal-delay-1">
+              <img src="../../demo_pic/ScoutAI-Agent%E5%88%86%E6%9E%90%E5%AE%8C%E6%88%90%E9%A1%B5.png" alt="ScoutAI Agent 分析完成页">
+            </figure>
+            <figure class="image-panel reveal reveal-delay-2">
+              <img src="../../demo_pic/ScoutAI-%E6%8A%A5%E5%91%8A%E8%AF%A6%E6%83%85%E9%A1%B5.png" alt="ScoutAI 报告详情页">
+            </figure>
+          </div>
+        </section>
+
+        <!-- ===== 04 DEMO 展示 ===== -->
+        <section class="case-section" id="demo">
+          <header class="section-head">
+            <span class="number">04</span>
+            <h2>DEMO 展示</h2>
+          </header>
+          <div class="demo-container">
+            <video src="../../demo_pic/scoutai-demo-web.mp4" controls playsinline preload="metadata" poster="../../demo_pic/ScoutAI-%E6%96%B0%E5%BB%BA%E8%B0%83%E7%A0%94%E9%A1%B5.png" style="display:block; width:100%; height:320px; object-fit:contain; border-radius:16px; background:#000;">
+            </video>
+            <div class="demo-info reveal reveal-delay-1">
+              <h3>产品交互演示</h3>
+              <p>从输入研究问题开始，完整展示 ScoutAI 自动生成关键词、跨平台抓取用户反馈、清洗数据并输出结构化研究报告的全流程。视频时长约 3 分钟。</p>
+              <div class="demo-meta">
+                <span>⏱ 3 min</span>
+                <span>📱 产品流程</span>
+                <span>🎯 端到端体验</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===== 05 关键设计 ===== -->
+        <section class="case-section" id="design">
+          <header class="section-head">
+            <span class="number">05</span>
+            <h2>关键设计</h2>
+          </header>
+          <div class="cards-3">
+            <article class="card reveal">
+              <h3>关键词生成模块</h3>
+              <p>理解问题意图，确认主研究范围，补充次要关键词，并确认关键词之间的关系。AI 自动提取 2-4 个短词、补充人群标签、扩展同义词与近义词，确保跨平台搜索覆盖面。</p>
+            </article>
+            <article class="card reveal reveal-delay-1">
+              <h3>可溯源设计</h3>
+              <p>每条结论至少引用 2-3 条来自不同平台的用户原话，原始数据带有原帖子链接，可跳转平台验证真实性，让调研结果经得起汇报时的追问。</p>
+            </article>
+            <article class="card reveal reveal-delay-2">
+              <h3>可追问 AI</h3>
+              <p>基于已采集证据继续提问，快速定位关键评论与结论依据。用户追问"为什么得出这个结论""有没有反例"时，系统可按关键词和样本来源检索回应。</p>
+            </article>
+          </div>
+          <div class="image-row">
+            <figure class="image-panel reveal">
+              <img src="../../demo_pic/%E5%85%B3%E9%94%AE%E8%AF%8D.png" alt="ScoutAI 关键词生成模块">
+            </figure>
+            <figure class="image-panel reveal reveal-delay-1">
+              <img src="../../demo_pic/%E5%8F%AF%E8%BF%BD%E6%BA%AF.png" alt="ScoutAI 可溯源原话引用">
+            </figure>
+            <figure class="image-panel reveal reveal-delay-2">
+              <img src="../../demo_pic/%E5%8F%AF%E8%BF%BD%E9%97%AE.png" alt="ScoutAI 可追问 AI">
+            </figure>
+          </div>
+          <div class="flow" aria-label="ScoutAI 关键流程" style="margin-top: 36px;">
+            <div class="flow-node"><small>01</small>输入研究问题</div>
+            <div class="flow-node"><small>02</small>AI 生成关键词</div>
+            <div class="flow-node"><small>03</small>跨平台抓取反馈</div>
+            <div class="flow-node"><small>04</small>清洗与聚类</div>
+            <div class="flow-node"><small>05</small>输出可追溯报告</div>
+            <div class="flow-node"><small>06</small>继续 AI 追问</div>
+          </div>
+        </section>
+
+        <!-- ===== 06 报告结构 ===== -->
+        <section class="case-section" id="report">
+          <header class="section-head">
+            <span class="number">06</span>
+            <h2>报告结构</h2>
+          </header>
+          <div style="display: grid; grid-template-columns: 1fr auto 1fr; gap: 0; align-items: center; min-height: 420px;">
+            <!-- 左侧目录 -->
+            <div style="display: flex; flex-direction: column; gap: 10px; padding: 20px 24px;">
+              <article class="card reveal" style="min-height:unset; padding:14px 18px;">
+                <h3 style="font-size:15px; margin-bottom:4px;">报告概况</h3>
+                <p style="font-size:13px; margin:0;">研究问题、关键词、数据来源与样本量总览</p>
+              </article>
+              <article class="card reveal reveal-delay-1" style="min-height:unset; padding:14px 18px;">
+                <h3 style="font-size:15px; margin-bottom:4px;">核心结论</h3>
+                <p style="font-size:13px; margin:0;">高频痛点词云、主题聚类与关键发现</p>
+              </article>
+              <article class="card reveal reveal-delay-2" style="min-height:unset; padding:14px 18px;">
+                <h3 style="font-size:15px; margin-bottom:4px;">用户情绪与态度分析</h3>
+                <p style="font-size:13px; margin:0;">情感分布、口碑趋势与正负面归因</p>
+              </article>
+              <article class="card reveal reveal-delay-3" style="min-height:unset; padding:14px 18px;">
+                <h3 style="font-size:15px; margin-bottom:4px;">用户画像</h3>
+                <p style="font-size:13px; margin:0;">典型用户角色、行为特征与使用场景</p>
+              </article>
+              <article class="card reveal reveal-delay-4" style="min-height:unset; padding:14px 18px;">
+                <h3 style="font-size:15px; margin-bottom:4px;">产品机会与建议</h3>
+                <p style="font-size:13px; margin:0;">基于证据的改进方向与优先级排序</p>
+              </article>
+              <article class="card reveal reveal-delay-5" style="min-height:unset; padding:14px 18px;">
+                <h3 style="font-size:15px; margin-bottom:4px;">附录：样本引用与原始数据</h3>
+                <p style="font-size:13px; margin:0;">每条结论的用户原话、平台来源与链接</p>
+              </article>
+            </div>
+            <!-- 箭头 -->
+            <div style="display: grid; place-items: center; padding: 0 10px;">
+              <span style="font-size: 48px; color: var(--pink-deep); font-weight: 900; transition: transform 0.3s ease;">→</span>
+            </div>
+            <!-- 右侧报告图片 -->
+            <figure class="image-panel reveal reveal-delay-2" style="min-height: 400px;">
+              <img src="../../demo_pic/%E6%8A%A5%E5%91%8A%E7%BB%93%E6%9E%84.png" alt="ScoutAI 报告结构示意图">
+            </figure>
+          </div>
+        </section>
+
+        <!-- ===== 07 测试与迭代 ===== -->
+        <section class="case-section" id="testing">
+          <header class="section-head">
+            <span class="number">07</span>
+            <h2>测试与迭代</h2>
+          </header>
+          <!-- Problem 1 -->
+          <div style="display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 14px; margin-bottom: 28px;">
+            <article class="card reveal">
+              <h3>跨平台抓取不稳定</h3>
+              <p style="margin-bottom: 16px;">Twitter / YouTube / Reddit / Bilibili 在接口限制、反爬策略、关键词命中率上表现不一致，导致同一课题下不同平台返回数据量波动较大。</p>
+              <p style="margin-bottom: 8px; font-size: 12px; color: var(--pink-deep); font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;">影响结果</p>
+              <p style="margin-bottom: 16px; font-size: 13px; color: var(--text);">数据量不稳定会影响报告覆盖度，部分结论可能出现平台样本偏向，进而影响用户对报告可信度的判断。</p>
+              <p style="margin-bottom: 8px; font-size: 12px; color: var(--green); font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;">迭代方向</p>
+              <p style="font-size: 13px; color: var(--text);">建立抓取监控与降级机制：记录成功率、有效样本数和失败原因；失败时自动切换备用关键词、降低抓取深度，或提示补充数据源。</p>
+            </article>
+            <article class="card reveal reveal-delay-1">
+              <h3>AI 追问还不够基于证据</h3>
+              <p style="margin-bottom: 16px;">当前 AI Agent 能围绕报告继续回答问题，但追问主要依赖大模型总结，容易泛化，不能稳定定位到具体用户原话和样本来源。</p>
+              <p style="margin-bottom: 8px; font-size: 12px; color: var(--pink-deep); font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;">影响结果</p>
+              <p style="margin-bottom: 16px; font-size: 13px; color: var(--text);">用户追问"为什么得出这个结论""有没有反例""某类用户具体怎么说"时，系统需要更强的证据检索能力。</p>
+              <p style="margin-bottom: 8px; font-size: 12px; color: var(--green); font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;">迭代方向</p>
+              <p style="font-size: 13px; color: var(--text);">引入 RAG 机制：将评论、帖子、视频评论切分为可检索语料库，让二次问答先检索原始样本再生成回答，并附平台、原文和链接。</p>
+            </article>
+          </div>
+          <p class="status-note reveal">迭代优先级：先解决抓取稳定性（影响数据基础），再引入 RAG 增强追问能力（提升体验上限），最终将调研流程标准化为可复用的 Agent 模板。</p>
+        </section>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- ===== Image Hover Preview ===== -->
+  <div class="img-preview" id="imgPreview" aria-hidden="true">
+    <img id="imgPreviewImg" src="" alt="预览">
+  </div>
+
+  <footer class="page-footer">
+    <span>ScoutAI · Case Study</span>
+    <a href="../../portfolio-ai-pm.html#projects">返回作品集 Projects ↗</a>
+  </footer>
+
+  <script>
+    // ===== 侧边栏导航高亮 =====
+    const anchors = document.querySelectorAll("[data-anchor]");
+    const sections = document.querySelectorAll(".case-section, #overview");
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        anchors.forEach((anchor) => {
+          anchor.classList.toggle("active", anchor.dataset.anchor === entry.target.id);
+        });
+      });
+    }, { threshold: 0.22, rootMargin: "-80px 0px -60% 0px" });
+    sections.forEach((section) => observer.observe(section));
+
+    // ===== 滚动入场动画 =====
+    const revealEls = document.querySelectorAll(".reveal");
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
+    revealEls.forEach((el) => revealObserver.observe(el));
+
+    // ===== Image Hover Preview =====
+    const imgPreview = document.getElementById("imgPreview");
+    const imgPreviewImg = document.getElementById("imgPreviewImg");
+    document.querySelectorAll(".image-panel img").forEach((img) => {
+      const panel = img.closest(".image-panel");
+      panel.addEventListener("mouseenter", () => {
+        imgPreviewImg.src = img.src;
+        imgPreview.classList.add("show");
+      });
+      panel.addEventListener("mousemove", (e) => {
+        const pw = imgPreview.offsetWidth || 480;
+        if (e.clientX + pw + 40 > window.innerWidth) {
+          imgPreview.style.left = (e.clientX - pw - 20) + "px";
+        } else {
+          imgPreview.style.left = (e.clientX + 20) + "px";
+        }
+        imgPreview.style.top = (e.clientY - 20) + "px";
+      });
+      panel.addEventListener("mouseleave", () => {
+        imgPreview.classList.remove("show");
+      });
+    });
+  </script>
+</body>
+</html>

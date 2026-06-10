@@ -1,0 +1,48 @@
+{
+  "output": "E:\\vibe_coding\\profilo\\pdf\\乡村文旅AI助手_三页概念版.pptx",
+  "outputBytes": 8791046,
+  "slideCount": 3,
+  "slideSize": {
+    "width": 1280,
+    "height": 720
+  },
+  "previewDir": "E:\\vibe_coding\\profilo\\outputs\\manual-20260601-rural-ai-assistant\\presentations\\rural-ai-assistant\\preview",
+  "previewPaths": [
+    "E:\\vibe_coding\\profilo\\outputs\\manual-20260601-rural-ai-assistant\\presentations\\rural-ai-assistant\\preview\\slide-01.png",
+    "E:\\vibe_coding\\profilo\\outputs\\manual-20260601-rural-ai-assistant\\presentations\\rural-ai-assistant\\preview\\slide-02.png",
+    "E:\\vibe_coding\\profilo\\outputs\\manual-20260601-rural-ai-assistant\\presentations\\rural-ai-assistant\\preview\\slide-03.png"
+  ],
+  "layoutDir": "E:\\vibe_coding\\profilo\\outputs\\manual-20260601-rural-ai-assistant\\presentations\\rural-ai-assistant\\layout",
+  "layoutResults": [
+    {
+      "layoutPath": "E:\\vibe_coding\\profilo\\outputs\\manual-20260601-rural-ai-assistant\\presentations\\rural-ai-assistant\\layout\\slide-01.layout.json"
+    },
+    {
+      "layoutPath": "E:\\vibe_coding\\profilo\\outputs\\manual-20260601-rural-ai-assistant\\presentations\\rural-ai-assistant\\layout\\slide-02.layout.json"
+    },
+    {
+      "layoutPath": "E:\\vibe_coding\\profilo\\outputs\\manual-20260601-rural-ai-assistant\\presentations\\rural-ai-assistant\\layout\\slide-03.layout.json"
+    }
+  ],
+  "contactSheet": "E:\\vibe_coding\\profilo\\outputs\\manual-20260601-rural-ai-assistant\\presentations\\rural-ai-assistant\\preview\\contact-sheet.png",
+  "slides": [
+    {
+      "index": 1,
+      "requestedSlideNumber": 1,
+      "modulePath": "E:\\vibe_coding\\profilo\\outputs\\manual-20260601-rural-ai-assistant\\presentations\\rural-ai-assistant\\slides\\slide-01.mjs",
+      "exportName": "default"
+    },
+    {
+      "index": 2,
+      "requestedSlideNumber": 2,
+      "modulePath": "E:\\vibe_coding\\profilo\\outputs\\manual-20260601-rural-ai-assistant\\presentations\\rural-ai-assistant\\slides\\slide-02.mjs",
+      "exportName": "default"
+    },
+    {
+      "index": 3,
+      "requestedSlideNumber": 3,
+      "modulePath": "E:\\vibe_coding\\profilo\\outputs\\manual-20260601-rural-ai-assistant\\presentations\\rural-ai-assistant\\slides\\slide-03.mjs",
+      "exportName": "default"
+    }
+  ]
+}

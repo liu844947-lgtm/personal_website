@@ -1,0 +1,248 @@
+{
+  "output": "E:\\vibe_coding\\profilo\\pdf\\AI产品经理作品集_用户自调研板块_2026.pptx",
+  "outputBytes": 20881991,
+  "slideCount": 23,
+  "slideSize": {
+    "width": 1280,
+    "height": 720
+  },
+  "previewDir": "E:\\vibe_coding\\profilo\\outputs\\manual-20260530-user-research-section\\presentations\\user-research-section\\preview",
+  "previewPaths": [
+    "E:\\vibe_coding\\profilo\\outputs\\manual-20260530-user-research-section\\presentations\\user-research-section\\preview\\slide-01.png",
+    "E:\\vibe_coding\\profilo\\outputs\\manual-20260530-user-research-section\\presentations\\user-research-section\\preview\\slide-02.png",
+    "E:\\vibe_coding\\profilo\\outputs\\manual-20260530-user-research-section\\presentations\\user-research-section\\preview\\slide-03.png",
+    "E:\\vibe_coding\\profilo\\outputs\\manual-20260530-user-research-section\\presentations\\user-research-section\\preview\\slide-04.png",
+    "E:\\vibe_coding\\profilo\\outputs\\manual-20260530-user-research-section\\presentations\\user-research-section\\preview\\slide-05.png",
+    "E:\\vibe_coding\\profilo\\outputs\\manual-20260530-user-research-section\\presentations\\user-research-section\\preview\\slide-06.png",
+    "E:\\vibe_coding\\profilo\\outputs\\manual-20260530-user-research-section\\presentations\\user-research-section\\preview\\slide-07.png",
+    "E:\\vibe_coding\\profilo\\outputs\\manual-20260530-user-research-section\\presentations\\user-research-section\\preview\\slide-08.png",
+    "E:\\vibe_coding\\profilo\\outputs\\manual-20260530-user-research-section\\presentations\\user-research-section\\preview\\slide-09.png",
+    "E:\\vibe_coding\\profilo\\outputs\\manual-20260530-user-research-section\\presentations\\user-research-section\\preview\\slide-10.png",
+    "E:\\vibe_coding\\profilo\\outputs\\manual-20260530-user-research-section\\presentations\\user-research-section\\preview\\slide-11.png",
+    "E:\\vibe_coding\\profilo\\outputs\\manual-20260530-user-research-section\\presentations\\user-research-section\\preview\\slide-12.png",
+    "E:\\vibe_coding\\profilo\\outputs\\manual-20260530-user-research-section\\presentations\\user-research-section\\preview\\slide-13.png",
+    "E:\\vibe_coding\\profilo\\outputs\\manual-20260530-user-research-section\\presentations\\user-research-section\\preview\\slide-14.png",
+    "E:\\vibe_coding\\profilo\\outputs\\manual-20260530-user-research-section\\presentations\\user-research-section\\preview\\slide-15.png",
+    "E:\\vibe_coding\\profilo\\outputs\\manual-20260530-user-research-section\\presentations\\user-research-section\\preview\\slide-16.png",
+    "E:\\vibe_coding\\profilo\\outputs\\manual-20260530-user-research-section\\presentations\\user-research-section\\preview\\slide-17.png",
+    "E:\\vibe_coding\\profilo\\outputs\\manual-20260530-user-research-section\\presentations\\user-research-section\\preview\\slide-18.png",
+    "E:\\vibe_coding\\profilo\\outputs\\manual-20260530-user-research-section\\presentations\\user-research-section\\preview\\slide-19.png",
+    "E:\\vibe_coding\\profilo\\outputs\\manual-20260530-user-research-section\\presentations\\user-research-section\\preview\\slide-20.png",
+    "E:\\vibe_coding\\profilo\\outputs\\manual-20260530-user-research-section\\presentations\\user-research-section\\preview\\slide-21.png",
+    "E:\\vibe_coding\\profilo\\outputs\\manual-20260530-user-research-section\\presentations\\user-research-section\\preview\\slide-22.png",
+    "E:\\vibe_coding\\profilo\\outputs\\manual-20260530-user-research-section\\presentations\\user-research-section\\preview\\slide-23.png"
+  ],
+  "layoutDir": "E:\\vibe_coding\\profilo\\outputs\\manual-20260530-user-research-section\\presentations\\user-research-section\\layout",
+  "layoutResults": [
+    {
+      "layoutPath": "E:\\vibe_coding\\profilo\\outputs\\manual-20260530-user-research-section\\presentations\\user-research-section\\layout\\slide-01.layout.json"
+    },
+    {
+      "layoutPath": "E:\\vibe_coding\\profilo\\outputs\\manual-20260530-user-research-section\\presentations\\user-research-section\\layout\\slide-02.layout.json"
+    },
+    {
+      "layoutPath": "E:\\vibe_coding\\profilo\\outputs\\manual-20260530-user-research-section\\presentations\\user-research-section\\layout\\slide-03.layout.json"
+    },
+    {
+      "layoutPath": "E:\\vibe_coding\\profilo\\outputs\\manual-20260530-user-research-section\\presentations\\user-research-section\\layout\\slide-04.layout.json"
+    },
+    {
+      "layoutPath": "E:\\vibe_coding\\profilo\\outputs\\manual-20260530-user-research-section\\presentations\\user-research-section\\layout\\slide-05.layout.json"
+    },
+    {
+      "layoutPath": "E:\\vibe_coding\\profilo\\outputs\\manual-20260530-user-research-section\\presentations\\user-research-section\\layout\\slide-06.layout.json"
+    },
+    {
+      "layoutPath": "E:\\vibe_coding\\profilo\\outputs\\manual-20260530-user-research-section\\presentations\\user-research-section\\layout\\slide-07.layout.json"
+    },
+    {
+      "layoutPath": "E:\\vibe_coding\\profilo\\outputs\\manual-20260530-user-research-section\\presentations\\user-research-section\\layout\\slide-08.layout.json"
+    },
+    {
+      "layoutPath": "E:\\vibe_coding\\profilo\\outputs\\manual-20260530-user-research-section\\presentations\\user-research-section\\layout\\slide-09.layout.json"
+    },
+    {
+      "layoutPath": "E:\\vibe_coding\\profilo\\outputs\\manual-20260530-user-research-section\\presentations\\user-research-section\\layout\\slide-10.layout.json"
+    },
+    {
+      "layoutPath": "E:\\vibe_coding\\profilo\\outputs\\manual-20260530-user-research-section\\presentations\\user-research-section\\layout\\slide-11.layout.json"
+    },
+    {
+      "layoutPath": "E:\\vibe_coding\\profilo\\outputs\\manual-20260530-user-research-section\\presentations\\user-research-section\\layout\\slide-12.layout.json"
+    },
+    {
+      "layoutPath": "E:\\vibe_coding\\profilo\\outputs\\manual-20260530-user-research-section\\presentations\\user-research-section\\layout\\slide-13.layout.json"
+    },
+    {
+      "layoutPath": "E:\\vibe_coding\\profilo\\outputs\\manual-20260530-user-research-section\\presentations\\user-research-section\\layout\\slide-14.layout.json"
+    },
+    {
+      "layoutPath": "E:\\vibe_coding\\profilo\\outputs\\manual-20260530-user-research-section\\presentations\\user-research-section\\layout\\slide-15.layout.json"
+    },
+    {
+      "layoutPath": "E:\\vibe_coding\\profilo\\outputs\\manual-20260530-user-research-section\\presentations\\user-research-section\\layout\\slide-16.layout.json"
+    },
+    {
+      "layoutPath": "E:\\vibe_coding\\profilo\\outputs\\manual-20260530-user-research-section\\presentations\\user-research-section\\layout\\slide-17.layout.json"
+    },
+    {
+      "layoutPath": "E:\\vibe_coding\\profilo\\outputs\\manual-20260530-user-research-section\\presentations\\user-research-section\\layout\\slide-18.layout.json"
+    },
+    {
+      "layoutPath": "E:\\vibe_coding\\profilo\\outputs\\manual-20260530-user-research-section\\presentations\\user-research-section\\layout\\slide-19.layout.json"
+    },
+    {
+      "layoutPath": "E:\\vibe_coding\\profilo\\outputs\\manual-20260530-user-research-section\\presentations\\user-research-section\\layout\\slide-20.layout.json"
+    },
+    {
+      "layoutPath": "E:\\vibe_coding\\profilo\\outputs\\manual-20260530-user-research-section\\presentations\\user-research-section\\layout\\slide-21.layout.json"
+    },
+    {
+      "layoutPath": "E:\\vibe_coding\\profilo\\outputs\\manual-20260530-user-research-section\\presentations\\user-research-section\\layout\\slide-22.layout.json"
+    },
+    {
+      "layoutPath": "E:\\vibe_coding\\profilo\\outputs\\manual-20260530-user-research-section\\presentations\\user-research-section\\layout\\slide-23.layout.json"
+    }
+  ],
+  "contactSheet": "E:\\vibe_coding\\profilo\\outputs\\manual-20260530-user-research-section\\presentations\\user-research-section\\preview\\contact-sheet.png",
+  "slides": [
+    {
+      "index": 1,
+      "requestedSlideNumber": 1,
+      "modulePath": "E:\\vibe_coding\\profilo\\outputs\\manual-20260530-user-research-section\\presentations\\user-research-section\\slides\\slide-01.mjs",
+      "exportName": "default"
+    },
+    {
+      "index": 2,
+      "requestedSlideNumber": 2,
+      "modulePath": "E:\\vibe_coding\\profilo\\outputs\\manual-20260530-user-research-section\\presentations\\user-research-section\\slides\\slide-02.mjs",
+      "exportName": "default"
+    },
+    {
+      "index": 3,
+      "requestedSlideNumber": 3,
+      "modulePath": "E:\\vibe_coding\\profilo\\outputs\\manual-20260530-user-research-section\\presentations\\user-research-section\\slides\\slide-03.mjs",
+      "exportName": "default"
+    },
+    {
+      "index": 4,
+      "requestedSlideNumber": 4,
+      "modulePath": "E:\\vibe_coding\\profilo\\outputs\\manual-20260530-user-research-section\\presentations\\user-research-section\\slides\\slide-04.mjs",
+      "exportName": "default"
+    },
+    {
+      "index": 5,
+      "requestedSlideNumber": 5,
+      "modulePath": "E:\\vibe_coding\\profilo\\outputs\\manual-20260530-user-research-section\\presentations\\user-research-section\\slides\\slide-05.mjs",
+      "exportName": "default"
+    },
+    {
+      "index": 6,
+      "requestedSlideNumber": 6,
+      "modulePath": "E:\\vibe_coding\\profilo\\outputs\\manual-20260530-user-research-section\\presentations\\user-research-section\\slides\\slide-06.mjs",
+      "exportName": "default"
+    },
+    {
+      "index": 7,
+      "requestedSlideNumber": 7,
+      "modulePath": "E:\\vibe_coding\\profilo\\outputs\\manual-20260530-user-research-section\\presentations\\user-research-section\\slides\\slide-07.mjs",
+      "exportName": "default"
+    },
+    {
+      "index": 8,
+      "requestedSlideNumber": 8,
+      "modulePath": "E:\\vibe_coding\\profilo\\outputs\\manual-20260530-user-research-section\\presentations\\user-research-section\\slides\\slide-08.mjs",
+      "exportName": "default"
+    },
+    {
+      "index": 9,
+      "requestedSlideNumber": 9,
+      "modulePath": "E:\\vibe_coding\\profilo\\outputs\\manual-20260530-user-research-section\\presentations\\user-research-section\\slides\\slide-09.mjs",
+      "exportName": "default"
+    },
+    {
+      "index": 10,
+      "requestedSlideNumber": 10,
+      "modulePath": "E:\\vibe_coding\\profilo\\outputs\\manual-20260530-user-research-section\\presentations\\user-research-section\\slides\\slide-10.mjs",
+      "exportName": "default"
+    },
+    {
+      "index": 11,
+      "requestedSlideNumber": 11,
+      "modulePath": "E:\\vibe_coding\\profilo\\outputs\\manual-20260530-user-research-section\\presentations\\user-research-section\\slides\\slide-11.mjs",
+      "exportName": "default"
+    },
+    {
+      "index": 12,
+      "requestedSlideNumber": 12,
+      "modulePath": "E:\\vibe_coding\\profilo\\outputs\\manual-20260530-user-research-section\\presentations\\user-research-section\\slides\\slide-12.mjs",
+      "exportName": "default"
+    },
+    {
+      "index": 13,
+      "requestedSlideNumber": 13,
+      "modulePath": "E:\\vibe_coding\\profilo\\outputs\\manual-20260530-user-research-section\\presentations\\user-research-section\\slides\\slide-13.mjs",
+      "exportName": "default"
+    },
+    {
+      "index": 14,
+      "requestedSlideNumber": 14,
+      "modulePath": "E:\\vibe_coding\\profilo\\outputs\\manual-20260530-user-research-section\\presentations\\user-research-section\\slides\\slide-14.mjs",
+      "exportName": "default"
+    },
+    {
+      "index": 15,
+      "requestedSlideNumber": 15,
+      "modulePath": "E:\\vibe_coding\\profilo\\outputs\\manual-20260530-user-research-section\\presentations\\user-research-section\\slides\\slide-15.mjs",
+      "exportName": "default"
+    },
+    {
+      "index": 16,
+      "requestedSlideNumber": 16,
+      "modulePath": "E:\\vibe_coding\\profilo\\outputs\\manual-20260530-user-research-section\\presentations\\user-research-section\\slides\\slide-16.mjs",
+      "exportName": "default"
+    },
+    {
+      "index": 17,
+      "requestedSlideNumber": 17,
+      "modulePath": "E:\\vibe_coding\\profilo\\outputs\\manual-20260530-user-research-section\\presentations\\user-research-section\\slides\\slide-17.mjs",
+      "exportName": "default"
+    },
+    {
+      "index": 18,
+      "requestedSlideNumber": 18,
+      "modulePath": "E:\\vibe_coding\\profilo\\outputs\\manual-20260530-user-research-section\\presentations\\user-research-section\\slides\\slide-18.mjs",
+      "exportName": "default"
+    },
+    {
+      "index": 19,
+      "requestedSlideNumber": 19,
+      "modulePath": "E:\\vibe_coding\\profilo\\outputs\\manual-20260530-user-research-section\\presentations\\user-research-section\\slides\\slide-19.mjs",
+      "exportName": "default"
+    },
+    {
+      "index": 20,
+      "requestedSlideNumber": 20,
+      "modulePath": "E:\\vibe_coding\\profilo\\outputs\\manual-20260530-user-research-section\\presentations\\user-research-section\\slides\\slide-20.mjs",
+      "exportName": "default"
+    },
+    {
+      "index": 21,
+      "requestedSlideNumber": 21,
+      "modulePath": "E:\\vibe_coding\\profilo\\outputs\\manual-20260530-user-research-section\\presentations\\user-research-section\\slides\\slide-21.mjs",
+      "exportName": "default"
+    },
+    {
+      "index": 22,
+      "requestedSlideNumber": 22,
+      "modulePath": "E:\\vibe_coding\\profilo\\outputs\\manual-20260530-user-research-section\\presentations\\user-research-section\\slides\\slide-22.mjs",
+      "exportName": "default"
+    },
+    {
+      "index": 23,
+      "requestedSlideNumber": 23,
+      "modulePath": "E:\\vibe_coding\\profilo\\outputs\\manual-20260530-user-research-section\\presentations\\user-research-section\\slides\\slide-23.mjs",
+      "exportName": "default"
+    }
+  ]
+}

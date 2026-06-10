@@ -1,0 +1,15 @@
+01 Cover: portfolio identity and flagship AI travel product.
+02 Directory: three portfolio chapters, with Xiaoji featured visually.
+03 Xiaoji - AI Travel Agent: product scope, role and demonstrable interface in one overview.
+04 User pain points: planning breaks between inspiration, organization and revision.
+05 Competitor analysis: opportunity sits in the decision chain, not another content feed or list tool.
+06 Product solution: match each planning problem to a product response.
+07 Core experience / planning entry: two paths accommodate unclear and clear intent.
+08 Core experience / post-generation adjustment: map validation plus AI/manual editing.
+09 Sequence diagram: concrete orchestration between front end, DeepSeek modules and Amap.
+10 Agent workflow: input-to-structured-itinerary-to-refinement system.
+11 Travel soul test design: preference layer makes personalization explicit.
+12 Persona generation and validation plan: example personas plus what must be checked next.
+13 User research system: a second AI workflow from feedback to evidence-linked insights.
+14 About Me: product role, transition and working abilities.
+15 Closing: product belief and ending note.

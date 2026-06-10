@@ -1,0 +1,1094 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI 作业助手拍照搜题 MVP | 实习 Case Study</title>
+  <style>
+    :root {
+      --green: #004c2b;
+      --green-deep: #00391f;
+      --green-soft: #eef5ef;
+      --pink: #eb7ba8;
+      --pink-deep: #d73582;
+      --pink-soft: #fff1f7;
+      --paper: #fffefa;
+      --white: #fff;
+      --ink: #111714;
+      --text: #46514b;
+      --muted: #87918b;
+      --rule: #172019;
+      --soft-rule: rgba(0, 57, 31, 0.15);
+      --pad: clamp(22px, 4.3vw, 62px);
+      --radius: 8px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: "Noto Sans SC", "Source Han Sans SC", "Microsoft YaHei", "PingFang SC", Arial, sans-serif;
+      line-height: 1.64;
+    }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+
+    .global-header {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      display: flex;
+      height: 68px;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 var(--pad);
+      border-bottom: 1px solid var(--rule);
+      background: rgba(255, 254, 250, 0.96);
+      backdrop-filter: blur(12px);
+    }
+
+    .brand {
+      color: var(--green);
+      font-size: 14px;
+      font-weight: 850;
+      letter-spacing: 0.2em;
+    }
+
+    .global-nav {
+      display: flex;
+      gap: clamp(20px, 4vw, 52px);
+      font-size: 13px;
+      font-weight: 750;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .global-nav a:hover { color: var(--pink-deep); }
+
+    .hero {
+      display: grid;
+      min-height: min(840px, calc(100vh - 68px));
+      grid-template-columns: 0.95fr 1.05fr;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .hero-copy {
+      padding: clamp(46px, 7vw, 86px) var(--pad);
+      border-right: 1px solid var(--rule);
+    }
+
+    .crumb {
+      display: inline-flex;
+      margin-bottom: clamp(34px, 6vw, 60px);
+      color: var(--green);
+      font-size: 12px;
+      font-weight: 850;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .kicker,
+    .section-label {
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 680px;
+      margin: 0 0 22px;
+      color: var(--green-deep);
+      font-size: clamp(48px, 6vw, 78px);
+      font-weight: 900;
+      line-height: 0.98;
+    }
+
+    h2 {
+      margin: 0;
+      color: var(--green-deep);
+      font-size: clamp(31px, 3.6vw, 49px);
+      line-height: 1.2;
+    }
+
+    h3 {
+      margin: 0 0 10px;
+      color: var(--green-deep);
+      font-size: 19px;
+      line-height: 1.3;
+    }
+
+    p { margin: 0; }
+
+    .subtitle {
+      max-width: 610px;
+      color: var(--green);
+      font-size: clamp(20px, 2vw, 26px);
+      font-weight: 850;
+      line-height: 1.42;
+    }
+
+    .intro {
+      max-width: 620px;
+      margin-top: 28px;
+      color: var(--text);
+      font-size: 16px;
+      line-height: 1.9;
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 30px;
+    }
+
+    .tag,
+    .ghost {
+      display: inline-flex;
+      min-height: 38px;
+      align-items: center;
+      padding: 7px 16px;
+      border: 1.4px solid var(--green);
+      border-radius: 999px;
+      color: var(--green);
+      font-size: 12px;
+      font-weight: 850;
+      letter-spacing: 0.08em;
+    }
+
+    .tag.pink,
+    .ghost {
+      border-color: var(--pink);
+      color: var(--pink-deep);
+      background: rgba(255, 241, 247, 0.72);
+    }
+
+    .hero-visual {
+      position: relative;
+      display: grid;
+      min-height: 620px;
+      place-items: center;
+      overflow: hidden;
+      padding: clamp(30px, 5vw, 72px);
+      background:
+        radial-gradient(circle at 72% 18%, rgba(235, 123, 168, 0.16) 0 15%, transparent 16%),
+        linear-gradient(135deg, #fffefa 0%, #f7fbf3 68%, #eef5ef 100%);
+    }
+
+    .hero-star {
+      position: absolute;
+      width: min(520px, 76%);
+      aspect-ratio: 1;
+      background: var(--green-deep);
+      clip-path: polygon(50% 0, 61% 31%, 94% 20%, 75% 49%, 100% 70%, 67% 72%, 72% 100%, 50% 80%, 27% 100%, 33% 70%, 0 66%, 25% 49%, 7% 20%, 39% 31%);
+      transform: rotate(-10deg);
+      filter: drop-shadow(0 26px 60px rgba(0, 57, 31, 0.18));
+    }
+
+    .hero-card {
+      position: relative;
+      z-index: 1;
+      width: min(560px, 92%);
+      padding: clamp(22px, 3vw, 34px);
+      border: 1px solid rgba(255, 254, 250, 0.4);
+      border-radius: var(--radius);
+      color: var(--paper);
+      background: rgba(0, 57, 31, 0.88);
+      box-shadow: 0 24px 60px rgba(0, 57, 31, 0.24);
+      backdrop-filter: blur(10px);
+    }
+
+    .hero-card .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1px;
+      margin-top: 24px;
+      background: rgba(255, 254, 250, 0.16);
+    }
+
+    .metric {
+      min-height: 116px;
+      padding: 18px;
+      background: rgba(0, 57, 31, 0.9);
+    }
+
+    .metric span {
+      display: block;
+      margin-bottom: 10px;
+      color: rgba(255, 254, 250, 0.66);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .metric strong {
+      display: block;
+      color: var(--paper);
+      font-size: clamp(18px, 2vw, 24px);
+      line-height: 1.35;
+    }
+
+    .case-shell {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      align-items: start;
+    }
+
+    .case-index {
+      position: sticky;
+      top: 68px;
+      height: calc(100vh - 68px);
+      overflow: auto;
+      border-right: 1px solid var(--rule);
+      background: rgba(255, 254, 250, 0.94);
+    }
+
+    .case-index nav {
+      display: grid;
+      gap: 4px;
+      padding: 26px 24px;
+    }
+
+    .case-index a {
+      padding: 8px 0;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 800;
+      transition: color 0.18s ease, transform 0.18s ease;
+    }
+
+    .case-index a:hover,
+    .case-index a.active {
+      color: var(--pink-deep);
+      transform: translateX(4px);
+    }
+
+    .case-content {
+      min-width: 0;
+    }
+
+    .section {
+      padding: clamp(52px, 7vw, 92px) var(--pad);
+      border-bottom: 1px solid var(--rule);
+      scroll-margin-top: 92px;
+      break-inside: avoid;
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: 94px minmax(0, 1fr);
+      gap: 28px;
+      margin-bottom: clamp(30px, 5vw, 52px);
+    }
+
+    .section-no {
+      color: var(--pink-deep);
+      font-size: 20px;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+    }
+
+    .lead {
+      max-width: 850px;
+      margin-top: 18px;
+      color: var(--text);
+      font-size: 16px;
+      line-height: 1.9;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1px;
+      border: 1px solid var(--soft-rule);
+      background: var(--soft-rule);
+    }
+
+    .card {
+      min-height: 190px;
+      padding: 24px;
+      background: var(--paper);
+      transition: transform 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .card:hover {
+      z-index: 1;
+      background: var(--white);
+      box-shadow: 0 18px 40px rgba(0, 57, 31, 0.08);
+      transform: translateY(-4px);
+    }
+
+    .card small {
+      display: block;
+      margin-bottom: 14px;
+      color: var(--pink-deep);
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .card p,
+    .note p {
+      color: var(--text);
+      font-size: 15px;
+      line-height: 1.78;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: clamp(26px, 4vw, 54px);
+      align-items: start;
+    }
+
+    .quote-box {
+      position: relative;
+      padding: 28px;
+      border: 1px solid var(--soft-rule);
+      background: var(--green-deep);
+      color: var(--paper);
+    }
+
+    .quote-box::after {
+      content: "";
+      position: absolute;
+      right: 20px;
+      bottom: 20px;
+      width: 88px;
+      aspect-ratio: 1;
+      background: var(--pink);
+      clip-path: polygon(50% 0, 61% 31%, 94% 20%, 75% 49%, 100% 70%, 67% 72%, 72% 100%, 50% 80%, 27% 100%, 33% 70%, 0 66%, 25% 49%, 7% 20%, 39% 31%);
+      opacity: 0.88;
+    }
+
+    .quote-box strong {
+      display: block;
+      max-width: 500px;
+      font-size: clamp(23px, 2.8vw, 34px);
+      line-height: 1.28;
+    }
+
+    .quote-box p {
+      max-width: 520px;
+      margin-top: 18px;
+      color: rgba(255, 254, 250, 0.72);
+    }
+
+    .insight-list {
+      display: grid;
+      gap: 1px;
+      border: 1px solid var(--soft-rule);
+      background: var(--soft-rule);
+    }
+
+    .insight {
+      display: grid;
+      grid-template-columns: 76px 1fr;
+      gap: 22px;
+      padding: 22px;
+      background: var(--white);
+      transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .insight:hover {
+      background: var(--green-soft);
+      transform: translateX(4px);
+    }
+
+    .insight b {
+      display: inline-grid;
+      width: 44px;
+      height: 44px;
+      place-items: center;
+      border-radius: 10px;
+      color: var(--white);
+      background: var(--green);
+      font-size: 16px;
+      font-weight: 800;
+    }
+
+    .insight h3 {
+      font-size: 17px;
+    }
+
+    .insight p {
+      color: var(--text);
+      font-size: 14px;
+      line-height: 1.75;
+    }
+
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(150px, 1fr));
+      gap: 0;
+      overflow-x: auto;
+      border: 1px solid var(--soft-rule);
+      background: var(--paper);
+    }
+
+    .step {
+      position: relative;
+      min-height: 170px;
+      padding: 22px 18px;
+      border-right: 1px solid var(--soft-rule);
+      transition: background 0.18s ease;
+    }
+
+    .step:last-child { border-right: 0; }
+    .step:hover { background: var(--pink-soft); }
+    .step span {
+      display: inline-grid;
+      width: 36px;
+      height: 36px;
+      margin-bottom: 18px;
+      place-items: center;
+      border-radius: 50%;
+      color: var(--paper);
+      background: var(--green);
+      font-weight: 900;
+    }
+
+    .step h3 { font-size: 18px; }
+
+    .feature-tabs {
+      display: grid;
+      grid-template-columns: 250px 1fr;
+      gap: 1px;
+      border: 1px solid var(--rule);
+      background: var(--rule);
+    }
+
+    .tab-buttons {
+      display: grid;
+      background: var(--paper);
+    }
+
+    .tab-buttons button {
+      cursor: pointer;
+      padding: 22px;
+      border: 0;
+      border-bottom: 1px solid var(--soft-rule);
+      color: var(--green-deep);
+      background: var(--paper);
+      text-align: left;
+      font-weight: 900;
+    }
+
+    .tab-buttons button.active {
+      color: var(--paper);
+      background: var(--green-deep);
+    }
+
+    .tab-panel {
+      display: none;
+      min-height: 360px;
+      padding: clamp(24px, 4vw, 42px);
+      background: var(--paper);
+    }
+
+    .tab-panel.active { display: grid; }
+
+    .panel-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(220px, 0.65fr);
+      gap: 30px;
+      align-items: center;
+    }
+
+    .panel-grid ul {
+      margin: 18px 0 0;
+      padding-left: 20px;
+      color: var(--text);
+      line-height: 1.9;
+    }
+
+    .phone-shot {
+      width: min(100%, 290px);
+      height: auto;
+      aspect-ratio: 9 / 19;
+      object-fit: contain;
+      justify-self: center;
+      border-radius: 34px;
+      filter: drop-shadow(0 18px 26px rgba(0, 57, 31, 0.16));
+      cursor: zoom-in;
+      transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+                  filter 0.4s ease;
+    }
+    .phone-shot:hover {
+      transform: scale(1.12);
+      filter: drop-shadow(0 18px 26px rgba(0, 57, 31, 0.16)) brightness(1.08);
+    }
+
+    /* ===== Image Lightbox (for competitive analysis screenshots) ===== */
+    .lightbox-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      display: none;
+      place-items: center;
+      background: rgba(0, 0, 0, 0.78);
+      backdrop-filter: blur(8px);
+      cursor: zoom-out;
+      animation: fadeIn 0.25s ease;
+    }
+    .lightbox-overlay.open { display: grid; }
+    .lightbox-overlay img {
+      display: block;
+      max-width: min(86vw, 640px);
+      max-height: 86vh;
+      border-radius: 12px;
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.5);
+      animation: scaleIn 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes scaleIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .workflow-wrap {
+      display: grid;
+      gap: 24px;
+    }
+
+    .workflow-image {
+      padding: 18px;
+      border: 1px solid var(--soft-rule);
+      background: #1f2420;
+    }
+
+    .workflow-image img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .ai-flow {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .ai-node {
+      position: relative;
+      min-height: 132px;
+      padding: 20px;
+      border: 1px solid var(--soft-rule);
+      background: var(--paper);
+      transition: transform 0.18s ease, border-color 0.18s ease;
+    }
+
+    .ai-node:hover {
+      border-color: var(--pink);
+      transform: translateY(-4px);
+    }
+
+    .ai-node small {
+      color: var(--pink-deep);
+      font-weight: 900;
+    }
+
+    .ai-node p {
+      margin-top: 10px;
+      color: var(--text);
+      font-size: 14px;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--soft-rule);
+    }
+
+    table {
+      width: 100%;
+      min-width: 760px;
+      border-collapse: collapse;
+      background: var(--paper);
+    }
+
+    th,
+    td {
+      padding: 17px 18px;
+      border-bottom: 1px solid var(--soft-rule);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      color: var(--green-deep);
+      background: var(--green-soft);
+      font-size: 13px;
+      letter-spacing: 0.08em;
+    }
+
+    td {
+      color: var(--text);
+      font-size: 14px;
+    }
+
+    .result-band {
+      display: grid;
+      grid-template-columns: 0.8fr 1.2fr;
+      gap: 1px;
+      border: 1px solid var(--rule);
+      background: var(--rule);
+    }
+
+    .result-main,
+    .result-side {
+      padding: clamp(24px, 4vw, 44px);
+      background: var(--paper);
+    }
+
+    .result-main {
+      color: var(--paper);
+      background: var(--green-deep);
+    }
+
+    .result-main strong {
+      display: block;
+      font-size: clamp(48px, 6vw, 78px);
+      line-height: 1;
+    }
+
+    .result-main span {
+      color: rgba(255, 254, 250, 0.74);
+    }
+
+    .result-side p {
+      margin-bottom: 18px;
+      color: var(--text);
+    }
+
+    .next-list {
+      display: grid;
+      gap: 1px;
+      background: var(--soft-rule);
+      border: 1px solid var(--soft-rule);
+    }
+
+    .next-item {
+      display: grid;
+      grid-template-columns: 90px 1fr;
+      gap: 20px;
+      padding: 20px;
+      background: var(--paper);
+    }
+
+    .next-item span {
+      color: var(--pink-deep);
+      font-weight: 900;
+    }
+
+    .footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 30px var(--pad);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 960px) {
+      .hero,
+      .case-shell,
+      .two-col,
+      .result-band {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-copy { border-right: 0; border-bottom: 1px solid var(--rule); }
+      .case-index {
+        position: sticky;
+        top: 68px;
+        z-index: 18;
+        height: auto;
+        border-right: 0;
+        border-bottom: 1px solid var(--rule);
+      }
+      .case-index nav {
+        display: flex;
+        overflow-x: auto;
+        white-space: nowrap;
+      }
+      .cards,
+      .ai-flow {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .feature-tabs,
+      .panel-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .global-header { height: 60px; }
+      .global-nav { gap: 16px; font-size: 11px; }
+      .hero { min-height: auto; }
+      .hero-visual { min-height: 560px; }
+      .section-head,
+      .cards,
+      .ai-flow {
+        grid-template-columns: 1fr;
+      }
+      .hero-card .metric-grid { grid-template-columns: 1fr; }
+      h1 { font-size: 42px; }
+      .section-no { font-size: 16px; }
+    }
+
+    @media print {
+      .global-header,
+      .case-index { display: none; }
+      .hero,
+      .case-shell,
+      .section-head,
+      .two-col,
+      .result-band { display: block; }
+      .section { break-inside: avoid; page-break-inside: avoid; }
+      body { background: #fff; }
+    }
+  </style>
+</head>
+<body>
+  <header class="global-header">
+    <a class="brand" href="../../portfolio-ai-pm.html#home">AI PM PORTFOLIO</a>
+    <nav class="global-nav" aria-label="主导航">
+      <a href="../../portfolio-ai-pm.html#home">Home</a>
+      <a href="../../portfolio-ai-pm.html#projects">Projects</a>
+      <a href="../../portfolio-ai-pm.html#about">About</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="overview">
+      <div class="hero-copy reveal">
+        <a class="crumb" href="../../portfolio-ai-pm.html#background">← Internship Case</a>
+        <p class="kicker">快乐学教育集团 · AI 产品助理</p>
+        <h1>AI 作业助手拍照搜题 MVP</h1>
+        <p class="subtitle">从学生作业求助场景出发，设计机构内嵌式 AI 拍搜答疑产品</p>
+        <p class="intro">该项目内嵌在学生学习 App 中，优先以初二数学为 MVP，帮助学生在作业场景中获得答案解析，同时将搜题行为沉淀为学情数据，辅助老师备课与后续复习服务。</p>
+        <div class="hero-tags">
+          <span class="tag">AI Education</span>
+          <span class="tag">Photo Search</span>
+          <span class="tag pink">MVP PRD</span>
+          <span class="tag">Reliability Strategy</span>
+        </div>
+      </div>
+      <div class="hero-visual reveal" aria-label="项目概览卡片">
+        <div class="hero-star" aria-hidden="true"></div>
+        <article class="hero-card">
+          <p class="kicker" style="color: rgba(255,254,250,0.66);">Product snapshot</p>
+          <h3 style="color: var(--paper); font-size: 26px;">不是“给答案”，而是把答疑变成可追踪的学习数据。</h3>
+          <div class="metric-grid">
+            <div class="metric"><span>公司</span><strong>快乐学教育集团</strong></div>
+            <div class="metric"><span>我的角色</span><strong>调研 / PRD / AI 策略 / 监控</strong></div>
+            <div class="metric"><span>调研样本</span><strong>访谈 5 人 + 问卷 102 份</strong></div>
+            <div class="metric"><span>项目结果</span><strong>约 400 名学员使用</strong></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <div class="case-shell">
+      <aside class="case-index" aria-label="案例目录">
+        <nav>
+          <a href="#overview">01 项目概览</a>
+          <a href="#context">02 业务背景</a>
+          <a href="#problem">03 用户问题</a>
+          <a href="#research">04 调研判断</a>
+          <a href="#mvp">05 MVP 目标</a>
+          <a href="#solution">06 产品方案</a>
+          <a href="#workflow">07 AI 工作流</a>
+          <a href="#validation">08 评测监控</a>
+          <a href="#reflection">09 结果复盘</a>
+        </nav>
+      </aside>
+
+      <div class="case-content">
+        <section class="section reveal" id="context">
+          <header class="section-head">
+            <span class="section-no">02</span>
+            <div>
+              <p class="section-label">Business Context</p>
+              <h2>机构需要的不只是答疑工具，而是可回流教学服务的学习数据。</h2>
+              <p class="lead">快乐学教育集团以 1v1 学科培训为主要业务，初中数学是核心场景。学习机研发部希望探索 AI 在教学服务中的落地方式：让学生日常作业中的疑难题能够被识别、解答、记录，并为老师备课提供依据。</p>
+            </div>
+          </header>
+          <div class="cards">
+            <article class="card"><small>业务基础</small><h3>近 10 万学员规模</h3><p>机构已有大量在读学生，数学补习占比较高，具备从真实学习场景中验证 MVP 的基础。</p></article>
+            <article class="card"><small>产品入口</small><h3>内嵌学生 App</h3><p>AI 作业助手不是独立工具，而是嵌入学生原有学习 App，与课程服务产生连接。</p></article>
+            <article class="card"><small>目标场景</small><h3>初二数学拍搜</h3><p>MVP 阶段收窄到初二数学，先跑通拍照上传、答案解析、追问与数据沉淀闭环。</p></article>
+          </div>
+        </section>
+
+        <section class="section reveal" id="problem">
+          <header class="section-head">
+            <span class="section-no">03</span>
+            <div>
+              <p class="section-label">User Problem</p>
+              <h2>学生真正困难的，不只是不会做题，而是不知道该向谁求助。</h2>
+            </div>
+          </header>
+          <div class="two-col">
+            <div class="quote-box">
+              <strong>传统拍搜能解决“这题答案是什么”，但不能自然解决“我是否真的学会了”。</strong>
+              <p>因此产品定位不能停留在拍照搜题本身，而要把答案解析、AI 追问、课程题库、老师备课后台串成一条教学服务链路。</p>
+            </div>
+            <div class="insight-list">
+              <article class="insight"><b>01</b><div><h3>求助渠道不稳定</h3><p>问老师“不敢”，问家长“不会”，问同学“不好意思”，作业场景里的即时帮助很难保障。</p></div></article>
+              <article class="insight"><b>02</b><div><h3>传统拍搜有心理负担</h3><p>部分学生认为拍搜像“作弊”，需要通过课程设计与产品表达降低负担。</p></div></article>
+              <article class="insight"><b>03</b><div><h3>答案之后缺少沉淀</h3><p>用户想把题目转录到错题本，但手工操作困难，导致学习过程无法持续追踪。</p></div></article>
+            </div>
+          </div>
+        </section>
+
+        <section class="section reveal" id="research">
+          <header class="section-head">
+            <span class="section-no">04</span>
+            <div>
+              <p class="section-label">Research & Decision</p>
+              <h2>用调研数据判断：哪些学生可能接受自学导向的拍搜？</h2>
+              <p class="lead">我在 PRD 中将用户分层为“抄答案为主”“自学为主”“自学与抄答案并存”，并结合手机可得性与拍搜习惯，推导 MVP 的真实可触达用户。</p>
+            </div>
+          </header>
+          <div class="cards">
+            <article class="card"><small>样本</small><h3>访谈 5 人 + 问卷 102 份</h3><p>以机构在读学生为样本，观察真实作业场景下的求助方式与拍搜使用习惯。</p></article>
+            <article class="card"><small>意愿</small><h3>60% 具备学习意愿</h3><p>调研显示，自学为主与自学/抄答案并存的人群合计约 60%，具备转向“自学导向拍搜”的可能。</p></article>
+            <article class="card"><small>判断</small><h3>约 30% 可配合使用</h3><p>结合移动设备可得性与学习意愿，判断在读学员中约 30% 有机会按照课程要求使用数学拍搜。</p></article>
+          </div>
+        </section>
+
+        <section class="section reveal" id="mvp">
+          <header class="section-head">
+            <span class="section-no">05</span>
+            <div>
+              <p class="section-label">MVP Scope</p>
+              <h2>先验证一个核心问题：学生是否愿意使用机构自己的 AI 拍搜工具。</h2>
+            </div>
+          </header>
+          <div class="timeline" aria-label="MVP 核心路径">
+            <article class="step"><span>1</span><h3>首页拍照上传</h3><p>学生进入 App 后拍照上传题目图片，降低首次使用门槛。</p></article>
+            <article class="step"><span>2</span><h3>AI 解题解析</h3><p>模型理解题目图片，输出步骤化解析和答案。</p></article>
+            <article class="step"><span>3</span><h3>答案页展示</h3><p>前端展示解题步骤、答案和追问入口。</p></article>
+            <article class="step"><span>4</span><h3>AI 追问</h3><p>学生可继续问“这一步为什么”，从单次答案进入理解过程。</p></article>
+            <article class="step"><span>5</span><h3>题库校验</h3><p>VIP 分支接入公共/个人题库，对 AI 答案进行校验和替换。</p></article>
+            <article class="step"><span>6</span><h3>老师后台</h3><p>搜题日志沉淀到学生档案，辅助老师备课。</p></article>
+          </div>
+        </section>
+
+        <section class="section reveal" id="solution">
+          <header class="section-head">
+            <span class="section-no">06</span>
+            <div>
+              <p class="section-label">Product Solution</p>
+              <h2>把“拍照搜题”拆成学生端、AI 策略和教学链路三部分。</h2>
+            </div>
+          </header>
+          <div class="feature-tabs">
+            <div class="tab-buttons" role="tablist" aria-label="产品方案切换">
+              <button class="active" data-tab="student" type="button">学生端体验</button>
+              <button data-tab="ai" type="button">AI 解题策略</button>
+              <button data-tab="teaching" type="button">教学服务链路</button>
+            </div>
+            <article class="tab-panel active" data-panel="student">
+              <div class="panel-grid">
+                <div>
+                  <h3>核心是让学生快速得到可读答案，并能继续追问。</h3>
+                  <ul>
+                    <li>首页支持拍照上传图片，限制文件大小和格式。</li>
+                    <li>题目解析页展示解题步骤、答案与追问入口。</li>
+                    <li>追问页用对话形式继续解释学生不理解的步骤。</li>
+                    <li>历史记录和收藏夹列为 P2，避免 MVP 首期范围失控。</li>
+                  </ul>
+                </div>
+                <img class="phone-shot" src="../../assets/internship-prd/image4.png" alt="AI 作业助手追问页截图">
+              </div>
+            </article>
+            <article class="tab-panel" data-panel="ai">
+              <div class="panel-grid">
+                <div>
+                  <h3>AI 不是只负责生成答案，还要可校验、可撤回。</h3>
+                  <ul>
+                    <li>解题专家负责图片理解、答案与步骤生成。</li>
+                    <li>异常识别区分非数学题、无效题目等情况。</li>
+                    <li>题库检索用于对高价值用户进行答案校验。</li>
+                    <li>若模型答案错误，前端撤回 AIGC 答案并替换为题库答案。</li>
+                  </ul>
+                </div>
+                <img class="phone-shot" src="../../assets/internship-prd/image3.png" alt="AI 作业助手答案页截图">
+              </div>
+            </article>
+            <article class="tab-panel" data-panel="teaching">
+              <div class="panel-grid">
+                <div>
+                  <h3>搜题行为要回到老师与课程体系中。</h3>
+                  <ul>
+                    <li>已学过题型：提醒学生复习，降低重复求助。</li>
+                    <li>未学过题型：进入老师重点讲解候选池。</li>
+                    <li>老师备课后台可查看学生搜题日志。</li>
+                    <li>后续可扩展错题本同步、课程知识点关联与学情分析。</li>
+                  </ul>
+                </div>
+                <img class="phone-shot" src="../../assets/internship-prd/image2.png" alt="AI 作业助手首页上传页截图">
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="section reveal" id="workflow">
+          <header class="section-head">
+            <span class="section-no">07</span>
+            <div>
+              <p class="section-label">AI Workflow</p>
+              <h2>AI 答案必须经过题库与规则兜底，才能进入教学场景。</h2>
+              <p class="lead">PRD 中最核心的设计是“双引擎策略”：大模型负责快速解题，题库负责校验与纠错，前端根据校验结果决定展示、撤回或替换答案。</p>
+            </div>
+          </header>
+          <div class="workflow-wrap">
+            <div class="ai-flow">
+              <article class="ai-node"><small>Input</small><h3>题目图片</h3><p>学生上传题目图片，前端压缩后传入策略模块。</p></article>
+              <article class="ai-node"><small>Model</small><h3>解题专家</h3><p>识别题目，输出解析、答案、题目文本与异常标记。</p></article>
+              <article class="ai-node"><small>Verify</small><h3>题库检索</h3><p>VIP 分支检索公共题库与个人题库，获得标准答案。</p></article>
+              <article class="ai-node"><small>Fallback</small><h3>撤回替换</h3><p>若对比错误，则撤回 AI 答案，展示题库答案与解析。</p></article>
+            </div>
+            <figure class="workflow-image">
+              <img src="../../assets/internship-prd/image1.png" alt="AI 作业助手策略流程图">
+            </figure>
+          </div>
+        </section>
+
+        <section class="section reveal" id="validation">
+          <header class="section-head">
+            <span class="section-no">08</span>
+            <div>
+              <p class="section-label">Validation & Metrics</p>
+              <h2>上线前看答案质量，上线后看用户是否真的完成学习动作。</h2>
+            </div>
+          </header>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>评测/监控对象</th><th>指标</th><th>目的</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>上线前效果评测</td><td>100 条答疑图片样本；答案正确性、解析正确性、排版美观</td><td>确认 AI 输出能达到可用标准，任何一项出错即为 badcase。</td></tr>
+                <tr><td>答案页</td><td>PV / UV、停留时长、返回/追问/关闭 App 行为</td><td>判断学生是否阅读解析，是否进入进一步学习动作。</td></tr>
+                <tr><td>追问页</td><td>PV / UV、停留时长、追问行为</td><td>观察学生是否把工具用于理解，而不只是拿答案。</td></tr>
+                <tr><td>速度感知</td><td>上传时间、服务端接收时间、解题开始/结束输出时间</td><td>定位慢点，确保 90% 开始响应时间在 5 秒内。</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="section reveal" id="reflection">
+          <header class="section-head">
+            <span class="section-no">09</span>
+            <div>
+              <p class="section-label">Result & Reflection</p>
+              <h2>按时上线，但真实使用低于预期，这反而帮助我看清产品边界。</h2>
+            </div>
+          </header>
+          <div class="result-band">
+            <div class="result-main">
+              <strong>400+</strong>
+              <span>实际约 400 名学员使用；原目标为上线 3 个月内 630 人使用 3 次以上。</span>
+            </div>
+            <div class="result-side">
+              <p>项目按时上线，并验证了机构自有 AI 答疑工具的基础可行性；但实际渗透率低于预期，部分学生认为已有作业帮等替代工具，使用粘性一般。</p>
+              <p>这让我意识到，教育场景里的 AI 产品不能只靠“功能可用”，还需要和课程体系、老师反馈、错题复习、学情分析形成更强的闭环，否则用户会自然回到已有工具。</p>
+            </div>
+          </div>
+          <div class="next-list" style="margin-top: 26px;">
+            <article class="next-item"><span>Next 01</span><div><h3>错题本同步</h3><p>将拍搜题目自动沉淀到个人错题本，支持分类、标签和针对性练习推荐。</p></div></article>
+            <article class="next-item"><span>Next 02</span><div><h3>课程知识点关联</h3><p>在结果页增加课程知识点模块，推荐对应视频或练习题，强化机构差异化。</p></div></article>
+            <article class="next-item"><span>Next 03</span><div><h3>模型速度与题库迭代</h3><p>优化响应速度，扩充公共题库并完善题目录入工具，提高题库更新效率。</p></div></article>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <a href="../../portfolio-ai-pm.html#background">← Back to Portfolio</a>
+    <span>Internship Case Study · AI Homework Assistant MVP</span>
+  </footer>
+
+  <!-- ===== Lightbox Overlay ===== -->
+  <div class="lightbox-overlay" id="lightbox" role="dialog" aria-label="截图放大预览">
+    <img id="lightbox-img" src="" alt="放大预览">
+  </div>
+
+  <script>
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
+
+    document.querySelectorAll(".reveal").forEach((element) => revealObserver.observe(element));
+
+    const tabButtons = document.querySelectorAll("[data-tab]");
+    const tabPanels = document.querySelectorAll("[data-panel]");
+    tabButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        tabButtons.forEach((item) => item.classList.toggle("active", item === button));
+        tabPanels.forEach((panel) => panel.classList.toggle("active", panel.dataset.panel === button.dataset.tab));
+      });
+    });
+
+    const indexLinks = [...document.querySelectorAll(".case-index a")];
+    const sections = indexLinks
+      .map((link) => document.querySelector(link.getAttribute("href")))
+      .filter(Boolean);
+
+    const navObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        indexLinks.forEach((link) => link.classList.toggle("active", link.getAttribute("href") === "#" + entry.target.id));
+      });
+    }, { threshold: 0.2, rootMargin: "-120px 0px -62% 0px" });
+
+    sections.forEach((section) => navObserver.observe(section));
+
+    // ===== Lightbox: click phone-shot to view enlarged =====
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightbox-img");
+    document.querySelectorAll(".phone-shot").forEach((img) => {
+      img.addEventListener("click", (e) => {
+        e.stopPropagation();
+        lightboxImg.src = img.src;
+        lightbox.classList.add("open");
+      });
+    });
+    lightbox.addEventListener("click", () => {
+      lightbox.classList.remove("open");
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") lightbox.classList.remove("open");
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,167 @@
+{
+  "output": "E:\\vibe_coding\\profilo\\pdf\\AI产品经理作品集_视觉优化版_2026.pptx",
+  "outputBytes": 20833089,
+  "slideCount": 15,
+  "slideSize": {
+    "width": 1280,
+    "height": 720
+  },
+  "previewDir": "E:\\vibe_coding\\profilo\\outputs\\manual-20260527-portfolio-progress\\presentations\\nine-dot-progress\\preview",
+  "previewPaths": [
+    "E:\\vibe_coding\\profilo\\outputs\\manual-20260527-portfolio-progress\\presentations\\nine-dot-progress\\preview\\slide-01.png",
+    "E:\\vibe_coding\\profilo\\outputs\\manual-20260527-portfolio-progress\\presentations\\nine-dot-progress\\preview\\slide-02.png",
+    "E:\\vibe_coding\\profilo\\outputs\\manual-20260527-portfolio-progress\\presentations\\nine-dot-progress\\preview\\slide-03.png",
+    "E:\\vibe_coding\\profilo\\outputs\\manual-20260527-portfolio-progress\\presentations\\nine-dot-progress\\preview\\slide-04.png",
+    "E:\\vibe_coding\\profilo\\outputs\\manual-20260527-portfolio-progress\\presentations\\nine-dot-progress\\preview\\slide-05.png",
+    "E:\\vibe_coding\\profilo\\outputs\\manual-20260527-portfolio-progress\\presentations\\nine-dot-progress\\preview\\slide-06.png",
+    "E:\\vibe_coding\\profilo\\outputs\\manual-20260527-portfolio-progress\\presentations\\nine-dot-progress\\preview\\slide-07.png",
+    "E:\\vibe_coding\\profilo\\outputs\\manual-20260527-portfolio-progress\\presentations\\nine-dot-progress\\preview\\slide-08.png",
+    "E:\\vibe_coding\\profilo\\outputs\\manual-20260527-portfolio-progress\\presentations\\nine-dot-progress\\preview\\slide-09.png",
+    "E:\\vibe_coding\\profilo\\outputs\\manual-20260527-portfolio-progress\\presentations\\nine-dot-progress\\preview\\slide-10.png",
+    "E:\\vibe_coding\\profilo\\outputs\\manual-20260527-portfolio-progress\\presentations\\nine-dot-progress\\preview\\slide-11.png",
+    "E:\\vibe_coding\\profilo\\outputs\\manual-20260527-portfolio-progress\\presentations\\nine-dot-progress\\preview\\slide-12.png",
+    "E:\\vibe_coding\\profilo\\outputs\\manual-20260527-portfolio-progress\\presentations\\nine-dot-progress\\preview\\slide-13.png",
+    "E:\\vibe_coding\\profilo\\outputs\\manual-20260527-portfolio-progress\\presentations\\nine-dot-progress\\preview\\slide-14.png",
+    "E:\\vibe_coding\\profilo\\outputs\\manual-20260527-portfolio-progress\\presentations\\nine-dot-progress\\preview\\slide-15.png"
+  ],
+  "layoutDir": "E:\\vibe_coding\\profilo\\outputs\\manual-20260527-portfolio-progress\\presentations\\nine-dot-progress\\layout",
+  "layoutResults": [
+    {
+      "layoutPath": "E:\\vibe_coding\\profilo\\outputs\\manual-20260527-portfolio-progress\\presentations\\nine-dot-progress\\layout\\slide-01.layout.json"
+    },
+    {
+      "layoutPath": "E:\\vibe_coding\\profilo\\outputs\\manual-20260527-portfolio-progress\\presentations\\nine-dot-progress\\layout\\slide-02.layout.json"
+    },
+    {
+      "layoutPath": "E:\\vibe_coding\\profilo\\outputs\\manual-20260527-portfolio-progress\\presentations\\nine-dot-progress\\layout\\slide-03.layout.json"
+    },
+    {
+      "layoutPath": "E:\\vibe_coding\\profilo\\outputs\\manual-20260527-portfolio-progress\\presentations\\nine-dot-progress\\layout\\slide-04.layout.json"
+    },
+    {
+      "layoutPath": "E:\\vibe_coding\\profilo\\outputs\\manual-20260527-portfolio-progress\\presentations\\nine-dot-progress\\layout\\slide-05.layout.json"
+    },
+    {
+      "layoutPath": "E:\\vibe_coding\\profilo\\outputs\\manual-20260527-portfolio-progress\\presentations\\nine-dot-progress\\layout\\slide-06.layout.json"
+    },
+    {
+      "layoutPath": "E:\\vibe_coding\\profilo\\outputs\\manual-20260527-portfolio-progress\\presentations\\nine-dot-progress\\layout\\slide-07.layout.json"
+    },
+    {
+      "layoutPath": "E:\\vibe_coding\\profilo\\outputs\\manual-20260527-portfolio-progress\\presentations\\nine-dot-progress\\layout\\slide-08.layout.json"
+    },
+    {
+      "layoutPath": "E:\\vibe_coding\\profilo\\outputs\\manual-20260527-portfolio-progress\\presentations\\nine-dot-progress\\layout\\slide-09.layout.json"
+    },
+    {
+      "layoutPath": "E:\\vibe_coding\\profilo\\outputs\\manual-20260527-portfolio-progress\\presentations\\nine-dot-progress\\layout\\slide-10.layout.json"
+    },
+    {
+      "layoutPath": "E:\\vibe_coding\\profilo\\outputs\\manual-20260527-portfolio-progress\\presentations\\nine-dot-progress\\layout\\slide-11.layout.json"
+    },
+    {
+      "layoutPath": "E:\\vibe_coding\\profilo\\outputs\\manual-20260527-portfolio-progress\\presentations\\nine-dot-progress\\layout\\slide-12.layout.json"
+    },
+    {
+      "layoutPath": "E:\\vibe_coding\\profilo\\outputs\\manual-20260527-portfolio-progress\\presentations\\nine-dot-progress\\layout\\slide-13.layout.json"
+    },
+    {
+      "layoutPath": "E:\\vibe_coding\\profilo\\outputs\\manual-20260527-portfolio-progress\\presentations\\nine-dot-progress\\layout\\slide-14.layout.json"
+    },
+    {
+      "layoutPath": "E:\\vibe_coding\\profilo\\outputs\\manual-20260527-portfolio-progress\\presentations\\nine-dot-progress\\layout\\slide-15.layout.json"
+    }
+  ],
+  "slides": [
+    {
+      "index": 1,
+      "requestedSlideNumber": 1,
+      "modulePath": "E:\\vibe_coding\\profilo\\outputs\\manual-20260526-portfolio-v3\\presentations\\visual-optimization\\slides\\slide-01.mjs",
+      "exportName": "default"
+    },
+    {
+      "index": 2,
+      "requestedSlideNumber": 2,
+      "modulePath": "E:\\vibe_coding\\profilo\\outputs\\manual-20260526-portfolio-v3\\presentations\\visual-optimization\\slides\\slide-02.mjs",
+      "exportName": "default"
+    },
+    {
+      "index": 3,
+      "requestedSlideNumber": 3,
+      "modulePath": "E:\\vibe_coding\\profilo\\outputs\\manual-20260526-portfolio-v3\\presentations\\visual-optimization\\slides\\slide-03.mjs",
+      "exportName": "default"
+    },
+    {
+      "index": 4,
+      "requestedSlideNumber": 4,
+      "modulePath": "E:\\vibe_coding\\profilo\\outputs\\manual-20260526-portfolio-v3\\presentations\\visual-optimization\\slides\\slide-04.mjs",
+      "exportName": "default"
+    },
+    {
+      "index": 5,
+      "requestedSlideNumber": 5,
+      "modulePath": "E:\\vibe_coding\\profilo\\outputs\\manual-20260526-portfolio-v3\\presentations\\visual-optimization\\slides\\slide-05.mjs",
+      "exportName": "default"
+    },
+    {
+      "index": 6,
+      "requestedSlideNumber": 6,
+      "modulePath": "E:\\vibe_coding\\profilo\\outputs\\manual-20260526-portfolio-v3\\presentations\\visual-optimization\\slides\\slide-06.mjs",
+      "exportName": "default"
+    },
+    {
+      "index": 7,
+      "requestedSlideNumber": 7,
+      "modulePath": "E:\\vibe_coding\\profilo\\outputs\\manual-20260526-portfolio-v3\\presentations\\visual-optimization\\slides\\slide-07.mjs",
+      "exportName": "default"
+    },
+    {
+      "index": 8,
+      "requestedSlideNumber": 8,
+      "modulePath": "E:\\vibe_coding\\profilo\\outputs\\manual-20260526-portfolio-v3\\presentations\\visual-optimization\\slides\\slide-08.mjs",
+      "exportName": "default"
+    },
+    {
+      "index": 9,
+      "requestedSlideNumber": 9,
+      "modulePath": "E:\\vibe_coding\\profilo\\outputs\\manual-20260526-portfolio-v3\\presentations\\visual-optimization\\slides\\slide-09.mjs",
+      "exportName": "default"
+    },
+    {
+      "index": 10,
+      "requestedSlideNumber": 10,
+      "modulePath": "E:\\vibe_coding\\profilo\\outputs\\manual-20260526-portfolio-v3\\presentations\\visual-optimization\\slides\\slide-10.mjs",
+      "exportName": "default"
+    },
+    {
+      "index": 11,
+      "requestedSlideNumber": 11,
+      "modulePath": "E:\\vibe_coding\\profilo\\outputs\\manual-20260526-portfolio-v3\\presentations\\visual-optimization\\slides\\slide-11.mjs",
+      "exportName": "default"
+    },
+    {
+      "index": 12,
+      "requestedSlideNumber": 12,
+      "modulePath": "E:\\vibe_coding\\profilo\\outputs\\manual-20260526-portfolio-v3\\presentations\\visual-optimization\\slides\\slide-12.mjs",
+      "exportName": "default"
+    },
+    {
+      "index": 13,
+      "requestedSlideNumber": 13,
+      "modulePath": "E:\\vibe_coding\\profilo\\outputs\\manual-20260526-portfolio-v3\\presentations\\visual-optimization\\slides\\slide-13.mjs",
+      "exportName": "default"
+    },
+    {
+      "index": 14,
+      "requestedSlideNumber": 14,
+      "modulePath": "E:\\vibe_coding\\profilo\\outputs\\manual-20260526-portfolio-v3\\presentations\\visual-optimization\\slides\\slide-14.mjs",
+      "exportName": "default"
+    },
+    {
+      "index": 15,
+      "requestedSlideNumber": 15,
+      "modulePath": "E:\\vibe_coding\\profilo\\outputs\\manual-20260526-portfolio-v3\\presentations\\visual-optimization\\slides\\slide-15.mjs",
+      "exportName": "default"
+    }
+  ]
+}

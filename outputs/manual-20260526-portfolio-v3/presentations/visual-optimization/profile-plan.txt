@@ -1,0 +1,31 @@
+Task mode: create / full visual restyle of an authored portfolio deck
+Primary deck-profile: product-platform
+Secondary gates: editorial portfolio presentation; authentic UI screenshot use only
+
+Required proof objects:
+- Product overview with real mobile interface screens
+- User pain points and competitor opportunity framing
+- Product workflow and user journey
+- Editable system sequence diagram and Agent workflow
+- Persona framework with stated validation status
+- Secondary user research system chapter and About Me close
+
+Source and asset requirements:
+- Use only supplied Chinese content and existing demo screenshots.
+- Use existing phone/UI assets in E:/vibe_coding/profilo/demo_pic and assets/travel-flow.
+- Reference images define visual language only; they are not copied as portfolio content.
+
+Brand authenticity constraints:
+- No invented brand marks, results, usage metrics, or testimonials.
+- The pink lightning is a new editorial motif requested by the user, not a product logo.
+
+QA gates:
+- Unified title/body/card type system across project detail pages.
+- Detail pages contain green top/bottom bars and pink progress indicator.
+- Slide 03 combines original opener and product overview.
+- Cards remain readable at contact-sheet scale.
+- Output is editable PPTX and package has no empty media.
+
+Known missing inputs:
+- User research system has only a concise concept description; keep scope modest.
+- Persona validation has no quantified results; label it as an evaluation plan/in progress.

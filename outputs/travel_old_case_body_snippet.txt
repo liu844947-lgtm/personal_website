@@ -1,0 +1,203 @@
+﻿      <div class="case-body">
+        <section class="case-section" id="problem">
+          <header class="section-head">
+            <span class="number">02</span>
+            <h2>用户问题</h2>
+          </header>
+          <div class="cards-4">
+            <article class="card"><h3>需求在探索中形成</h3><p>用户往往只知道“想出去玩”或“想轻松一点”，需要在浏览和比较中逐步明确目的地、节奏与偏好。</p></article>
+            <article class="card"><h3>信息分散，难以收敛</h3><p>攻略、地点、地图和路线分散在不同平台，用户需要反复切换并手动组合成行程。</p></article>
+            <article class="card"><h3>生成方案缺少个性化</h3><p>通用 AI 容易给出大众化路线，难以真正体现用户的旅行节奏、兴趣重点与同行需求。</p></article>
+            <article class="card"><h3>结果难验证，也难继续改</h3><p>大段文字行程看不到真实路线关系；一旦不满意，用户也难以针对某一天或某个地点继续调整。</p></article>
+          </div>
+          <div class="split-decision">
+            <article class="decision ai">
+              <h3>产品机会</h3>
+              <p>不是替代攻略内容，也不是再做一个行程清单工具，而是补足“需求澄清 - 个性化生成 - 地图验证 - 持续调整”这一段决策链路。</p>
+            </article>
+            <article class="decision user">
+              <h3>竞品启发</h3>
+              <p>内容平台提供灵感，行程工具偏记录，通用 AI 能快速生成文字，但缺少地图验证、结构化编辑与稳定个性化。</p>
+            </article>
+          </div>
+          <div class="old-flow" aria-label="用户原始旅行规划流程">
+            <div class="flow-node">只有模糊想法</div>
+            <div class="flow-node">浏览攻略寻找方向</div>
+            <div class="flow-node">收藏与比较地点</div>
+            <div class="flow-node">切换地图排列路线</div>
+            <div class="flow-node">反复调整偏好与安排</div>
+            <div class="flow-node">得到最终方案</div>
+          </div>
+        </section>
+
+        <section class="case-section" id="mvp">
+          <header class="section-head">
+            <span class="number">03</span>
+            <h2>聚焦一个核心闭环：从模糊旅行想法到可调整行程</h2>
+          </header>
+          <div class="core-flow" aria-label="MVP 核心流程">
+            <div class="flow-node"><small>INPUT</small>输入旅行想法</div>
+            <div class="flow-node"><small>UNDERSTAND</small>AI 理解需求</div>
+            <div class="flow-node"><small>GENERATE</small>生成行程</div>
+            <div class="flow-node"><small>VERIFY</small>地图查看路线</div>
+            <div class="flow-node"><small>ADJUST</small>AI 修改 / 手动编辑</div>
+            <div class="flow-node"><small>SAVE</small>保存方案</div>
+          </div>
+          <div class="mvp-columns">
+            <article class="list-box">
+              <h3>核心功能</h3>
+              <div class="feature-list">
+                <span class="feature-pill">自然语言输入</span>
+                <span class="feature-pill">AI 生成行程</span>
+                <span class="feature-pill">高德地图线路展示</span>
+                <span class="feature-pill">AI 对话式修改</span>
+                <span class="feature-pill">手动拖拽与增删地点</span>
+                <span class="feature-pill">旅行偏好测试</span>
+              </div>
+            </article>
+            <article class="list-box secondary">
+              <h3>非本阶段重点</h3>
+              <div class="feature-list">
+                <span class="feature-pill">预订支付</span>
+                <span class="feature-pill">会员体系</span>
+                <span class="feature-pill">内容社区扩展</span>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="case-section" id="workflow">
+          <header class="section-head">
+            <span class="number">04</span>
+            <h2>AI 不只生成一次结果，而是持续参与旅行决策</h2>
+          </header>
+          <div class="agent-flow" aria-label="Agent 工作流">
+            <div class="flow-node"><small>01</small>自然语言输入</div>
+            <div class="flow-node"><small>02</small>AI 识别需求</div>
+            <div class="flow-node"><small>03</small>结构化旅行偏好</div>
+            <div class="flow-node"><small>04</small>生成行程</div>
+            <div class="flow-node"><small>05</small>地图展示</div>
+            <div class="flow-node"><small>06</small>AI 修改 / 手动编辑</div>
+          </div>
+          <div class="split-decision">
+            <article class="decision ai">
+              <h3>AI 适合处理</h3>
+              <p>模糊需求理解、替换建议、路线风格调整、基于上下文的局部方案修改。</p>
+            </article>
+            <article class="decision user">
+              <h3>用户直接操作适合处理</h3>
+              <p>拖动排序、删除地点、增加明确目的地，以及对已确定安排的快速接管。</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="case-section" id="preference">
+          <header class="section-head">
+            <span class="number">05</span>
+            <h2>从“我想轻松一点”到可影响路线的旅行偏好标签</h2>
+          </header>
+          <p class="lead">为了减少所有用户获得相似推荐结果的问题，我将旅行倾向拆解为六类偏好维度，并通过旅行人格标签参与后续生成。当前该机制已经接入生成流程，但不同偏好对结果差异的影响仍需要继续验证。</p>
+          <div class="preference-grid">
+            <article class="dimension"><strong>节奏感</strong><p>每日景点数量与停留时长</p></article>
+            <article class="dimension"><strong>规划感</strong><p>时间颗粒度与自由活动比例</p></article>
+            <article class="dimension"><strong>兴趣重心</strong><p>自然 / 城市 / 文化 / 美食 / 拍照</p></article>
+            <article class="dimension"><strong>同行倾向</strong><p>独行 / 朋友 / 情侣 / 家庭</p></article>
+            <article class="dimension"><strong>探索偏好</strong><p>经典 / 小众 / 热门</p></article>
+            <article class="dimension"><strong>消费观</strong><p>性价比 / 均衡 / 舒适</p></article>
+          </div>
+          <div class="placeholder-row">
+            <figure class="image-panel">
+              <img src="../../demo_pic/%E6%B5%8B%E8%AF%95%E9%A1%B5.png" alt="小迹旅行灵魂测试页">
+            </figure>
+            <figure class="image-panel">
+              <img src="../../demo_pic/%E6%B5%8B%E8%AF%95%E7%BB%93%E6%9E%9C.png" alt="小迹城市考古家人格结果页">
+            </figure>
+          </div>
+        </section>
+
+        <section class="case-section" id="interaction">
+          <header class="section-head">
+            <span class="number">06</span>
+            <h2>让 AI 方案可查看、可修改、可接管</h2>
+          </header>
+          <div class="interaction-list">
+            <article class="interaction"><h3>进入规划</h3><p>用户可选择直接规划或与 AI 先讨论旅行想法。</p></article>
+            <article class="interaction"><h3>地图结果</h3><p>生成路线与地图线路同步展示，便于判断合理性。</p></article>
+            <article class="interaction"><h3>AI 修改</h3><p>用户一句话即可继续优化当前已有方案。</p></article>
+            <article class="interaction"><h3>手动编辑</h3><p>支持拖动、交换、删除与添加地点。</p></article>
+          </div>
+          <div class="five-screens" aria-label="五屏手机样机占位">
+            <figure class="screen-shot"><img src="../../demo_pic/%E9%A6%96%E9%A1%B5.png" alt="首页吸引"><strong>首页吸引</strong><span>00 / Home</span></figure>
+            <figure class="screen-shot"><img src="../../demo_pic/%E8%A7%84%E5%88%92%E6%96%B9%E5%BC%8F.png" alt="选择规划方式"><strong>规划选择</strong><span>Path A / B</span></figure>
+            <figure class="screen-shot"><img src="../../demo_pic/%E5%A1%AB%E8%A1%A8%E7%95%8C%E9%9D%A2.png" alt="直接填写页"><strong>直接填写</strong><span>Quick generate</span></figure>
+            <figure class="screen-shot"><img src="../../demo_pic/%E8%A1%8C%E7%A8%8B%E8%AF%A6%E6%83%85.png" alt="行程详情与地图路线"><strong>路线详情</strong><span>Map verify</span></figure>
+            <figure class="screen-shot"><img src="../../demo_pic/%E4%BA%8C%E6%AC%A1%E7%BC%96%E8%BE%91%E8%A1%8C%E7%A8%8B.png" alt="手动编辑行程"><strong>手动编辑</strong><span>Take control</span></figure>
+          </div>
+        </section>
+
+        <section class="case-section" id="demo">
+          <header class="section-head">
+            <span class="number">07</span>
+            <h2>从产品方案到可运行 Demo</h2>
+          </header>
+          <div class="implementation">
+            <article class="implemented"><b>✓</b><div><strong>DeepSeek</strong><span>识别需求、生成行程、继续修改</span></div></article>
+            <article class="implemented"><b>✓</b><div><strong>高德地图</strong><span>展示地图点位与线路</span></div></article>
+            <article class="implemented"><b>✓</b><div><strong>页面交互</strong><span>完成主要流程跳转</span></div></article>
+            <article class="implemented"><b>✓</b><div><strong>手动编辑</strong><span>支持增删与调整地点</span></div></article>
+          </div>
+          <div class="video-placeholder">
+            <div>
+              <span class="play">▶</span>
+              <h3>AI Travel Agent 核心流程演示</h3>
+              <p>从需求输入、行程生成、地图查看到 AI 与手动修改</p>
+              <div class="actions">
+                <a class="button primary" href="#" aria-disabled="true">观看 Demo</a>
+                <a class="button" href="#" aria-disabled="true">体验产品</a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="case-section" id="testing">
+          <header class="section-head">
+            <span class="number">08</span>
+            <h2>功能跑通之后：个性化结果是否真的不同？</h2>
+          </header>
+          <p class="status-note">当前状态：在同一目的地与相同时长下，仅改变旅行人格与偏好输入，观察 AI 生成结果是否真正体现用户差异。测试表明当前模型能够生成不同内容，但个性化仍依赖表层偏好匹配，下一步需要通过约束规则、路线校验、Prompt 结构化与反馈闭环继续优化。</p>
+          <div class="table-scroll">
+            <table class="test-table">
+              <thead>
+                <tr>
+                  <th>观察维度</th>
+                  <th>城市考古家</th>
+                  <th>松弛漫游家</th>
+                  <th>胃袋探险家</th>
+                  <th>安稳旅行家</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><th>主要地点类型</th><td>文化经典路线</td><td>光影与拍摄节点</td><td>美食节点串联周边景点</td><td>经典设施友好景点</td></tr>
+                <tr><th>每日景点数量</th><td>2-3 个核心点</td><td>节奏轻松，短步行</td><td>以美食节点为骨架，节点略密</td><td>2-3 个点，预留午休</td></tr>
+                <tr><th>推荐理由是否体现偏好</th><td>文化路线明确</td><td>光影与拍摄节点突出</td><td>美食节点丰富</td><td>景点少、休息与交通提醒</td></tr>
+                <tr><th>路线是否明显折返</th><td>路线合理性 4/5</td><td>路线合理性 3/5</td><td>路线合理性 3/5</td><td>路线合理性 3/5</td></tr>
+                <tr><th>符合人格程度</th><td>偏好匹配度 4/5，节奏符合度 4/5</td><td>偏好匹配度 4/5，节奏符合度 4/5</td><td>偏好匹配度 4/5，节奏符合度 3/5</td><td>偏好匹配度 4/5，节奏符合度 4/5</td></tr>
+                <tr><th>主要问题</th><td>部分热门景点混入</td><td>D2 跨区跳转需优化</td><td>节点过密</td><td>步行与换乘约束不够</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="case-section reflection" id="reflection">
+          <div>
+            <span class="number">09</span>
+            <h2>Agent 的价值发生在生成之后</h2>
+          </div>
+          <div class="reflection-copy">
+            <p>在最初构思中，我更关注 AI 能否快速生成一份个性化行程。但在完成 Demo 后，我发现旅行规划中更有价值的问题发生在生成之后：用户需要判断路线是否合理，需要针对局部内容继续调整，也需要在 AI 建议和自己的明确决定之间自由切换。</p>
+            <p>因此，我将产品核心从“一次性生成行程”转向“持续协作的旅行决策 Agent”：AI 负责理解模糊需求、生成方案与响应修改，高德地图帮助用户判断路线可行性，手动编辑功能则让用户随时接管具体安排。</p>
+            <p>当前核心闭环已跑通，但个性化偏好对生成结果的影响仍需进一步验证。下一阶段重点是完善偏好约束与测试体系，而不是继续扩展与核心任务关系较弱的功能。</p>
+          </div>
+        </section>
+      </div>
+    </div>
