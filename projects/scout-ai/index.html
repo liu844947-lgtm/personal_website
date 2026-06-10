@@ -490,6 +490,13 @@
     .image-panel:hover img {
       transform: scale(1.05);
     }
+    .image-panel.no-preview {
+      cursor: default;
+      pointer-events: none;
+    }
+    .image-panel.no-preview:hover img {
+      transform: none;
+    }
 
     /* ===== Image Hover Preview ===== */
     .img-preview {
@@ -810,7 +817,6 @@
         <p class="subtitle">用户自调研系统</p>
         <p class="summary">输入一个研究问题，系统自动生成关键词、抓取跨平台用户反馈、清洗数据，并输出带原话证据的结构化用户研究报告。</p>
         <div class="facts" aria-label="项目信息">
-          <div class="fact"><strong>项目类型</strong><span>AI Agent</span></div>
           <div class="fact"><strong>目标用户</strong><span>产品经理：竞品分析、用户需求挖掘</span></div>
           <div class="fact"><strong>我的角色</strong><span>产品定义 / AI 交互 / 界面设计 / Demo 落地</span></div>
           <div class="fact"><strong>当前成果</strong><span>网页端 Demo / 跨平台抓取 / 数据清洗与报告输出</span></div>
@@ -940,13 +946,13 @@
             </article>
           </div>
           <div class="image-row">
-            <figure class="image-panel reveal">
+            <figure class="image-panel no-preview reveal">
               <img src="../../demo_pic/%E5%85%B3%E9%94%AE%E8%AF%8D.png" alt="ScoutAI 关键词生成模块">
             </figure>
-            <figure class="image-panel reveal reveal-delay-1">
+            <figure class="image-panel no-preview reveal reveal-delay-1">
               <img src="../../demo_pic/%E5%8F%AF%E8%BF%BD%E6%BA%AF.png" alt="ScoutAI 可溯源原话引用">
             </figure>
-            <figure class="image-panel reveal reveal-delay-2">
+            <figure class="image-panel no-preview reveal reveal-delay-2">
               <img src="../../demo_pic/%E5%8F%AF%E8%BF%BD%E9%97%AE.png" alt="ScoutAI 可追问 AI">
             </figure>
           </div>
@@ -966,7 +972,7 @@
             <span class="number">06</span>
             <h2>报告结构</h2>
           </header>
-          <div style="display: grid; grid-template-columns: 1fr auto 1fr; gap: 0; align-items: center; min-height: 420px;">
+          <div style="display: grid; grid-template-columns: 0.55fr auto 1.45fr; gap: 0; align-items: center; min-height: 420px;">
             <!-- 左侧目录 -->
             <div style="display: flex; flex-direction: column; gap: 10px; padding: 20px 24px;">
               <article class="card reveal" style="min-height:unset; padding:14px 18px;">
@@ -999,7 +1005,7 @@
               <span style="font-size: 48px; color: var(--pink-deep); font-weight: 900; transition: transform 0.3s ease;">→</span>
             </div>
             <!-- 右侧报告图片 -->
-            <figure class="image-panel reveal reveal-delay-2" style="min-height: 400px;">
+            <figure class="image-panel no-preview reveal reveal-delay-2" style="min-height: 400px;">
               <img src="../../demo_pic/%E6%8A%A5%E5%91%8A%E7%BB%93%E6%9E%84.png" alt="ScoutAI 报告结构示意图">
             </figure>
           </div>
@@ -1076,7 +1082,7 @@
     // ===== Image Hover Preview =====
     const imgPreview = document.getElementById("imgPreview");
     const imgPreviewImg = document.getElementById("imgPreviewImg");
-    document.querySelectorAll(".image-panel img").forEach((img) => {
+    document.querySelectorAll(".image-panel:not(.no-preview) img").forEach((img) => {
       const panel = img.closest(".image-panel");
       panel.addEventListener("mouseenter", () => {
         imgPreviewImg.src = img.src;

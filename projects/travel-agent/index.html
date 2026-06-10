@@ -777,19 +777,44 @@
       min-height: 143px;
       padding: 20px;
       border: 1px solid var(--soft-rule);
+      border-radius: 14px;
+      background: linear-gradient(160deg, var(--white) 0%, var(--green-soft) 100%);
+      transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    .dimension::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      background: linear-gradient(160deg, var(--green-soft) 0%, rgba(0, 76, 43, 0.06) 100%);
+      transition: opacity 0.35s ease;
+      pointer-events: none;
+    }
+    .dimension:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 36px rgba(0, 57, 31, 0.12);
+      border-color: transparent;
+    }
+    .dimension:hover::after {
+      opacity: 1;
     }
 
     .dimension strong {
       display: block;
       margin-bottom: 9px;
-      color: var(--pink-deep);
+      color: var(--green-deep);
       font-size: 14px;
+      position: relative;
+      z-index: 1;
     }
-
     .dimension p {
       margin: 0;
       color: var(--text);
       font-size: 14px;
+      position: relative;
+      z-index: 1;
     }
 
     .placeholder-row {
@@ -1095,10 +1120,16 @@
       min-height: clamp(285px, 33vw, 425px);
       margin: 0;
       padding: 14px 10px 16px;
-      border: 0;
-      border-radius: 0;
+      border: 1px solid transparent;
+      border-radius: 12px;
       background: transparent;
       text-align: center;
+      cursor: zoom-in;
+      transition: border-color 0.35s ease, box-shadow 0.35s ease;
+    }
+    .screen-shot:hover {
+      border-color: var(--pink-soft);
+      box-shadow: 0 8px 32px rgba(205, 42, 94, 0.08);
     }
 
     .screen-shot img {
@@ -1106,6 +1137,13 @@
       height: clamp(230px, 27vw, 360px);
       object-fit: contain;
       filter: drop-shadow(0 16px 18px rgba(0, 57, 31, 0.14));
+      transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+      position: relative;
+      z-index: 1;
+    }
+    .screen-shot:hover img {
+      transform: scale(2);
+      z-index: 100;
     }
 
     .screen-shot strong {
@@ -1113,6 +1151,8 @@
       margin-top: 10px;
       color: var(--green-deep);
       font-size: 13px;
+      position: relative;
+      z-index: 101;
     }
 
     .screen-shot span {
@@ -1629,6 +1669,9 @@
       .screen-shot img {
         width: min(100%, 132px);
       }
+      .screen-shot:hover img {
+        transform: none;
+      }
 
       .screen-board .screen-shot img {
         width: min(100%, 112px);
@@ -1903,17 +1946,22 @@
             <h2>旅行灵魂测试设计</h2>
           </header>
           <p class="lead">20 题 / 约 3 分钟，从 6 个维度生成 4 种旅行灵魂，路线与标签会参与不同旅行人格的个性化路线定制。</p>
-          <div class="preference-grid">
-            <article class="dimension"><strong>节奏感</strong><p>每日景点数量与停留时长</p></article>
-            <article class="dimension"><strong>规划感</strong><p>时间颗粒度与自由活动比例</p></article>
-            <article class="dimension"><strong>兴趣重心</strong><p>自然 / 城市 / 文化 / 美食 / 拍照</p></article>
-            <article class="dimension"><strong>同行倾向</strong><p>独行 / 朋友 / 情侣 / 家庭</p></article>
-            <article class="dimension"><strong>探索偏好</strong><p>经典 / 小众 / 热门</p></article>
-            <article class="dimension"><strong>消费观</strong><p>性价比 / 均衡 / 舒适</p></article>
-          </div>
-          <div class="placeholder-row">
-            <figure class="image-panel"><img src="../../demo_pic/%E6%B5%8B%E8%AF%95%E9%A1%B5.png?v=20260606b" alt="旅行灵魂测试页"></figure>
-            <figure class="image-panel"><img src="../../demo_pic/%E6%B5%8B%E8%AF%95%E7%BB%93%E6%9E%9C.png?v=20260606b" alt="旅行灵魂测试结果页"></figure>
+          <div style="display: grid; grid-template-columns: 1fr 1.2fr; gap: 24px; align-items: stretch;">
+            <!-- 左侧：6 个维度卡片 -->
+            <div class="preference-grid" style="grid-template-columns: 1fr 1fr; gap: 10px; align-content: center;">
+              <article class="dimension"><strong>⏱ 节奏感</strong><p>每日景点数量与停留时长</p></article>
+              <article class="dimension"><strong>📋 规划感</strong><p>时间颗粒度与自由活动比例</p></article>
+              <article class="dimension"><strong>🎯 兴趣重心</strong><p>自然 / 城市 / 文化 / 美食 / 拍照</p></article>
+              <article class="dimension"><strong>👥 同行倾向</strong><p>独行 / 朋友 / 情侣 / 家庭</p></article>
+              <article class="dimension"><strong>🧭 探索偏好</strong><p>经典 / 小众 / 热门</p></article>
+              <article class="dimension"><strong>💰 消费观</strong><p>性价比 / 均衡 / 舒适</p></article>
+            </div>
+            <!-- 右侧：2 个页面截图 -->
+            <div class="placeholder-row" style="position: relative; grid-template-columns: 1fr 1fr; gap: 12px; align-items: stretch;">
+              <figure class="image-panel" style="border-radius: 18px; min-height: unset;"><img src="../../demo_pic/%E6%B5%8B%E8%AF%95%E9%A1%B5.png?v=20260606b" alt="旅行灵魂测试页" style="max-height:420px;"><figcaption style="text-align:center; margin-top:8px; color:var(--green-deep); font-size:11px; font-weight:700;">测试页面</figcaption></figure>
+              <figure class="image-panel" style="border-radius: 18px; min-height: unset;"><img src="../../demo_pic/%E6%B5%8B%E8%AF%95%E7%BB%93%E6%9E%9C.png?v=20260606b" alt="旅行灵魂测试结果页" style="max-height:420px;"><figcaption style="text-align:center; margin-top:8px; color:var(--green-deep); font-size:11px; font-weight:700;">测试结果</figcaption></figure>
+              <span style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: var(--green-deep); color: var(--white); font-size: 18px; box-shadow: 0 4px 16px rgba(0,57,31,0.3); z-index: 5;">→</span>
+            </div>
           </div>
           <p class="status-note" style="margin-top: 34px;">测试中生成 4 种旅行灵魂——城市考古家（文化经典/计划型）、出片收集员（视觉导向/探索型）、胃袋探险家（饮食中心/松弛型）、安稳旅行家（舒适导向/规划型），路线与标签共同参与不同人格的个性化定制。</p>
         </section>
@@ -1925,7 +1973,7 @@
           </header>
           <p class="lead">从首页选择规划方式，到 AI 生成个性化路线、地图查看、手动编辑调整，再到最终保存行程的全流程演示。</p>
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
-            <video src="../../demo_pic/travel-demo-web.mp4" controls playsinline preload="metadata" poster="../../assets/travel-flow/source/route-chroma.png" style="display:block; width:100%; max-width:280px; height:auto; max-height:520px; object-fit:contain; border-radius:16px; background:#000; margin:0 auto;">
+            <video src="../../demo_pic/travel-demo-web.mp4" controls playsinline preload="metadata" style="display:block; width:100%; max-width:280px; height:auto; max-height:520px; object-fit:contain; border-radius:16px; background:#000; margin:0 auto;">
             </video>
             <div style="display: flex; flex-direction: column; justify-content: center; gap: 14px; padding: 10px 0;">
               <h3 style="margin: 0; color: var(--green-deep); font-size: 20px;">小迹 · 产品交互演示</h3>

@@ -124,14 +124,6 @@
 
     p { margin: 0; }
 
-    .subtitle {
-      max-width: 610px;
-      color: var(--green);
-      font-size: clamp(20px, 2vw, 26px);
-      font-weight: 850;
-      line-height: 1.42;
-    }
-
     .intro {
       max-width: 620px;
       margin-top: 28px;
@@ -182,56 +174,86 @@
 
     .hero-star {
       position: absolute;
-      width: min(520px, 76%);
+      right: 8%;
+      bottom: 10%;
+      width: min(380px, 58%);
       aspect-ratio: 1;
-      background: var(--green-deep);
+      background: var(--pink);
       clip-path: polygon(50% 0, 61% 31%, 94% 20%, 75% 49%, 100% 70%, 67% 72%, 72% 100%, 50% 80%, 27% 100%, 33% 70%, 0 66%, 25% 49%, 7% 20%, 39% 31%);
-      transform: rotate(-10deg);
-      filter: drop-shadow(0 26px 60px rgba(0, 57, 31, 0.18));
+      opacity: 0.22;
+      transform: rotate(8deg);
     }
 
     .hero-card {
       position: relative;
       z-index: 1;
-      width: min(560px, 92%);
-      padding: clamp(22px, 3vw, 34px);
-      border: 1px solid rgba(255, 254, 250, 0.4);
-      border-radius: var(--radius);
-      color: var(--paper);
-      background: rgba(0, 57, 31, 0.88);
-      box-shadow: 0 24px 60px rgba(0, 57, 31, 0.24);
-      backdrop-filter: blur(10px);
+      width: min(500px, 92%);
+      overflow: hidden;
+      border: 1px solid var(--rule);
+      background: rgba(255, 254, 250, 0.96);
+      box-shadow: 0 28px 64px rgba(0, 57, 31, 0.1);
     }
 
-    .hero-card .metric-grid {
+    .hero-card-label {
+      margin: 0;
+      padding: 16px 22px;
+      border-bottom: 1px solid var(--soft-rule);
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .hero-card-quote {
+      margin: 0;
+      padding: 22px 22px 20px;
+      border-bottom: 1px solid var(--soft-rule);
+      color: var(--green-deep);
+      background: linear-gradient(135deg, rgba(238, 245, 239, 0.92) 0%, rgba(255, 254, 250, 0.98) 100%);
+      font-size: clamp(19px, 2.1vw, 23px);
+      font-weight: 800;
+      line-height: 1.48;
+    }
+
+    .hero-card-quote::before {
+      content: "";
+      display: block;
+      width: 28px;
+      height: 3px;
+      margin-bottom: 14px;
+      background: var(--pink);
+    }
+
+    .hero-stats {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 1px;
-      margin-top: 24px;
-      background: rgba(255, 254, 250, 0.16);
+      margin: 0;
+      background: var(--soft-rule);
     }
 
-    .metric {
-      min-height: 116px;
-      padding: 18px;
-      background: rgba(0, 57, 31, 0.9);
+    .hero-stat {
+      min-height: 96px;
+      padding: 16px 18px;
+      background: var(--paper);
     }
 
-    .metric span {
-      display: block;
-      margin-bottom: 10px;
-      color: rgba(255, 254, 250, 0.66);
-      font-size: 12px;
+    .hero-stat dt {
+      margin: 0 0 8px;
+      color: var(--muted);
+      font-size: 11px;
       font-weight: 800;
       letter-spacing: 0.12em;
       text-transform: uppercase;
     }
 
-    .metric strong {
-      display: block;
-      color: var(--paper);
-      font-size: clamp(18px, 2vw, 24px);
-      line-height: 1.35;
+    .hero-stat dd {
+      margin: 0;
+      color: var(--green-deep);
+      font-size: 15px;
+      font-weight: 800;
+      line-height: 1.45;
     }
 
     .case-shell {
@@ -353,18 +375,6 @@
       border: 1px solid var(--soft-rule);
       background: var(--green-deep);
       color: var(--paper);
-    }
-
-    .quote-box::after {
-      content: "";
-      position: absolute;
-      right: 20px;
-      bottom: 20px;
-      width: 88px;
-      aspect-ratio: 1;
-      background: var(--pink);
-      clip-path: polygon(50% 0, 61% 31%, 94% 20%, 75% 49%, 100% 70%, 67% 72%, 72% 100%, 50% 80%, 27% 100%, 33% 70%, 0 66%, 25% 49%, 7% 20%, 39% 31%);
-      opacity: 0.88;
     }
 
     .quote-box strong {
@@ -751,7 +761,7 @@
       .ai-flow {
         grid-template-columns: 1fr;
       }
-      .hero-card .metric-grid { grid-template-columns: 1fr; }
+      .hero-stats { grid-template-columns: 1fr; }
       h1 { font-size: 42px; }
       .section-no { font-size: 16px; }
     }
@@ -782,10 +792,9 @@
   <main>
     <section class="hero" id="overview">
       <div class="hero-copy reveal">
-        <a class="crumb" href="../../portfolio-ai-pm.html#background">← Internship Case</a>
+        <a class="crumb" href="../../portfolio-ai-pm.html#internship">← Internship Case</a>
         <p class="kicker">快乐学教育集团 · AI 产品助理</p>
         <h1>AI 作业助手拍照搜题 MVP</h1>
-        <p class="subtitle">从学生作业求助场景出发，设计机构内嵌式 AI 拍搜答疑产品</p>
         <p class="intro">该项目内嵌在学生学习 App 中，优先以初二数学为 MVP，帮助学生在作业场景中获得答案解析，同时将搜题行为沉淀为学情数据，辅助老师备课与后续复习服务。</p>
         <div class="hero-tags">
           <span class="tag">AI Education</span>
@@ -797,14 +806,14 @@
       <div class="hero-visual reveal" aria-label="项目概览卡片">
         <div class="hero-star" aria-hidden="true"></div>
         <article class="hero-card">
-          <p class="kicker" style="color: rgba(255,254,250,0.66);">Product snapshot</p>
-          <h3 style="color: var(--paper); font-size: 26px;">不是“给答案”，而是把答疑变成可追踪的学习数据。</h3>
-          <div class="metric-grid">
-            <div class="metric"><span>公司</span><strong>快乐学教育集团</strong></div>
-            <div class="metric"><span>我的角色</span><strong>调研 / PRD / AI 策略 / 监控</strong></div>
-            <div class="metric"><span>调研样本</span><strong>访谈 5 人 + 问卷 102 份</strong></div>
-            <div class="metric"><span>项目结果</span><strong>约 400 名学员使用</strong></div>
-          </div>
+          <p class="hero-card-label">Product Snapshot</p>
+          <blockquote class="hero-card-quote">不是「给答案」，而是把答疑变成可追踪的学习数据。</blockquote>
+          <dl class="hero-stats">
+            <div class="hero-stat"><dt>公司</dt><dd>快乐学教育集团</dd></div>
+            <div class="hero-stat"><dt>我的角色</dt><dd>调研 / PRD / AI 策略 / 监控</dd></div>
+            <div class="hero-stat"><dt>调研样本</dt><dd>访谈 5 人 + 问卷 102 份</dd></div>
+            <div class="hero-stat"><dt>项目结果</dt><dd>约 400 名学员使用</dd></div>
+          </dl>
         </article>
       </div>
     </section>
@@ -1029,7 +1038,7 @@
   </main>
 
   <footer class="footer">
-    <a href="../../portfolio-ai-pm.html#background">← Back to Portfolio</a>
+    <a href="../../portfolio-ai-pm.html#internship">← Back to Portfolio</a>
     <span>Internship Case Study · AI Homework Assistant MVP</span>
   </footer>
 

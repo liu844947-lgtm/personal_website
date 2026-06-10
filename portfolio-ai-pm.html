@@ -129,6 +129,7 @@
       font-size: 12px;
       font-weight: 750;
       letter-spacing: 0.2em;
+      line-height: 1.4;
       text-transform: uppercase;
     }
 
@@ -207,8 +208,7 @@
       font-weight: 600;
     }
 
-    .hero-links,
-    .footer-links {
+    .hero-links {
       display: flex;
       flex-wrap: wrap;
       gap: 34px;
@@ -240,21 +240,21 @@
       border: 2px solid rgba(0, 76, 43, 0.24);
       border-radius: 52% 48% 18% 18%;
       transform: rotate(-7deg);
+      z-index: 1;
     }
 
     .portrait::after {
-      content: "AI PM";
+      content: "";
       position: absolute;
-      top: clamp(70px, 11vh, 112px);
-      right: clamp(34px, 6vw, 78px);
-      padding: 8px 16px;
-      border: 1px solid rgba(0, 76, 43, 0.28);
-      border-radius: 999px;
-      color: var(--green);
-      background: rgba(255, 254, 250, 0.78);
-      font-size: 12px;
-      font-weight: 850;
-      letter-spacing: 0.18em;
+      top: 50%;
+      left: 50%;
+      z-index: 0;
+      width: min(560px, 92%);
+      height: min(560px, 92%);
+      border-radius: 50%;
+      background: var(--green);
+      opacity: 0.16;
+      transform: translate(-50%, -50%);
     }
 
     .portrait-frame {
@@ -268,31 +268,6 @@
       overflow: visible;
       border: 0;
       background: transparent;
-    }
-
-    .portrait-frame::before {
-      content: "";
-      position: absolute;
-      inset: 10% -4% 4% 1%;
-      z-index: -1;
-      background: var(--green-deep);
-      clip-path: polygon(
-        50% 0,
-        60% 30%,
-        92% 18%,
-        76% 48%,
-        100% 68%,
-        66% 72%,
-        70% 100%,
-        50% 78%,
-        25% 100%,
-        33% 70%,
-        0 65%,
-        25% 48%,
-        8% 18%,
-        40% 30%
-      );
-      box-shadow: 0 26px 70px rgba(0, 57, 31, 0.2);
     }
 
     .portrait-frame::after {
@@ -399,80 +374,9 @@
     }
 
     .internship-section {
-      display: grid;
-      grid-template-columns: 0.82fr 1.18fr;
-      gap: clamp(28px, 5vw, 70px);
       background:
         radial-gradient(circle at 86% 18%, rgba(235, 123, 168, 0.14) 0 13%, transparent 14%),
         var(--paper);
-    }
-
-    .internship-visual {
-      position: relative;
-      min-height: 430px;
-      overflow: hidden;
-      border: 1px solid var(--rule);
-      background: var(--green-deep);
-    }
-
-    .internship-visual::before {
-      content: "";
-      position: absolute;
-      inset: 42px;
-      background: var(--pink);
-      clip-path: polygon(50% 0, 61% 31%, 94% 20%, 75% 49%, 100% 70%, 67% 72%, 72% 100%, 50% 80%, 27% 100%, 33% 70%, 0 66%, 25% 49%, 7% 20%, 39% 31%);
-      opacity: 0.9;
-      transform: rotate(-9deg);
-    }
-
-    .internship-visual::after {
-      content: "PRD";
-      position: absolute;
-      right: 28px;
-      bottom: 24px;
-      color: rgba(255, 254, 250, 0.16);
-      font-size: clamp(72px, 12vw, 150px);
-      font-weight: 950;
-      line-height: 1;
-      letter-spacing: -0.02em;
-    }
-
-    .prd-card {
-      position: absolute;
-      top: 52%;
-      left: 50%;
-      width: min(360px, 76%);
-      padding: 24px;
-      border: 1px solid rgba(255, 254, 250, 0.36);
-      color: var(--paper);
-      background: rgba(0, 57, 31, 0.88);
-      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.16);
-      transform: translate(-50%, -50%);
-      backdrop-filter: blur(10px);
-    }
-
-    .prd-card small {
-      display: block;
-      margin-bottom: 16px;
-      color: rgba(255, 254, 250, 0.68);
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-    }
-
-    .prd-card strong {
-      display: block;
-      font-size: clamp(24px, 3vw, 34px);
-      line-height: 1.25;
-    }
-
-    .prd-card span {
-      display: block;
-      margin-top: 18px;
-      color: var(--pink);
-      font-size: 13px;
-      font-weight: 850;
     }
 
     .internship-copy {
@@ -483,7 +387,7 @@
       font-size: clamp(34px, 4vw, 54px);
     }
 
-    .internship-copy p {
+    .internship-copy p:not(.section-label) {
       max-width: 720px;
       margin: 22px 0 26px;
       color: var(--text);
@@ -671,128 +575,427 @@
       background: rgba(235, 123, 168, 0.08);
     }
 
-    .background-section {
-      display: grid;
-      grid-template-columns: 0.82fr 1.18fr;
+    .about-section {
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 92% 8%, rgba(235, 123, 168, 0.16) 0 11%, transparent 12%),
+        radial-gradient(circle at 4% 88%, rgba(0, 76, 43, 0.06) 0 18%, transparent 19%),
+        repeating-linear-gradient(
+          90deg,
+          rgba(0, 57, 31, 0.028) 0,
+          rgba(0, 57, 31, 0.028) 1px,
+          transparent 1px,
+          transparent 72px
+        ),
+        repeating-linear-gradient(
+          0deg,
+          rgba(0, 57, 31, 0.028) 0,
+          rgba(0, 57, 31, 0.028) 1px,
+          transparent 1px,
+          transparent 72px
+        ),
+        var(--paper);
+      color: var(--green-deep);
     }
 
-    .background-title {
-      padding-right: clamp(24px, 5vw, 66px);
-      border-right: 1px solid var(--rule);
-    }
-
-    .background-title h2 {
-      font-size: clamp(36px, 4vw, 54px);
-    }
-
-    .transfer {
-      display: grid;
-      gap: 0;
-      padding-left: clamp(24px, 5vw, 66px);
-    }
-
-    .transfer-item {
-      display: grid;
-      grid-template-columns: 112px 1fr;
-      gap: 20px;
-      padding: 20px 0;
+    .about-head {
+      position: relative;
+      z-index: 1;
+      margin-bottom: clamp(40px, 5vw, 64px);
+      padding-bottom: clamp(24px, 3vw, 36px);
       border-bottom: 1px solid var(--soft-rule);
     }
 
-    .transfer-item:last-child {
-      border-bottom: 0;
+    .about-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 1px minmax(0, 1fr);
+      gap: clamp(32px, 5vw, 72px);
+      align-items: start;
     }
 
-    .transfer-item span {
-      color: var(--pink-deep);
-      font-size: 13px;
+    .about-divider {
+      width: 1px;
+      min-height: 100%;
+      background: linear-gradient(
+        180deg,
+        transparent 0%,
+        var(--green) 12%,
+        var(--pink) 50%,
+        var(--green) 88%,
+        transparent 100%
+      );
+      opacity: 0.45;
+    }
+
+    .about-block {
+      position: relative;
+    }
+
+    .about-block + .about-block {
+      margin-top: clamp(28px, 4vw, 44px);
+    }
+
+    .about-block-head {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .about-index {
+      color: rgba(215, 53, 130, 0.42);
+      font-size: clamp(28px, 3vw, 38px);
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -0.04em;
+    }
+
+    .about-block-title {
+      margin: 0;
+      flex: 1;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--green);
+      color: var(--green-deep);
+      font-size: clamp(17px, 2vw, 21px);
       font-weight: 800;
     }
 
-    .transfer-item h3 {
-      margin: 0 0 7px;
-      color: var(--green-deep);
-      font-size: 19px;
+    .about-edu-card {
+      padding: 22px 24px;
+      border: 1px solid var(--soft-rule);
+      background:
+        linear-gradient(135deg, rgba(238, 245, 239, 0.9) 0%, rgba(255, 254, 250, 0.96) 100%);
+      box-shadow: 0 18px 44px rgba(0, 57, 31, 0.06);
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
     }
 
-    .transfer-item p {
-      margin: 0;
+    .about-edu-card::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: linear-gradient(180deg, var(--green) 0%, var(--pink) 100%);
+    }
+
+    .about-block-edu .about-edu-card {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-block-edu .about-edu-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 24px 52px rgba(0, 57, 31, 0.1);
+    }
+
+    .about-edu p {
+      margin: 0 0 8px;
       color: var(--text);
-      font-size: 14px;
-    }
-
-    .about-section {
-      display: grid;
-      grid-template-columns: 0.8fr 1.2fr;
-      gap: clamp(30px, 6vw, 90px);
-      background: var(--green-deep);
-      color: var(--paper);
-    }
-
-    .about-section h2 {
-      color: var(--paper);
-    }
-
-    .about-copy {
-      padding-top: 20px;
-    }
-
-    .about-copy p {
-      margin: 0 0 26px;
-      color: rgba(255, 254, 250, 0.76);
-      font-size: 17px;
-      line-height: 1.85;
-    }
-
-    .about-copy .ghost {
-      margin: 0 8px 8px 0;
-    }
-
-    .about-meta {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 1px;
-      margin-top: 30px;
-      background: rgba(255, 254, 250, 0.18);
-    }
-
-    .about-meta article {
-      min-height: 150px;
-      padding: 20px;
-      background: var(--green-deep);
-      box-shadow: inset 0 0 0 1px rgba(255, 254, 250, 0.06);
-    }
-
-    .about-meta h3 {
-      margin: 0 0 10px;
-      color: var(--pink);
-      font-size: 14px;
-    }
-
-    .about-meta p {
-      margin: 0;
-      color: rgba(255, 254, 250, 0.72);
-      font-size: 13px;
+      font-size: 15px;
       line-height: 1.7;
     }
 
-    .footer {
+    .about-edu .about-date {
+      display: inline-flex;
+      margin-bottom: 12px;
+      padding: 4px 10px;
+      border: 1px solid rgba(0, 76, 43, 0.18);
+      border-radius: 999px;
+      color: var(--green-deep);
+      background: rgba(255, 254, 250, 0.88);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+    }
+
+    .about-edu .about-school {
+      color: var(--green-deep);
+      font-size: 18px;
+      font-weight: 800;
+    }
+
+    .about-list {
+      list-style: none;
+      margin: 0;
+      padding: 8px 0 0 18px;
+      border-left: 2px solid var(--green);
+    }
+
+    .about-list li {
+      position: relative;
+      padding: 0 0 14px 22px;
+      color: var(--text);
+      font-size: 15px;
+      line-height: 1.65;
+      transition: color 0.18s ease, transform 0.18s ease;
+    }
+
+    .about-list li:hover {
+      color: var(--green-deep);
+      transform: translateX(4px);
+    }
+
+    .about-list li:last-child {
+      padding-bottom: 0;
+    }
+
+    .about-list li::before {
+      content: "";
+      position: absolute;
+      left: -23px;
+      top: 0.55em;
+      width: 7px;
+      height: 7px;
+      background: var(--pink);
+      transform: translateY(-50%) rotate(45deg);
+      transition: transform 0.18s ease, background 0.18s ease;
+    }
+
+    .about-list li:hover::before {
+      background: var(--pink-deep);
+      transform: translateY(-50%) rotate(45deg) scale(1.15);
+    }
+
+    .about-skill-cards {
+      display: grid;
+      gap: 14px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .about-skill-card {
+      padding: 20px 22px;
+      border: 1px solid var(--soft-rule);
+      background: rgba(255, 254, 250, 0.82);
+      box-shadow: 0 12px 32px rgba(0, 57, 31, 0.05);
+      transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+    }
+
+    .about-skill-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(235, 123, 168, 0.42);
+      box-shadow: 0 22px 48px rgba(0, 57, 31, 0.1);
+    }
+
+    .about-skill-top {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 24px;
-      padding: 28px var(--pad);
-      border-top: 1px solid rgba(255, 254, 250, 0.14);
-      color: var(--paper);
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .about-skill-top strong {
+      color: var(--green-deep);
+      font-size: 16px;
+      font-weight: 800;
+    }
+
+    .about-skill-mark {
+      color: var(--pink);
+      font-size: 10px;
+      letter-spacing: 0.2em;
+    }
+
+    .about-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .about-tags span {
+      display: inline-flex;
+      padding: 5px 11px;
+      border: 1px solid rgba(0, 76, 43, 0.14);
+      border-radius: 999px;
+      color: var(--text);
+      background: rgba(238, 245, 239, 0.72);
+      font-size: 12px;
+      font-weight: 650;
+      line-height: 1.4;
+      transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+    }
+
+    .about-skill-card:hover .about-tags span {
+      border-color: rgba(215, 53, 130, 0.22);
+    }
+
+    .about-tags span:hover {
+      color: var(--pink-deep);
+      border-color: rgba(215, 53, 130, 0.34);
+      background: rgba(255, 241, 247, 0.92);
+    }
+
+    .about-col-left .about-block.reveal:nth-child(1) { transition-delay: 0.04s; }
+    .about-col-left .about-block.reveal:nth-child(2) { transition-delay: 0.1s; }
+    .about-col-left .about-block.reveal:nth-child(3) { transition-delay: 0.16s; }
+    .about-col-right .about-block.reveal { transition-delay: 0.12s; }
+    .about-skill-card.reveal:nth-child(1) { transition-delay: 0.18s; }
+    .about-skill-card.reveal:nth-child(2) { transition-delay: 0.24s; }
+    .about-skill-card.reveal:nth-child(3) { transition-delay: 0.3s; }
+
+    .hobbies-section {
+      overflow: hidden;
+      padding-bottom: clamp(12px, 2vw, 20px);
       background: var(--green-deep);
-    }
-
-    .footer-links {
       color: var(--paper);
     }
 
-    .footer small {
+    .hobbies-section .section-label {
       color: rgba(255, 254, 250, 0.58);
+    }
+
+    .hobbies-section h2 {
+      color: var(--paper);
+    }
+
+    .hobbies-intro {
+      max-width: 620px;
+      margin: 18px 0 0;
+      color: rgba(255, 254, 250, 0.72);
+      font-size: 15px;
+      line-height: 1.85;
+    }
+
+    .hobbies-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+      margin-bottom: 0;
+    }
+
+    .hobbies-tags span {
+      display: inline-flex;
+      min-height: 36px;
+      align-items: center;
+      padding: 6px 14px;
+      border: 1px solid rgba(255, 254, 250, 0.22);
+      border-radius: 999px;
+      color: rgba(255, 254, 250, 0.88);
+      font-size: 12px;
+      font-weight: 750;
+      letter-spacing: 0.06em;
+    }
+
+    .hobbies-tags span.accent {
+      border-color: rgba(235, 123, 168, 0.55);
+      color: var(--pink);
+      background: rgba(235, 123, 168, 0.12);
+    }
+
+    .emote-wall {
+      display: grid;
+      gap: 0;
+      margin: clamp(10px, 1.5vw, 14px) calc(-1 * var(--pad)) 0;
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 2%, #000 98%, transparent);
+      mask-image: linear-gradient(90deg, transparent, #000 2%, #000 98%, transparent);
+    }
+
+    .emote-row {
+      overflow: hidden;
+      align-items: center;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .emote-row::-webkit-scrollbar {
+      display: none;
+    }
+
+    .emote-wall.is-interactive .emote-row {
+      overflow-x: auto;
+      cursor: grab;
+    }
+
+    .emote-wall.is-interactive .emote-row.dragging {
+      cursor: grabbing;
+      user-select: none;
+    }
+
+    .emote-track-auto {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      width: max-content;
+      animation: emote-scroll linear infinite;
+    }
+
+    .emote-track-manual {
+      display: none;
+      align-items: center;
+      gap: 0;
+      width: max-content;
+      animation: none;
+    }
+
+    .emote-wall.is-interactive .emote-track-auto {
+      display: none;
+    }
+
+    .emote-wall.is-interactive .emote-track-manual {
+      display: flex;
+    }
+
+    .emote-row.dragging .emote-item:hover {
+      transform: none;
+    }
+
+    .emote-track-auto.reverse {
+      animation-direction: reverse;
+    }
+
+    @keyframes emote-scroll {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    .emote-item {
+      display: grid;
+      width: 96px;
+      height: 96px;
+      flex-shrink: 0;
+      place-items: center;
+      padding: 2px;
+      border: 0;
+      border-right: 1px solid rgba(255, 254, 250, 0.08);
+      border-radius: 0;
+      background: rgba(255, 254, 250, 0.04);
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .emote-item:last-child {
+      border-right: 0;
+    }
+
+    .emote-item:hover {
+      transform: scale(1.06);
+      background: rgba(255, 254, 250, 0.1);
+    }
+
+    .emote-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .emote-track-auto {
+        animation: none;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+      }
+
+      .emote-wall {
+        margin-inline: 0;
+        -webkit-mask-image: none;
+        mask-image: none;
+      }
     }
 
     .detail-hero {
@@ -1047,16 +1250,17 @@
 
     @media (max-width: 980px) {
       .hero,
-      .internship-section,
       .projects-grid,
-      .background-section,
-      .about-section,
+      .about-grid,
       .detail-header {
         grid-template-columns: 1fr;
       }
 
-      .hero-copy,
-      .background-title {
+      .about-divider {
+        display: none;
+      }
+
+      .hero-copy {
         border-right: 0;
         border-bottom: 1px solid var(--rule);
       }
@@ -1068,10 +1272,6 @@
       .project-card:first-child {
         border-right: 0;
         border-bottom: 1px solid var(--rule);
-      }
-
-      .transfer {
-        padding: 34px 0 0;
       }
 
       .detail-summary {
@@ -1090,8 +1290,7 @@
       }
 
       .band-head,
-      .flow-head,
-      .footer {
+      .flow-head {
         display: block;
       }
 
@@ -1102,7 +1301,6 @@
       .flow,
       .answer-row,
       .internship-facts,
-      .about-meta,
       .case-grid,
       .scout-gallery,
       .stats {
@@ -1144,7 +1342,7 @@
     <section class="hero" id="home" data-section="home">
       <div class="hero-copy">
         <div>
-          <p class="eyebrow">Portfolio 2025 - 2026</p>
+          <p class="eyebrow">2026</p>
           <h1>Hi,我是刘颖</h1>
           <div class="pills">
             <span class="pill">AI Agent 产品经理</span>
@@ -1159,27 +1357,19 @@
         </div>
         <div class="hero-links">
           <a href="#about">Resume ↗</a>
-          <a href="#contact">Contact ↗</a>
         </div>
       </div>
       <aside class="portrait reveal" aria-label="个人照片区域">
         <figure class="portrait-frame">
-          <img class="portrait-cutout" src="assets/profile-liuying-cutout-green.png?v=20260607e" alt="刘颖个人抠图照片">
+          <img class="portrait-cutout" src="demo_pic/photo-new.png?v=20260609e" alt="刘颖个人照片">
         </figure>
       </aside>
     </section>
 
     <section class="band internship-section" id="internship" data-section="projects">
-      <div class="internship-visual reveal" aria-label="实习经历视觉卡片">
-        <article class="prd-card">
-          <small>Internship Case</small>
-          <strong>AI 作业助手拍照搜题 MVP</strong>
-          <span>快乐学教育集团 · AI 产品助理</span>
-        </article>
-      </div>
       <div class="internship-copy reveal">
         <p class="section-label">01 · Internship</p>
-        <h2>从 PRD 到上线验证：机构内嵌式 AI 拍搜答疑产品。</h2>
+        <h2>AI作业助手拍照搜题MVP</h2>
         <p>在快乐学教育集团学习机研发部，我负责 AI 作业助手拍照搜题 MVP 的调研、需求拆解、流程设计、AI 策略与数据监控。项目优先跑通初二数学场景，将学生拍搜行为沉淀为可回流教学服务的学习数据。</p>
         <div class="internship-facts">
           <div><span>调研样本</span><strong>访谈 5 人 + 问卷 102 份</strong></div>
@@ -1196,7 +1386,6 @@
           <p class="section-label">02 · Vibe Coding Projects</p>
           <h2>AI Projects</h2>
         </div>
-        <p class="band-note">按 PPT 作品集结构保留两个 AI 产品项目：用户自调研系统与小迹旅行 Agent。点击 View 进入对应案例页。</p>
       </div>
       <div class="projects-grid reveal">
         <article class="project-card">
@@ -1232,59 +1421,117 @@
       </div>
     </section>
 
-    <section class="band background-section" id="background">
-      <div class="background-title reveal">
-        <p class="section-label">03 · Background</p>
-        <h2>城乡规划 →<br>AI 产品能力迁移</h2>
-      </div>
-      <div class="transfer reveal">
-        <article class="transfer-item">
-          <span>场景研究</span>
-          <div><h3>从空间观察到用户洞察</h3><p>理解真实人群、行为路径和问题语境，将复杂场景转成用户需求。</p></div>
-        </article>
-        <article class="transfer-item">
-          <span>系统设计</span>
-          <div><h3>从城市系统到 Agent 工作流</h3><p>将多约束规划能力迁移到 AI 流程、任务拆解与产品机制设计。</p></div>
-        </article>
-        <article class="transfer-item">
-          <span>结果验证</span>
-          <div><h3>从方案评估到 AI 可靠性</h3><p>关注输出是否可信、可执行、可验证，并通过数据和反馈迭代。</p></div>
-        </article>
-      </div>
-    </section>
-
     <section class="band about-section" id="about" data-section="about">
-      <div class="reveal">
-        <p class="section-label" style="color: var(--pink);">04 · About me</p>
-        <h2>让 AI 真正进入用户任务。</h2>
+      <div class="about-head reveal">
+        <p class="section-label">03 · About me</p>
+        <h2>About me</h2>
       </div>
-      <div class="about-copy reveal">
-        <p>目标岗位：AI 应用产品经理 / AI Agent 产品经理 / AI 用户产品经理。希望用兼具体验判断、系统拆解和验证意识的产品方法，设计更可靠、更自然的 AI 应用。</p>
-        <span class="ghost">产品定义</span>
-        <span class="ghost">用户研究</span>
-        <span class="ghost">Agent 交互</span>
-        <span class="ghost">评估验证</span>
-        <div class="about-meta">
-          <article>
-            <h3>教育背景</h3>
-            <p>安徽建筑大学 · 城乡规划<br>2022.09 - 2027.06<br>GPA 3.7/5，前 20%</p>
+      <div class="about-grid">
+        <div class="about-col about-col-left">
+          <article class="about-block about-block-edu reveal">
+            <div class="about-block-head">
+              <span class="about-index">01</span>
+              <h3 class="about-block-title">教育背景</h3>
+            </div>
+            <div class="about-edu-card">
+              <div class="about-edu">
+                <p class="about-date">2022.09 - 2027.06</p>
+                <p class="about-school">安徽建筑大学</p>
+                <p>城乡规划 / GPA 3.7/5（前 20%）</p>
+              </div>
+            </div>
           </article>
-          <article>
-            <h3>AI 产品设计</h3>
-            <p>需求分析 / 用户流程 / PRD / Prompt 设计 / RAG 基础认知 / AI 工作流设计</p>
+          <article class="about-block reveal">
+            <div class="about-block-head">
+              <span class="about-index">02</span>
+              <h3 class="about-block-title">语言</h3>
+            </div>
+            <ul class="about-list">
+              <li>英语六级</li>
+              <li>普通话二乙</li>
+            </ul>
           </article>
-          <article>
-            <h3>原型与落地</h3>
-            <p>Figma / Cursor / XMind / Excel / Python 基础 / SQL 基础</p>
+          <article class="about-block reveal">
+            <div class="about-block-head">
+              <span class="about-index">03</span>
+              <h3 class="about-block-title">奖项</h3>
+            </div>
+            <ul class="about-list">
+              <li>2023-2024国家励志奖学金</li>
+              <li>2022-2024校三等奖学金</li>
+              <li>2025 乡村规划大赛省级一等奖/国家级佳作奖</li>
+              <li>长三角黄山竞赛：传统乡村生活场景设计赛道优秀奖</li>
+            </ul>
+          </article>
+        </div>
+        <div class="about-divider" aria-hidden="true"></div>
+        <div class="about-col about-col-right">
+          <article class="about-block reveal">
+            <div class="about-block-head">
+              <span class="about-index">04</span>
+              <h3 class="about-block-title">个人能力</h3>
+            </div>
+            <ul class="about-skill-cards">
+              <li class="about-skill-card reveal">
+                <div class="about-skill-top">
+                  <strong>AI 产品设计</strong>
+                  <span class="about-skill-mark">◆ ◆ ◆</span>
+                </div>
+                <div class="about-tags">
+                  <span>需求分析</span>
+                  <span>用户流程</span>
+                  <span>PRD</span>
+                  <span>Prompt 设计</span>
+                  <span>RAG 基础认知</span>
+                  <span>AI 工作流设计</span>
+                </div>
+              </li>
+              <li class="about-skill-card reveal">
+                <div class="about-skill-top">
+                  <strong>原型与落地</strong>
+                  <span class="about-skill-mark">◆ ◆ ◆</span>
+                </div>
+                <div class="about-tags">
+                  <span>Figma</span>
+                  <span>Cursor</span>
+                  <span>XMind</span>
+                  <span>Excel</span>
+                  <span>Python 基础</span>
+                  <span>SQL 基础</span>
+                </div>
+              </li>
+              <li class="about-skill-card reveal">
+                <div class="about-skill-top">
+                  <strong>跨学科优势</strong>
+                  <span class="about-skill-mark">◆ ◆ ◆</span>
+                </div>
+                <div class="about-tags">
+                  <span>用户调研</span>
+                  <span>空间分析</span>
+                  <span>复杂系统拆解</span>
+                  <span>可视化表达</span>
+                </div>
+              </li>
+            </ul>
           </article>
         </div>
       </div>
     </section>
 
-    <footer class="footer" id="contact">
-      <div class="footer-links"><a href="#">Resume ↗</a><a href="#">Contact ↗</a></div>
-      <small>AI Product Manager Portfolio · 2026</small>
-    </footer>
+    <section class="band hobbies-section" id="hobbies">
+      <div class="hobbies-head reveal">
+        <p class="section-label">Hobby · Creative</p>
+        <h2>设计/绘画</h2>
+        <p class="hobbies-intro">在海外平台承接 Twitch 主播表情包定制，从角色 IP 设计、表情包定制到最终交付，独立完成全流程设计。深度对接海外创作者，熟悉其使用偏好与真实需求，具备需求落地的实操经验。下面是我的部分作品展示。</p>
+        <div class="hobbies-tags">
+          <span class="accent">Twitch Emotes</span>
+          <span>角色设计</span>
+          <span>表情语义</span>
+          <span>透明底交付</span>
+        </div>
+      </div>
+      <div class="emote-wall reveal" id="emote-wall" aria-label="Twitch 表情包作品流动展示墙"></div>
+    </section>
   </main>
 
   <main class="detail-view" id="research-detail" data-detail="research" hidden>
@@ -1344,6 +1591,7 @@
     </section>
   </main>
 
+  <script src="assets/emotes/manifest.js"></script>
   <script>
     const home = document.querySelector("[data-home]");
     const details = document.querySelectorAll("[data-detail]");
@@ -1373,8 +1621,105 @@
       document.querySelectorAll(".reveal:not(.visible)").forEach((element) => observer.observe(element));
     }
 
+    async function initEmoteWall() {
+      const wall = document.getElementById("emote-wall");
+      if (!wall || wall.dataset.loaded) return;
+
+      let files = window.EMOTE_MANIFEST || [];
+      if (!files.length) {
+        try {
+          const response = await fetch("assets/emotes/manifest.json");
+          if (response.ok) files = await response.json();
+        } catch (_) {}
+      }
+
+      if (!files.length) return;
+
+      const rowCount = 1;
+      const rowSize = Math.ceil(files.length / rowCount);
+      const durations = [54];
+      const rows = Array.from({ length: rowCount }, (_, rowIndex) =>
+        files.slice(rowIndex * rowSize, (rowIndex + 1) * rowSize)
+      );
+
+      wall._emoteConfig = { rows, durations };
+      renderEmoteWall(wall);
+      setupEmoteInteraction(wall);
+      wall.dataset.loaded = "true";
+    }
+
+    function renderEmoteItem(file) {
+      return `<figure class="emote-item"><img src="assets/emotes/${file}" alt="Twitch 定制表情包" loading="eager" decoding="async"></figure>`;
+    }
+
+    function renderEmoteWall(wall) {
+      const { rows, durations } = wall._emoteConfig;
+      wall.innerHTML = rows.map((rowFiles, rowIndex) => {
+        const autoItems = [...rowFiles, ...rowFiles].map(renderEmoteItem).join("");
+        const manualItems = rowFiles.map(renderEmoteItem).join("");
+        const reverseClass = rowIndex % 2 ? " reverse" : "";
+        const duration = ` style="animation-duration:${durations[rowIndex]}s"`;
+        return `<div class="emote-row"><div class="emote-track emote-track-auto${reverseClass}"${duration}>${autoItems}</div><div class="emote-track emote-track-manual">${manualItems}</div></div>`;
+      }).join("");
+    }
+
+    function setupEmoteInteraction(wall) {
+      let activeRow = null;
+      let isDown = false;
+      let startX = 0;
+      let scrollLeft = 0;
+
+      wall.addEventListener("mouseenter", () => {
+        wall.classList.add("is-interactive");
+        wall.querySelectorAll(".emote-row").forEach((row) => {
+          row.scrollLeft = 0;
+        });
+      });
+
+      wall.addEventListener("mouseleave", (event) => {
+        if (event.relatedTarget && wall.contains(event.relatedTarget)) return;
+        wall.classList.remove("is-interactive");
+        isDown = false;
+        activeRow = null;
+        wall.querySelectorAll(".emote-row").forEach((row) => {
+          row.classList.remove("dragging");
+          row.scrollLeft = 0;
+        });
+      });
+
+      wall.addEventListener("mousedown", (event) => {
+        const row = event.target.closest(".emote-row");
+        if (!row || !wall.classList.contains("is-interactive")) return;
+        isDown = true;
+        activeRow = row;
+        startX = event.pageX;
+        scrollLeft = row.scrollLeft;
+        row.classList.add("dragging");
+      });
+
+      wall.addEventListener("wheel", (event) => {
+        const row = event.target.closest(".emote-row");
+        if (!row || !wall.classList.contains("is-interactive")) return;
+        event.preventDefault();
+        row.scrollLeft += event.deltaY + event.deltaX;
+      }, { passive: false });
+
+      window.addEventListener("mouseup", () => {
+        if (activeRow) activeRow.classList.remove("dragging");
+        isDown = false;
+        activeRow = null;
+      });
+
+      window.addEventListener("mousemove", (event) => {
+        if (!isDown || !activeRow) return;
+        event.preventDefault();
+        activeRow.scrollLeft = scrollLeft - (event.pageX - startX);
+      });
+    }
+
     addEventListener("hashchange", showPage);
     showPage();
+    initEmoteWall();
   </script>
 </body>
 </html>
