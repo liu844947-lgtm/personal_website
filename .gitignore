@@ -1,7 +1,12 @@
-# Large demo videos (host separately or use Git LFS)
+# Large demo videos (hosted on Bilibili)
 demo_pic/*.mp4
 demo_pic/**/*.mp4
 
 # Build artifacts & dependencies
 outputs/
 node_modules/
+
+# Local dev
+.edge-print-profile/
+preview-server.pid
+.git-rewrite/

@@ -1389,6 +1389,25 @@
       text-align: center;
     }
 
+    .demo-bilibili {
+      position: relative;
+      width: 100%;
+      max-width: 280px;
+      margin: 0 auto;
+      aspect-ratio: 9 / 16;
+      border-radius: 16px;
+      overflow: hidden;
+      background: #000;
+    }
+
+    .demo-bilibili iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
     .play {
       display: grid;
       width: 72px;
@@ -1973,8 +1992,16 @@
           </header>
           <p class="lead">从首页选择规划方式，到 AI 生成个性化路线、地图查看、手动编辑调整，再到最终保存行程的全流程演示。</p>
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
-            <video src="../../demo_pic/travel-demo-web.mp4" controls playsinline preload="metadata" style="display:block; width:100%; max-width:280px; height:auto; max-height:520px; object-fit:contain; border-radius:16px; background:#000; margin:0 auto;">
-            </video>
+            <div class="demo-bilibili">
+              <iframe
+                src="https://player.bilibili.com/player.html?bvid=BV1PVEd62ExE&page=1&high_quality=1&danmaku=0&autoplay=0"
+                title="小迹 产品交互演示"
+                allowfullscreen="true"
+                scrolling="no"
+                frameborder="0"
+                sandbox="allow-top-navigation allow-same-origin allow-forms allow-scripts allow-popups allow-popups-to-escape-sandbox">
+              </iframe>
+            </div>
             <div style="display: flex; flex-direction: column; justify-content: center; gap: 14px; padding: 10px 0;">
               <h3 style="margin: 0; color: var(--green-deep); font-size: 20px;">小迹 · 产品交互演示</h3>
               <p style="margin: 0; color: var(--text); font-size: 14px; line-height: 1.8;">从首页进入规划选择，AI 对话梳理需求或直接填写旅行信息，系统自动生成每日路线并通过地图验证点位关系，最后支持 AI 优化或手动编辑保存为最终行程。视频时长约 3 分钟。</p>

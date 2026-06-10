@@ -603,6 +603,23 @@
       gap: 24px;
       margin-bottom: 30px;
     }
+
+    .demo-bilibili {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border-radius: 16px;
+      overflow: hidden;
+      background: #000;
+    }
+
+    .demo-bilibili iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
     .demo-video-wrapper {
       position: relative;
       display: grid;
@@ -911,8 +928,16 @@
             <h2>DEMO 展示</h2>
           </header>
           <div class="demo-container">
-            <video src="../../demo_pic/scoutai-demo-web.mp4" controls playsinline preload="metadata" poster="../../demo_pic/ScoutAI-%E6%96%B0%E5%BB%BA%E8%B0%83%E7%A0%94%E9%A1%B5.png" style="display:block; width:100%; height:320px; object-fit:contain; border-radius:16px; background:#000;">
-            </video>
+            <div class="demo-bilibili">
+              <iframe
+                src="https://player.bilibili.com/player.html?bvid=BV1PVEd62Evs&page=1&high_quality=1&danmaku=0&autoplay=0"
+                title="ScoutAI 产品交互演示"
+                allowfullscreen="true"
+                scrolling="no"
+                frameborder="0"
+                sandbox="allow-top-navigation allow-same-origin allow-forms allow-scripts allow-popups allow-popups-to-escape-sandbox">
+              </iframe>
+            </div>
             <div class="demo-info reveal reveal-delay-1">
               <h3>产品交互演示</h3>
               <p>从输入研究问题开始，完整展示 ScoutAI 自动生成关键词、跨平台抓取用户反馈、清洗数据并输出结构化研究报告的全流程。视频时长约 3 分钟。</p>
