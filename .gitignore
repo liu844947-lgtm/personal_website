@@ -1,2 +1,7 @@
-.edge-print-profile/
-preview-server.pid
+# Large demo videos (host separately or use Git LFS)
+demo_pic/*.mp4
+demo_pic/**/*.mp4
+
+# Build artifacts & dependencies
+outputs/
+node_modules/
