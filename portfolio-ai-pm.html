@@ -118,7 +118,7 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      padding: clamp(48px, 8vh, 86px) var(--pad) 34px;
+      padding: clamp(48px, 8vh, 86px) var(--pad) 20px;
       border-right: 1px solid var(--rule);
     }
 
@@ -212,10 +212,125 @@
       display: flex;
       flex-wrap: wrap;
       gap: 34px;
+      margin-top: clamp(28px, 4vh, 44px);
+      padding-bottom: 6px;
       color: var(--text);
       font-size: 13px;
       letter-spacing: 0.16em;
       text-transform: uppercase;
+    }
+
+    .hero-links a,
+    .hero-links button {
+      padding: 0;
+      border: 0;
+      background: none;
+      color: inherit;
+      font: inherit;
+      letter-spacing: inherit;
+      text-transform: inherit;
+      cursor: pointer;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .hero-links a:hover,
+    .hero-links button:hover {
+      color: var(--pink-deep);
+    }
+
+    .contact-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      background: rgba(16, 22, 18, 0.52);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.25s ease, visibility 0.25s ease;
+    }
+
+    .contact-modal.is-open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .contact-panel {
+      position: relative;
+      width: min(420px, 100%);
+      padding: clamp(28px, 4vw, 40px);
+      border: 1px solid var(--rule);
+      background: var(--paper);
+      box-shadow: 0 24px 60px rgba(0, 57, 31, 0.18);
+    }
+
+    .contact-panel h2 {
+      margin: 0 0 8px;
+      color: var(--green-deep);
+      font-size: clamp(24px, 3vw, 32px);
+    }
+
+    .contact-panel p {
+      margin: 0 0 24px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 14px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .contact-list li {
+      display: grid;
+      gap: 4px;
+      padding: 14px 16px;
+      border: 1px solid var(--soft-rule);
+      background: var(--green-soft);
+    }
+
+    .contact-list span {
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .contact-list a {
+      color: var(--green-deep);
+      font-size: 16px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .contact-list a:hover {
+      color: var(--pink-deep);
+    }
+
+    .contact-close {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      width: 36px;
+      height: 36px;
+      border: 1px solid var(--soft-rule);
+      background: var(--paper);
+      color: var(--green-deep);
+      font-size: 22px;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    .contact-close:hover {
+      background: var(--pink-soft);
+      border-color: var(--pink);
     }
 
     .portrait {
@@ -957,20 +1072,20 @@
 
     .emote-item {
       display: grid;
-      width: 96px;
-      height: 96px;
+      width: 80px;
+      height: 80px;
       flex-shrink: 0;
       place-items: center;
-      padding: 2px;
+      padding: 0;
+      margin-right: -6px;
       border: 0;
-      border-right: 1px solid rgba(255, 254, 250, 0.08);
       border-radius: 0;
       background: rgba(255, 254, 250, 0.04);
       transition: transform 0.2s ease, background 0.2s ease;
     }
 
     .emote-item:last-child {
-      border-right: 0;
+      margin-right: 0;
     }
 
     .emote-item:hover {
@@ -1348,7 +1463,7 @@
             <span class="pill">AI Agent 产品经理</span>
             <span class="pill pink">可实习六个月以上 / 立即到岗</span>
           </div>
-          <p class="hero-description">我叫刘颖，本科来自城乡规划背景，正在转向 AI 产品经理方向。关注 AI 如何进入真实用户任务，擅长把分散问题拆成需求分析、Agent 工作流、交互路径与可验证 Demo。</p>
+          <p class="hero-description">你好呀！我叫刘颖，我的性格开朗，对新事物持开放和学习的态度，乐于探索和实践。我对 AI 抱有浓厚的兴趣，一直在学习中，这里是我的个人网站，记录了我的学习和探索成果。</p>
           <nav class="directory" aria-label="首页目录">
             <a href="#internship"><span>01</span><strong>实习经历</strong></a>
             <a href="#projects"><span>02</span><strong>Vibe Coding 项目</strong></a>
@@ -1356,7 +1471,8 @@
           </nav>
         </div>
         <div class="hero-links">
-          <a href="#about">Resume ↗</a>
+          <a href="assets/resume-liu-ying-ai-pm.pdf" download="刘颖-求职意向ai产品经理.pdf">Resume ↗</a>
+          <button type="button" id="contact-open" aria-haspopup="dialog">Contact ↗</button>
         </div>
       </div>
       <aside class="portrait reveal" aria-label="个人照片区域">
@@ -1591,6 +1707,24 @@
     </section>
   </main>
 
+  <div class="contact-modal" id="contact-modal" hidden aria-hidden="true">
+    <div class="contact-panel" role="dialog" aria-labelledby="contact-title" aria-modal="true">
+      <button type="button" class="contact-close" id="contact-close" aria-label="关闭联系方式">×</button>
+      <h2 id="contact-title">Contact</h2>
+      <p>欢迎通过以下方式联系我。</p>
+      <ul class="contact-list">
+        <li>
+          <span>Phone</span>
+          <a href="tel:19307065732">193 0706 5732</a>
+        </li>
+        <li>
+          <span>Email</span>
+          <a href="mailto:2364314755@qq.com">2364314755@qq.com</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
   <script src="assets/emotes/manifest.js"></script>
   <script>
     const home = document.querySelector("[data-home]");
@@ -1720,6 +1854,35 @@
     addEventListener("hashchange", showPage);
     showPage();
     initEmoteWall();
+
+    const contactModal = document.getElementById("contact-modal");
+    const contactOpen = document.getElementById("contact-open");
+    const contactClose = document.getElementById("contact-close");
+
+    function openContactModal() {
+      contactModal.hidden = false;
+      contactModal.setAttribute("aria-hidden", "false");
+      requestAnimationFrame(() => contactModal.classList.add("is-open"));
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeContactModal() {
+      contactModal.classList.remove("is-open");
+      contactModal.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+      setTimeout(() => {
+        if (!contactModal.classList.contains("is-open")) contactModal.hidden = true;
+      }, 250);
+    }
+
+    contactOpen?.addEventListener("click", openContactModal);
+    contactClose?.addEventListener("click", closeContactModal);
+    contactModal?.addEventListener("click", (event) => {
+      if (event.target === contactModal) closeContactModal();
+    });
+    addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && contactModal?.classList.contains("is-open")) closeContactModal();
+    });
   </script>
 </body>
 </html>

@@ -6,7 +6,8 @@ demo_pic/**/*.mp4
 outputs/
 node_modules/
 
-# Local dev
-.edge-print-profile/
+# Local deploy bundle (sync from source before upload)
+my-website/
+
 preview-server.pid
 .git-rewrite/
