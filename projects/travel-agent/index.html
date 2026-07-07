@@ -596,6 +596,7 @@
       border: 1px solid rgba(0, 76, 43, 0.13);
       border-radius: 20px;
       background: linear-gradient(180deg, #fff, #fbfaf5);
+      overflow: visible;
     }
 
     .screen-board .screen-shot {
@@ -603,9 +604,14 @@
       padding: 0;
     }
 
-    .case-section .screen-board .screen-shot img {
+    .screen-board .screen-shot-media {
       width: 118px;
       height: 238px;
+    }
+
+    .case-section .screen-board .screen-shot img {
+      width: 100%;
+      height: 100%;
       object-fit: contain;
     }
 
@@ -635,6 +641,7 @@
       border: 1px solid rgba(235, 123, 168, 0.36);
       border-radius: 16px;
       background: var(--pink-soft);
+      overflow: visible;
     }
 
     .path-title {
@@ -646,7 +653,7 @@
       letter-spacing: 0.08em;
     }
 
-    .case-section .screen-board .path-group .screen-shot img {
+    .case-section .screen-board .path-group .screen-shot-media {
       width: 118px;
       height: 238px;
     }
@@ -1114,9 +1121,11 @@
     }
 
     .screen-shot {
-      display: grid;
-      align-content: start;
-      justify-items: center;
+      position: relative;
+      z-index: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       min-height: clamp(285px, 33vw, 425px);
       margin: 0;
       padding: 14px 10px 16px;
@@ -1125,25 +1134,34 @@
       background: transparent;
       text-align: center;
       cursor: zoom-in;
-      transition: border-color 0.35s ease, box-shadow 0.35s ease;
+      transition: border-color 0.35s ease, box-shadow 0.35s ease, z-index 0s;
     }
     .screen-shot:hover {
+      z-index: 200;
       border-color: var(--pink-soft);
       box-shadow: 0 8px 32px rgba(205, 42, 94, 0.08);
     }
 
-    .screen-shot img {
+    .screen-shot-media {
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
       width: min(100%, 155px);
       height: clamp(230px, 27vw, 360px);
+      overflow: visible;
+      flex-shrink: 0;
+    }
+
+    .screen-shot img {
+      width: 100%;
+      height: 100%;
       object-fit: contain;
       filter: drop-shadow(0 16px 18px rgba(0, 57, 31, 0.14));
       transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-      position: relative;
-      z-index: 1;
+      transform-origin: bottom center;
     }
     .screen-shot:hover img {
       transform: scale(2);
-      z-index: 100;
     }
 
     .screen-shot strong {
@@ -1151,8 +1169,7 @@
       margin-top: 10px;
       color: var(--green-deep);
       font-size: 13px;
-      position: relative;
-      z-index: 101;
+      flex-shrink: 0;
     }
 
     .screen-shot span {
@@ -1685,14 +1702,20 @@
         grid-auto-columns: minmax(118px, 138px);
       }
 
-      .screen-shot img {
+      .screen-shot-media {
         width: min(100%, 132px);
+        height: clamp(210px, 52vw, 280px);
+      }
+
+      .screen-shot img {
+        width: 100%;
+        height: 100%;
       }
       .screen-shot:hover img {
         transform: none;
       }
 
-      .screen-board .screen-shot img {
+      .screen-board .screen-shot-media {
         width: min(100%, 112px);
         height: 224px;
       }
@@ -1735,18 +1758,18 @@
 </head>
 <body>
   <header class="global-header">
-    <a class="brand" href="../../portfolio-ai-pm.html#home">AI PM PORTFOLIO</a>
+    <a class="brand" href="../../index.html#home">AI PM PORTFOLIO</a>
     <nav class="global-nav" aria-label="全局导航">
-      <a href="../../portfolio-ai-pm.html#home">Home</a>
-      <a href="../../portfolio-ai-pm.html#projects">Projects</a>
-      <a href="../../portfolio-ai-pm.html#about">About</a>
+      <a href="../../index.html#home">Home</a>
+      <a href="../../index.html#projects">Projects</a>
+      <a href="../../index.html#about">About</a>
     </nav>
   </header>
 
   <main>
     <section class="case-hero" id="overview">
       <div class="hero-copy">
-        <a class="crumb" href="../../portfolio-ai-pm.html#projects">← Back to Projects</a>
+        <a class="crumb" href="../../index.html#projects">← Back to Projects</a>
         <p class="section-label">01 · 产品概览</p>
         <div class="chips">
           <span class="chip">AI AGENT</span>
@@ -1881,24 +1904,24 @@
             <article class="experience-mini"><h3>调整并保存</h3><p>支持 AI 优化或手动编辑，最终保存为可查看行程。</p></article>
           </div>
           <div class="screen-board" aria-label="小迹两排页面流程">
-            <figure class="screen-shot"><img src="../../demo_pic/travel-home.png?v=20260607a" alt="首页"><strong>00 首页</strong><span></span></figure>
-            <figure class="screen-shot"><img src="../../demo_pic/travel-plan-mode.png?v=20260607a" alt="规划选择"><strong>01 规划选择</strong><span></span></figure>
+            <figure class="screen-shot"><div class="screen-shot-media"><img src="../../demo_pic/travel-home.png?v=20260607a" alt="首页"></div><strong>00 首页</strong><span></span></figure>
+            <figure class="screen-shot"><div class="screen-shot-media"><img src="../../demo_pic/travel-plan-mode.png?v=20260607a" alt="规划选择"></div><strong>01 规划选择</strong><span></span></figure>
             <div class="path-choice">
               <div class="path-group">
                 <div class="path-title">路径 A 想法不清晰</div>
-                <figure class="screen-shot"><img src="../../demo_pic/travel-ai-chat.png?v=20260607b" alt="AI 需求沟通"><strong>02 AI 需求沟通</strong><span></span></figure>
+                <figure class="screen-shot"><div class="screen-shot-media"><img src="../../demo_pic/travel-ai-chat.png?v=20260607b" alt="AI 需求沟通"></div><strong>02 AI 需求沟通</strong><span></span></figure>
               </div>
               <div class="path-group">
                 <div class="path-title">路径 B 需求已明确</div>
-                <figure class="screen-shot"><img src="../../demo_pic/travel-form.png?v=20260607b" alt="直接填写"><strong>03 直接填写</strong><span></span></figure>
+                <figure class="screen-shot"><div class="screen-shot-media"><img src="../../demo_pic/travel-form.png?v=20260607b" alt="直接填写"></div><strong>03 直接填写</strong><span></span></figure>
               </div>
             </div>
-            <figure class="screen-shot"><img src="../../demo_pic/travel-requirements.png?v=20260607b" alt="需求确认"><strong>04 需求确认</strong><span></span></figure>
-            <figure class="screen-shot"><img src="../../demo_pic/travel-generating.png?v=20260607a" alt="生成中"><strong>05 生成中</strong><span></span></figure>
-            <figure class="screen-shot"><img src="../../demo_pic/travel-route-detail.png?v=20260607a" alt="行程详情"><strong>06 行程详情</strong><span></span></figure>
-            <figure class="screen-shot"><img src="../../demo_pic/travel-ai-optimize.png?v=20260607a" alt="AI 优化"><strong>07 AI 优化</strong><span></span></figure>
-            <figure class="screen-shot"><img src="../../demo_pic/travel-manual-edit.png?v=20260607a" alt="手动编辑"><strong>08 手动编辑</strong><span></span></figure>
-            <figure class="screen-shot"><img src="../../demo_pic/travel-list.png?v=20260607a" alt="行程保存"><strong>09 行程保存</strong><span></span></figure>
+            <figure class="screen-shot"><div class="screen-shot-media"><img src="../../demo_pic/travel-requirements.png?v=20260607b" alt="需求确认"></div><strong>04 需求确认</strong><span></span></figure>
+            <figure class="screen-shot"><div class="screen-shot-media"><img src="../../demo_pic/travel-generating.png?v=20260607a" alt="生成中"></div><strong>05 生成中</strong><span></span></figure>
+            <figure class="screen-shot"><div class="screen-shot-media"><img src="../../demo_pic/travel-route-detail.png?v=20260607a" alt="行程详情"></div><strong>06 行程详情</strong><span></span></figure>
+            <figure class="screen-shot"><div class="screen-shot-media"><img src="../../demo_pic/travel-ai-optimize.png?v=20260607a" alt="AI 优化"></div><strong>07 AI 优化</strong><span></span></figure>
+            <figure class="screen-shot"><div class="screen-shot-media"><img src="../../demo_pic/travel-manual-edit.png?v=20260607a" alt="手动编辑"></div><strong>08 手动编辑</strong><span></span></figure>
+            <figure class="screen-shot"><div class="screen-shot-media"><img src="../../demo_pic/travel-list.png?v=20260607a" alt="行程保存"></div><strong>09 行程保存</strong><span></span></figure>
           </div>
         </section>
 
@@ -1964,7 +1987,7 @@
             <span class="number">08</span>
             <h2>旅行灵魂测试设计</h2>
           </header>
-          <p class="lead">20 题 / 约 3 分钟，从 6 个维度生成 4 种旅行灵魂，路线与标签会参与不同旅行人格的个性化路线定制。</p>
+          <p class="lead">20 题 / 约 3 分钟，从 6 个维度生成 16 种旅行人格，路线与标签会参与不同旅行人格的个性化路线定制。</p>
           <div style="display: grid; grid-template-columns: 1fr 1.2fr; gap: 24px; align-items: stretch;">
             <!-- 左侧：6 个维度卡片 -->
             <div class="preference-grid" style="grid-template-columns: 1fr 1fr; gap: 10px; align-content: center;">
@@ -1982,7 +2005,7 @@
               <span style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: var(--green-deep); color: var(--white); font-size: 18px; box-shadow: 0 4px 16px rgba(0,57,31,0.3); z-index: 5;">→</span>
             </div>
           </div>
-          <p class="status-note" style="margin-top: 34px;">测试中生成 4 种旅行灵魂——城市考古家（文化经典/计划型）、出片收集员（视觉导向/探索型）、胃袋探险家（饮食中心/松弛型）、安稳旅行家（舒适导向/规划型），路线与标签共同参与不同人格的个性化定制。</p>
+          <p class="status-note" style="margin-top: 34px;">测试中生成 16 种旅行人格——如城市考古家（文化经典/计划型）、出片收集员（视觉导向/探索型）、胃袋探险家（饮食中心/松弛型）、安稳旅行家（舒适导向/规划型）等，路线与标签共同参与不同人格的个性化定制。</p>
         </section>
 
         <section class="case-section" id="demo">
@@ -2065,7 +2088,7 @@
 
   <footer class="page-footer">
     <span>AI Travel Agent · Case Study</span>
-    <a href="../../portfolio-ai-pm.html#projects">返回作品集 Projects ↗</a>
+    <a href="../../index.html#projects">返回作品集 Projects ↗</a>
   </footer>
 
   <!-- ===== Hover Tooltip Preview ===== -->
